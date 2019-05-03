@@ -2,16 +2,17 @@ package com.example.slatielly;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
-
+import android.support.design.widget.CollapsingToolbarLayout;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.view.DressAdapter;
 
@@ -27,7 +28,14 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.globalRecyclerView);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        initCollapsingToolbar();
+
+
+        recyclerView = findViewById(R.id.recycler_view);
         dressArrayList = new ArrayList<>();
         //Preencher array
         for(int i = 0; i< 20;i++){
@@ -46,6 +54,34 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
     @Override
     public void onClickDressListener(Dress dress) {
         Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(" ");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(true);
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle(getString(R.string.app_name));
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
