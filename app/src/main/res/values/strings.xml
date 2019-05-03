@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Slatielly</string>
+    <string name="type">Type:</string>
+    <string name="price">Price:</string>
 </resources>
