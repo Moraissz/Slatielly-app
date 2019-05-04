@@ -1,4 +1,4 @@
-package com.example.slatielly.view;
+package com.example.slatielly.view.Dress;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
