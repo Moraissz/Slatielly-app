@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ListOrdersActivity" />
+        <activity android:name=".RegisterDressActivity" />
+        <activity android:name=".EditDressActivity" />
         <activity
             android:name=".AllBooksActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
