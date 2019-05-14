@@ -6,4 +6,6 @@
     <string name="subWelcomeMessage">The best dress for you!</string>
     <string name="hirerName">Hirer Name:</string>
     <string name="allBooks">All Books</string>
+    <string name="email">E-mail</string>
+    <string name="join">JOIN</string>
 </resources>

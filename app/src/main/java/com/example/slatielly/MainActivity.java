@@ -30,11 +30,13 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, LoginActivity.class);
+        this.startActivity(intent);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
-
 
         recyclerView = findViewById(R.id.recycler_view);
         dressArrayList = new ArrayList<>();
