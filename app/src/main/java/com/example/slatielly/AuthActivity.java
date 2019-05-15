@@ -13,7 +13,8 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void onClickJoin(View v) {
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        this.startActivity(intent);
     }
 
     public void onClickRegister(View v) {
