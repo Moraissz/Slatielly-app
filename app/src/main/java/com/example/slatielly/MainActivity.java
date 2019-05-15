@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Toast;
 import android.support.design.widget.CollapsingToolbarLayout;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.view.Dress.DressAdapter;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, AuthActivity.class);
         this.startActivity(intent);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
