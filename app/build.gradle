@@ -31,6 +31,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
+    implementation 'com.basgeekball:awesome-validation:4.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
