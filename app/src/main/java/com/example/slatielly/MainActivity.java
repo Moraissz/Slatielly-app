@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, AuthActivity.class);
-        this.startActivity(intent);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

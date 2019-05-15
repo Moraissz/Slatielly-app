@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
     @Override
     public void onSuccess(Void aVoid) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         this.startActivity(intent);
     }
 }
