@@ -2,6 +2,7 @@ package com.example.slatielly;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 // TODO: LIDAR COM OS ERROS AO LOGAR USUARIO
 public class LoginActivity extends AppCompatActivity implements OnCompleteListener<AuthResult> {
-    private EditText ptxtEmail;
-    private EditText ptxtPassword;
+    private TextInputEditText ptxtEmail;
+    private TextInputEditText ptxtPassword;
     private ProgressBar loadingBar;
     private Button btnSubmit;
     private FirebaseAuth firebaseAuth;

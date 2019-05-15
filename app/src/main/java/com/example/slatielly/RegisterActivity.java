@@ -2,6 +2,7 @@ package com.example.slatielly;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,10 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 // TODO: LIDAR COM OS ERROS AOS REGISTRAR USUARIO
 public class RegisterActivity extends AppCompatActivity implements OnCompleteListener<AuthResult>, OnSuccessListener<Void> {
-    private EditText ptxtEmail;
-    private EditText ptxtPassword;
-    private EditText ptxtPhone;
-    private EditText ptxtName;
+    private TextInputEditText ptxtEmail;
+    private TextInputEditText ptxtPassword;
+    private TextInputEditText ptxtPhone;
+    private TextInputEditText ptxtName;
     private ProgressBar loadingBar;
     private Button btnSubmit;
     private FirebaseAuth firebaseAuth;
