@@ -9,4 +9,8 @@
     <string name="email">E-mail</string>
     <string name="join">JOIN</string>
     <string name="register">REGISTER</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="submit">SUBMIT</string>
 </resources>
