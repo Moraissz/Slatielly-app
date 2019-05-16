@@ -6,4 +6,16 @@
     <string name="subWelcomeMessage">The best dress for you!</string>
     <string name="hirerName">Hirer Name:</string>
     <string name="allBooks">All Books</string>
+    <string name="email">E-mail</string>
+    <string name="join">JOIN</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="submit">SUBMIT</string>
+    <string name="err_email">Enter a valid email</string>
+    <string name="err_password">Password should not be empty</string>
+    <string name="err_phone">Enter a valid phone number</string>
+    <string name="err_name">Name should not be empty</string>
 </resources>

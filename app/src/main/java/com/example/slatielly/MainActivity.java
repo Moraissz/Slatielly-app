@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Toast;
 import android.support.design.widget.CollapsingToolbarLayout;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.view.Dress.DressAdapter;
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
         setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
-
 
         recyclerView = findViewById(R.id.recycler_view);
         dressArrayList = new ArrayList<>();
