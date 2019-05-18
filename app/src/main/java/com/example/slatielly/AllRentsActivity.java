@@ -26,14 +26,14 @@ public class AllRentsActivity extends AppCompatActivity implements RentAdapter.r
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_books);
+        setContentView(R.layout.activity_all_rents);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.allBooksToolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         setSupportActionBar(toolbar);
 
 
-        recyclerView = findViewById(R.id.allBooksRecyclerView);
+        recyclerView = findViewById(R.id.allRentsRecyclerView);
         rentArrayList = new ArrayList<>();
         //Preencher ArrayList
         for (int i = 0; i < 20;i++){
