@@ -38,7 +38,7 @@ public class AllRentsActivity extends AppCompatActivity implements RentAdapter.r
         //Preencher ArrayList
         for (int i = 0; i < 20;i++){
             Rent rent = new Rent(i,new Dress(i,"Vestido Doidao","Para doidos","R$ 70,00"),
-                    new Person(i,"Lucas","Avenida dos doido","333333"),"Pendente");
+                    new Person(i,"Lucas","Avenida dos doido","333333"),"30-02-2020","31-02-2021","Pendente");
             if(i > 10){
                 rent.setStatus("Concluido");
             }

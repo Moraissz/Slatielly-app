@@ -1,9 +1,7 @@
 package com.example.slatielly;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,76 +10,47 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
-import android.support.design.widget.CollapsingToolbarLayout;
+
 import com.example.slatielly.Model.Dress;
-import com.example.slatielly.view.Dress.DressAdapter;
+import com.example.slatielly.Model.Person;
+import com.example.slatielly.Model.Rent;
+import com.example.slatielly.view.RentRequest.RentRequestAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements DressAdapter.DressListener {
+public class RentRequestsActivity extends AppCompatActivity  implements RentRequestAdapter.rentRequestListener {
+
     private RecyclerView recyclerView;
-    private DressAdapter adapter;
-    private ArrayList<Dress> dressArrayList;
-
-
+    private RentRequestAdapter adapter;
+    private ArrayList<Rent> rentArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_rent_requests);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.RentRequestToolbar);
+        toolbar.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         setSupportActionBar(toolbar);
 
-        initCollapsingToolbar();
 
-        recyclerView = findViewById(R.id.recycler_view);
-        dressArrayList = new ArrayList<>();
-        //Preencher array
-        for(int i = 0; i< 20;i++){
-            Dress dress = new Dress(i,"Vestido para Casamento","Tipo "+i,"R$ 50,00");
-            dressArrayList.add(dress);
+        recyclerView = findViewById(R.id.RRRecyclerView);
+        rentArrayList = new ArrayList<>();
+        //Preencher ArrayList
+        for (int i = 0; i < 20;i++){
+            Rent rent = new Rent(i,new Dress(i,"Vestido Doidao","Para doidos","R$ 70,00"),
+                    new Person(i,"Lucas","Avenida dos doido","333333"),"30-02-2020","31-02-2021","Pendente");
+            if(i > 10){
+                rent.setStatus("Concluido");
+            }
+            rentArrayList.add(rent);
         }
-        adapter = new DressAdapter(dressArrayList,this);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        System.out.println(rentArrayList.get(0));
+        adapter = new RentRequestAdapter(rentArrayList,this);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-    }
-
-    @Override
-    public void onClickDressListener(Dress dress) {
-        Intent intent = new Intent(this,RentRequestsActivity.class);
-        startActivity(intent);
-    }
-
-    private void initCollapsingToolbar() {
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(" ");
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        appBarLayout.setExpanded(true);
-
-        // hiding & showing the title when toolbar expanded & collapsed
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
-                    isShow = false;
-                }
-            }
-        });
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -118,12 +87,14 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
             }
         }
     }
-
-    /**
-     * Converting dp to pixel
-     */
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+
+    @Override
+    public void onClickRentRequestListener(Rent rent) {
+
     }
 }

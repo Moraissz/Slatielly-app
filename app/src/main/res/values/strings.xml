@@ -18,4 +18,10 @@
     <string name="err_password">Password should not be empty</string>
     <string name="err_phone">Enter a valid phone number</string>
     <string name="err_name">Name should not be empty</string>
+    <string name="startDate">Start</string>
+    <string name="endDate">End</string>
+    <string name="rentRequest">Rents Requests</string>
+    <string name="acceptRent">Accept</string>
+    <string name="declineRent">Decline</string>
+
 </resources>
