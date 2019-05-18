@@ -1,7 +1,6 @@
 package com.example.slatielly;
 
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,17 +11,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.example.slatielly.Model.Book;
+import com.example.slatielly.Model.Rent;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.Model.Person;
-import com.example.slatielly.view.Book.BookAdapter;
+import com.example.slatielly.view.Rent.RentAdapter;
 
 import java.util.ArrayList;
 
-public class AllBooksActivity extends AppCompatActivity implements BookAdapter.BookListener {
+public class AllRentsActivity extends AppCompatActivity implements RentAdapter.rentListener {
     private RecyclerView recyclerView;
-    private BookAdapter adapter;
-    private ArrayList<Book> bookArrayList;
+    private RentAdapter adapter;
+    private ArrayList<Rent> rentArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +34,18 @@ public class AllBooksActivity extends AppCompatActivity implements BookAdapter.B
 
 
         recyclerView = findViewById(R.id.allBooksRecyclerView);
-        bookArrayList = new ArrayList<>();
+        rentArrayList = new ArrayList<>();
         //Preencher ArrayList
         for (int i = 0; i < 20;i++){
-            Book book = new Book(i,new Dress(i,"Vestido Doidao","Para doidos","R$ 70,00"),
+            Rent rent = new Rent(i,new Dress(i,"Vestido Doidao","Para doidos","R$ 70,00"),
                     new Person(i,"Lucas","Avenida dos doido","333333"),"Pendente");
             if(i > 10){
-                book.setStatus("Concluido");
+                rent.setStatus("Concluido");
             }
-            bookArrayList.add(book);
+            rentArrayList.add(rent);
         }
-        System.out.println(bookArrayList.get(0));
-        adapter = new BookAdapter(bookArrayList,this);
+        System.out.println(rentArrayList.get(0));
+        adapter = new RentAdapter(rentArrayList,this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
@@ -57,7 +56,7 @@ public class AllBooksActivity extends AppCompatActivity implements BookAdapter.B
     }
 
     @Override
-    public void onClickBookListener(Book book) {
+    public void onClickRentListener(Rent rent) {
 
     }
 

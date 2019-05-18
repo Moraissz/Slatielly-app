@@ -1,12 +1,12 @@
 package com.example.slatielly.Model;
 
-public class Book {
+public class Rent {
     private int id;
     private Dress dress;
     private Person person;
     private String status;
 
-    public Book(int id, Dress dress, Person person, String status) {
+    public Rent(int id, Dress dress, Person person, String status) {
         this.id = id;
         this.dress = dress;
         this.person = person;

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AllBooksActivity"
+            android:name=".AllRentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"

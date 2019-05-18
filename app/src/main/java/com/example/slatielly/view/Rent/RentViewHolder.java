@@ -1,4 +1,4 @@
-package com.example.slatielly.view.Book;
+package com.example.slatielly.view.Rent;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -6,18 +6,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.slatielly.Model.Book;
-import com.example.slatielly.Model.Dress;
+import com.example.slatielly.Model.Rent;
 import com.example.slatielly.R;
 
-public class BookViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
     private TextView hirerName;
     private TextView status;
-    private Book book;
-    private BookAdapter.BookListener listener;
+    private Rent rent;
+    private RentAdapter.rentListener listener;
 
-    public BookViewHolder(@NonNull View itemView, BookAdapter.BookListener listener) {
+    public RentViewHolder(@NonNull View itemView, RentAdapter.rentListener listener) {
         super(itemView);
         this.description = (TextView) itemView.findViewById(R.id.bookDressDescription);
         this.hirerName = (TextView) itemView.findViewById(R.id.hirerName);
@@ -27,20 +26,20 @@ public class BookViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
 
-    public void bind(Book book){
-        this.description.setText(book.getDress().getDescription());
-        this.hirerName.setText(book.getPerson().getName());
-        this.status.setText(book.getStatus());
-        if(book.getStatus().equals("Pendente"))
+    public void bind(Rent rent){
+        this.description.setText(rent.getDress().getDescription());
+        this.hirerName.setText(rent.getPerson().getName());
+        this.status.setText(rent.getStatus());
+        if(rent.getStatus().equals("Pendente"))
             this.status.setTextColor(Color.parseColor("#f4d742"));
         else
             this.status.setTextColor(Color.parseColor("#1fe056"));
-        this.book = book;
+        this.rent = rent;
     }
 
     @Override
     public void onClick(View v) {
-        listener.onClickBookListener(this.book);
+        listener.onClickRentListener(this.rent);
 
     }
 }
