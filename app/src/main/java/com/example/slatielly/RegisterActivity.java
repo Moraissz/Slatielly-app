@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
             User user = new User(id, name, email, phone);
             this.db.collection("users")
                     .document(id)
-                    .set(user.toHashMap())
+                    .set(user)
                     .addOnSuccessListener(this)
                     .addOnFailureListener(this);
 
