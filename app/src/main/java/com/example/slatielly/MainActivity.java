@@ -25,14 +25,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        this.toolbar = this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
 
-        this.drawerLayout = (DrawerLayout) this.findViewById(R.id.drawerLayout);
+        this.drawerLayout = this.findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         this.drawerLayout.addDrawerListener(toggle);
 
-        this.navigationView = (NavigationView) this.findViewById(R.id.navView);
+        this.navigationView = this.findViewById(R.id.navView);
         this.navigationView.setNavigationItemSelectedListener(this);
 
         toggle.syncState();

@@ -38,19 +38,23 @@ public class AllDressesFragment extends Fragment implements DressAdapter.DressLi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = this.getView().findViewById(R.id.recycler_view);
-        dressArrayList = new ArrayList<>();
+
+        this.recyclerView = this.getView().findViewById(R.id.recycler_view);
+        this.dressArrayList = new ArrayList<>();
+
         //Preencher array
         for (int i = 0; i < 20; i++) {
             Dress dress = new Dress(i, "Vestido para Casamento", "Tipo " + i, "R$ 50,00");
-            dressArrayList.add(dress);
+            this.dressArrayList.add(dress);
         }
-        adapter = new DressAdapter(dressArrayList, this);
+
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        this.recyclerView.setLayoutManager(mLayoutManager);
+        this.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        this.recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        this.adapter = new DressAdapter(this.dressArrayList, this);
+        this.recyclerView.setAdapter(this.adapter);
     }
 
     @Override
@@ -73,29 +77,26 @@ public class AllDressesFragment extends Fragment implements DressAdapter.DressLi
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
+            int column = position % this.spanCount; // item column
 
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+            if (this.includeEdge) {
+                outRect.left = this.spacing - column * this.spacing / this.spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * this.spacing / this.spanCount; // (column + 1) * ((1f / spanCount) * spacing)
 
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
+                if (position < this.spanCount) { // top edge
+                    outRect.top = this.spacing;
                 }
-                outRect.bottom = spacing; // item bottom
+                outRect.bottom = this.spacing; // item bottom
             } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
+                outRect.left = column * this.spacing / this.spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = this.spacing - (column + 1) * this.spacing / this.spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= this.spanCount) {
+                    outRect.top = this.spacing; // item top
                 }
             }
         }
     }
 
-    /**
-     * Converting dp to pixel
-     */
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
