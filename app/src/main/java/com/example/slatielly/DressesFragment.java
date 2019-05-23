@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.view.Dress.DressAdapter;
+import com.example.slatielly.view.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,13 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
         this.recyclerView.setLayoutManager(mLayoutManager);
-        this.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+
+        this.recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(2,
+                        GridSpacingItemDecoration.dpToPx(10, this.getResources()), true
+                )
+        );
+
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         this.adapter = new DressAdapter(this.dressArrayList, this);
@@ -60,45 +67,5 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     @Override
     public void onClickDressListener(Dress dress) {
 
-    }
-
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % this.spanCount; // item column
-
-            if (this.includeEdge) {
-                outRect.left = this.spacing - column * this.spacing / this.spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * this.spacing / this.spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < this.spanCount) { // top edge
-                    outRect.top = this.spacing;
-                }
-                outRect.bottom = this.spacing; // item bottom
-            } else {
-                outRect.left = column * this.spacing / this.spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = this.spacing - (column + 1) * this.spacing / this.spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= this.spanCount) {
-                    outRect.top = this.spacing; // item top
-                }
-            }
-        }
-    }
-
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }
