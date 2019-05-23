@@ -39,24 +39,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.fragmentManager = this.getSupportFragmentManager();
 
-        this.fragmentManager.beginTransaction()
-                .add(R.id.fragment_content, new AllDressesFragment())
-                .commit();
+        this.setNavigationFragment(this.navigationView.getMenu().getItem(0), R.id.fragment_content);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.nav_item_all_dresses: {
+                this.setNavigationFragment(menuItem, R.id.fragment_content);
+                break;
+            }
+
             case R.id.nav_item_all_books: {
                 Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
                 break;
             }
-            case R.id.nav_item_all_dresses: {
-                this.fragmentManager.beginTransaction()
-                        .add(R.id.fragment_content, new AllDressesFragment())
-                        .commit();
-                break;
-            }
+
             default: {
                 Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
                 break;
@@ -74,5 +72,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void setNavigationFragment(@NonNull MenuItem menuItem, int id) {
+        this.fragmentManager.beginTransaction()
+                .add(id, new AllDressesFragment())
+                .commit();
+
+        menuItem.setChecked(true);
     }
 }
