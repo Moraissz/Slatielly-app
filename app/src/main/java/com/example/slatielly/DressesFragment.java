@@ -20,19 +20,19 @@ import com.example.slatielly.view.Dress.DressAdapter;
 import java.util.ArrayList;
 
 
-public class AllDressesFragment extends Fragment implements DressAdapter.DressListener {
+public class DressesFragment extends Fragment implements DressAdapter.DressListener {
 
     private RecyclerView recyclerView;
     private DressAdapter adapter;
     private ArrayList<Dress> dressArrayList;
 
-    public AllDressesFragment() {
+    public DressesFragment() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_all_dresses, container, false);
+        return inflater.inflate(R.layout.fragment_dresses, container, false);
     }
 
     @Override

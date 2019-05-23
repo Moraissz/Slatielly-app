@@ -1,9 +1,7 @@
 package com.example.slatielly;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,17 +22,17 @@ import com.example.slatielly.view.Rent.RentAdapter;
 import java.util.ArrayList;
 
 
-public class AllRentsFragment extends Fragment implements RentAdapter.RentListener {
+public class RentsFragment extends Fragment implements RentAdapter.RentListener {
     private RecyclerView recyclerView;
     private RentAdapter adapter;
     private ArrayList<Rent> rentArrayList;
 
-    public AllRentsFragment() {
+    public RentsFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_all_rents, container, false);
+        return inflater.inflate(R.layout.fragment_rents, container, false);
     }
 
     @Override

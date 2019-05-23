@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
     private int[] icons = {
-            R.string.fa_female_solid, R.string.fa_calendar_alt_solid
+            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid
     };
 
     @Override
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         menuItem.setChecked(true);
 
-        this.setNavigationFragment(new AllDressesFragment());
+        this.setNavigationFragment(new DressesFragment());
     }
 
     private void initDrawerLayout() {
@@ -69,14 +69,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawable.setTextSize(35);
         iconHeader.setImageDrawable(drawable);
 
-        this.renderMenuIcons(navigationView.getMenu(), true, false);
+        this.renderMenuIcons(navigationView.getMenu());
     }
 
-    private void renderMenuIcons(Menu menu, boolean isSolid, boolean isBrand) {
+    private void renderMenuIcons(Menu menu) {
         for (int i = 0; i < menu.size(); i++) {
             MenuItem menuItem = menu.getItem(i);
             if (!menuItem.hasSubMenu()) {
-                FontDrawable drawable = new FontDrawable(this, this.icons[i], isSolid, isBrand);
+                FontDrawable drawable = new FontDrawable(this, this.icons[i], true, false);
                 drawable.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
                 drawable.setTextSize(25);
                 menu.getItem(i).setIcon(drawable);
@@ -92,17 +92,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.nav_item_all_dresses: {
-                this.setNavigationFragment(new AllDressesFragment());
+                this.setNavigationFragment(new DressesFragment());
                 break;
             }
 
             case R.id.nav_item_all_rents: {
-                this.setNavigationFragment(new AllRentsFragment());
+                this.setNavigationFragment(new RentsFragment());
+                break;
+            }
+
+            case R.id.nav_item_rent_requests: {
+                this.setNavigationFragment(new RentRequestsFragment());
                 break;
             }
 
             default: {
-                this.setNavigationFragment(new AllDressesFragment());
+                this.setNavigationFragment(new DressesFragment());
                 break;
             }
         }

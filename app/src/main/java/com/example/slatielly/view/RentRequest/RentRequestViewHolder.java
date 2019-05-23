@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.example.slatielly.Model.Rent;
 import com.example.slatielly.R;
-import com.example.slatielly.view.Rent.RentAdapter;
 
 public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
@@ -16,10 +15,10 @@ public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements V
     private TextView endDate;
     private TextView totalPrice;
     private Rent rent;
-    private RentRequestAdapter.rentRequestListener listener;
+    private RentRequestAdapter.RentRequestListener listener;
 
 
-    public RentRequestViewHolder(@NonNull View itemView, RentRequestAdapter.rentRequestListener listener) {
+    public RentRequestViewHolder(@NonNull View itemView, RentRequestAdapter.RentRequestListener listener) {
         super(itemView);
         this.description = (TextView) itemView.findViewById(R.id.RRDressName);
         this.hirerName = (TextView) itemView.findViewById(R.id.RRHirerName);

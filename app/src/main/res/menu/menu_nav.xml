@@ -5,5 +5,7 @@
             android:title="@string/all_dresses" />
         <item android:id="@+id/nav_item_all_rents"
             android:title="@string/allRents" />
+        <item android:id="@+id/nav_item_rent_requests"
+            android:title="@string/rentsRequests" />
     </group>
 </menu>

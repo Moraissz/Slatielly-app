@@ -23,11 +23,7 @@
     <string name="all_dresses">All Dresses</string>
     <string name="startDate">Start</string>
     <string name="endDate">End</string>
-    <string name="rentRequest">Rents Requests</string>
+    <string name="rentsRequests">Rents Requests</string>
     <string name="acceptRent">Accept</string>
     <string name="declineRent">Decline</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>
