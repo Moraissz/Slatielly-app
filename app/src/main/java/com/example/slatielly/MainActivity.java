@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private int[] icons = {
             R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid
     };
+    private MenuItem menuItemChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FontDrawable icon = (FontDrawable) menuItem.getIcon();
         icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         menuItem.setChecked(true);
+        this.menuItemChecked = menuItem;
 
         this.setNavigationFragment(new DressesFragment());
     }
@@ -86,9 +88,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        this.unCheckMenuItem();
+
         menuItem.setChecked(true);
         FontDrawable icon = (FontDrawable) menuItem.getIcon();
         icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        this.menuItemChecked = menuItem;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_item_all_dresses: {
@@ -114,6 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void unCheckMenuItem() {
+        this.menuItemChecked.setChecked(false);
+        FontDrawable icon = (FontDrawable) this.menuItemChecked.getIcon();
+        icon.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
+        this.menuItemChecked = null;
     }
 
     @Override
