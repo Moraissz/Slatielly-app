@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".RentRequestsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
             android:name=".AuthActivity"
@@ -23,11 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AllBooksActivity"
+            android:name=".AllRentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
