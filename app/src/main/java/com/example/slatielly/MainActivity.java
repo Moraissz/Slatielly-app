@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import info.androidhive.fontawesome.FontDrawable;
 
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         menuItem.setChecked(true);
 
-        this.setNavigationFragment(R.id.fragment_content, new AllDressesFragment());
+        this.setNavigationFragment(new AllDressesFragment());
     }
 
     private void initDrawerLayout() {
@@ -93,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.nav_item_all_dresses: {
-                this.setNavigationFragment(R.id.fragment_content, new AllDressesFragment());
+                this.setNavigationFragment(new AllDressesFragment());
                 break;
             }
 
-            case R.id.nav_item_all_books: {
-                Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
+            case R.id.nav_item_all_rents: {
+                this.setNavigationFragment(new AllRentsFragment());
                 break;
             }
 
             default: {
-                Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
+                this.setNavigationFragment(new AllDressesFragment());
                 break;
             }
         }
@@ -121,9 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void setNavigationFragment(int id, Fragment fragment) {
+    private void setNavigationFragment(Fragment fragment) {
         this.fragmentManager.beginTransaction()
-                .add(id, fragment)
+                .replace(R.id.fragment_content, fragment)
                 .commit();
     }
 }

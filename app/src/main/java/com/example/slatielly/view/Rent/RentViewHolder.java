@@ -14,9 +14,9 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView hirerName;
     private TextView status;
     private Rent rent;
-    private RentAdapter.rentListener listener;
+    private RentAdapter.RentListener listener;
 
-    public RentViewHolder(@NonNull View itemView, RentAdapter.rentListener listener) {
+    public RentViewHolder(@NonNull View itemView, RentAdapter.RentListener listener) {
         super(itemView);
         this.description = (TextView) itemView.findViewById(R.id.rentDressDescription);
         this.hirerName = (TextView) itemView.findViewById(R.id.hirerName);

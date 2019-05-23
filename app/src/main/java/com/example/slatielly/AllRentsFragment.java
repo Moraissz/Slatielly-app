@@ -1,58 +1,68 @@
 package com.example.slatielly;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.slatielly.Model.Rent;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.Model.Person;
+import com.example.slatielly.Model.Rent;
 import com.example.slatielly.view.Rent.RentAdapter;
 
 import java.util.ArrayList;
 
-public class AllRentsActivity extends AppCompatActivity implements RentAdapter.rentListener {
+
+public class AllRentsFragment extends Fragment implements RentAdapter.RentListener {
     private RecyclerView recyclerView;
     private RentAdapter adapter;
     private ArrayList<Rent> rentArrayList;
 
+    public AllRentsFragment() {
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_rents);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_all_rents, container, false);
+    }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.allBooksToolbar);
-        toolbar.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-        setSupportActionBar(toolbar);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        this.recyclerView = this.getView().findViewById(R.id.allRentsRecyclerView);
+        this.rentArrayList = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.allRentsRecyclerView);
-        rentArrayList = new ArrayList<>();
+        Rent rent;
         //Preencher ArrayList
         for (int i = 0; i < 20;i++){
-            Rent rent = new Rent(i,new Dress(i,"Vestido Doidao","Para doidos","R$ 70,00"),
-                    new Person(i,"Lucas","Avenida dos doido","333333"),"30-02-2020","31-02-2021","Pendente");
+            rent = new Rent(i, new Dress(i, "Vestido Doidao", "Para doidos", "R$ 70,00"),
+                    new Person(i, "Lucas", "Avenida dos doido", "333333"), "30-02-2020", "31-02-2021", "Pendente");
+
             if(i > 10){
                 rent.setStatus("Concluido");
             }
-            rentArrayList.add(rent);
+
+            this.rentArrayList.add(rent);
         }
         System.out.println(rentArrayList.get(0));
-        adapter = new RentAdapter(rentArrayList,this);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        this.adapter = new RentAdapter(rentArrayList,this);
 
-
+        this.recyclerView.setLayoutManager(new GridLayoutManager(this.getActivity(), 2));
+        this.recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, this.dpToPx(10), true));
+        this.recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this. recyclerView.setAdapter(this.adapter);
     }
 
     @Override
@@ -98,6 +108,4 @@ public class AllRentsActivity extends AppCompatActivity implements RentAdapter.r
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
-
-
 }

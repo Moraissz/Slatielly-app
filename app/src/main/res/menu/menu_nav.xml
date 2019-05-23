@@ -3,7 +3,7 @@
     <group>
         <item android:id="@+id/nav_item_all_dresses"
             android:title="@string/all_dresses" />
-        <item android:id="@+id/nav_item_all_books"
-            android:title="@string/allBooks" />
+        <item android:id="@+id/nav_item_all_rents"
+            android:title="@string/allRents" />
     </group>
 </menu>

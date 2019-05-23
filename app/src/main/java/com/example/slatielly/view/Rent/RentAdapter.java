@@ -14,14 +14,14 @@ import java.util.ArrayList;
 public class RentAdapter extends RecyclerView.Adapter<RentViewHolder> {
 
     private ArrayList<Rent> rentArrayList;
-    private rentListener listener;
+    private RentListener listener;
 
-    public RentAdapter(ArrayList<Rent> rentArrayList, rentListener listener) {
+    public RentAdapter(ArrayList<Rent> rentArrayList, RentListener listener) {
         this.rentArrayList = rentArrayList;
         this.listener = listener;
     }
 
-    public interface rentListener{
+    public interface RentListener{
         void onClickRentListener(Rent rent);
     }
 
@@ -30,7 +30,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentViewHolder> {
     public RentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.rent_card_viewholder,viewGroup,false);
-        RentViewHolder rentViewHolder = new RentViewHolder(view,this.listener);
+        RentViewHolder rentViewHolder = new RentViewHolder(view, this.listener);
         return rentViewHolder;
     }
 
