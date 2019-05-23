@@ -5,7 +5,7 @@
     <string name="welcomeMessage">Welcome To Slatielly app</string>
     <string name="subWelcomeMessage">The best dress for you!</string>
     <string name="hirerName">Hirer Name:</string>
-    <string name="allBooks">All Books</string>
+    <string name="allRents">All Rents</string>
     <string name="email">E-mail</string>
     <string name="join">JOIN</string>
     <string name="register">REGISTER</string>
@@ -21,4 +21,10 @@
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
     <string name="all_dresses">All Dresses</string>
+    <string name="startDate">Start</string>
+    <string name="endDate">End</string>
+    <string name="rentRequest">Rents Requests</string>
+    <string name="acceptRent">Accept</string>
+    <string name="declineRent">Decline</string>
+
 </resources>
