@@ -1,13 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">Slatielly</string>
+    <string name="app_name">Slatielly</string>
     <string name="type" translatable="false">Type:</string>
     <string name="price" translatable="false">Price:</string>
     <string name="welcomeMessage" translatable="false">Welcome To Slatielly app</string>
     <string name="subWelcomeMessage" translatable="false">The best dress for you!</string>
     <string name="hirerName" translatable="false">Hirer Name:</string>
     <string name="allBooks" translatable="false">All Books</string>
-
-
     <string name="wRegisterDress">Register Dress</string>
     <string name="wTitleD">Title</string>
     <string name="wSizeDress">Size</string>
@@ -25,33 +23,25 @@
     <string name="wDateEnd">End</string>
     <string name="wTotalPrice">Total Amount</string>
     <string name="wOrders">Orders</string>
-
-
-    <string name="app_name">Slatielly</string>
-    <string name="type">Type:</string>
-    <string name="price">Price:</string>
-    <string name="welcomeMessage">Welcome To Slatielly app</string>
-    <string name="subWelcomeMessage">The best dress for you!</string>
-    <string name="hirerName">Hirer Name:</string>
-    <string name="allRents">All Rents</string>
-    <string name="email">E-mail</string>
-    <string name="join">JOIN</string>
-    <string name="register">REGISTER</string>
-    <string name="login">LOGIN</string>
-    <string name="name">Name</string>
-    <string name="password">Password</string>
-    <string name="phone">Phone</string>
-    <string name="submit">SUBMIT</string>
-    <string name="err_email">Enter a valid email</string>
-    <string name="err_password">Password should not be empty</string>
-    <string name="err_phone">Enter a valid phone number</string>
-    <string name="err_name">Name should not be empty</string>
-    <string name="open_drawer">Open</string>
-    <string name="close_drawer">Close</string>
-    <string name="all_dresses">All Dresses</string>
-    <string name="startDate">Start</string>
-    <string name="endDate">End</string>
-    <string name="rentsRequests">Rents Requests</string>
-    <string name="acceptRent">Accept</string>
-    <string name="declineRent">Decline</string>
+    <string name="allRents" translatable="false">All Rents</string>
+    <string name="email" translatable="false">E-mail</string>
+    <string name="join" translatable="false">JOIN</string>
+    <string name="register" translatable="false">REGISTER</string>
+    <string name="login" translatable="false">LOGIN</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="phone" translatable="false">Phone</string>
+    <string name="submit" translatable="false">SUBMIT</string>
+    <string name="err_email" translatable="false">Enter a valid email</string>
+    <string name="err_password" translatable="false">Password should not be empty</string>
+    <string name="err_phone" translatable="false">Enter a valid phone number</string>
+    <string name="err_name" translatable="false">Name should not be empty</string>
+    <string name="open_drawer" translatable="false">Open</string>
+    <string name="close_drawer" translatable="false">Close</string>
+    <string name="all_dresses" translatable="false">All Dresses</string>
+    <string name="startDate" translatable="false">Start</string>
+    <string name="endDate" translatable="false">End</string>
+    <string name="rentsRequests" translatable="false">Rents Requests</string>
+    <string name="acceptRent" translatable="false">Accept</string>
+    <string name="declineRent" translatable="false">Decline</string>
 </resources>
