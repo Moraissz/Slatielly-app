@@ -1,4 +1,32 @@
 <resources>
+    <string name="app_name" translatable="false">Slatielly</string>
+    <string name="type" translatable="false">Type:</string>
+    <string name="price" translatable="false">Price:</string>
+    <string name="welcomeMessage" translatable="false">Welcome To Slatielly app</string>
+    <string name="subWelcomeMessage" translatable="false">The best dress for you!</string>
+    <string name="hirerName" translatable="false">Hirer Name:</string>
+    <string name="allBooks" translatable="false">All Books</string>
+
+
+    <string name="wRegisterDress">Register Dress</string>
+    <string name="wTitleD">Title</string>
+    <string name="wSizeDress">Size</string>
+    <string name="wDaysOfPrepare">Days of Prepare</string>
+    <string name="wDaysOfWashing">Days of Washing</string>
+    <string name="wPriceDress">Price Per Day</string>
+    <string name="wDescriptionDress">Description</string>
+    <string name="wAddPhotoDress">Add Photos</string>
+    <string name="wSaveDress">Save Dress</string>
+    <string name="wTypeDress">Type of Dress</string>
+    <string name="wEditDress">Edit Dress</string>
+    <string name="wSetPhotos">Edit Photos</string>
+    <string name="wSaveChanges">Save Changes</string>
+    <string name="wStartDate">Start</string>
+    <string name="wDateEnd">End</string>
+    <string name="wTotalPrice">Total Amount</string>
+    <string name="wOrders">Orders</string>
+
+
     <string name="app_name">Slatielly</string>
     <string name="type">Type:</string>
     <string name="price">Price:</string>

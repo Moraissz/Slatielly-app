@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Slatielly</string>
+    <string name="wRegisterDress">Cadastrar Vestido</string>
+    <string name="wTitleD">Título</string>
+    <string name="wSizeDress">Tamanho</string>
+    <string name="wDaysOfPrepare">Dias de Preparo</string>
+    <string name="wDaysOfWashing">Dias de Lavagem</string>
+    <string name="wPriceDress">Preço Por Dia</string>
+    <string name="wDescriptionDress">Descrição</string>
+    <string name="wAddPhotoDress">Add Fotos</string>
+    <string name="wSaveDress">Salvar</string>
+    <string name="wTypeDress">Tipo de Vestido</string>
+    <string name="wEditDress">Editar Vestido</string>
+    <string name="wSetPhotos">Editar Fotos</string>
+    <string name="wSaveChanges">Salvar Mudanças</string>
+    <string name="wStartDate">Início</string>
+    <string name="wDateEnd">Término</string>
+    <string name="wOrders">Pedidos</string>
+    <string name="wTotalPrice">Valor Total</string>
+</resources>
