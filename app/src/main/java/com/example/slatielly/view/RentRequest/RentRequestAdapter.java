@@ -8,22 +8,20 @@ import android.view.ViewGroup;
 
 import com.example.slatielly.Model.Rent;
 import com.example.slatielly.R;
-import com.example.slatielly.view.Rent.RentAdapter;
-import com.example.slatielly.view.Rent.RentViewHolder;
 
 import java.util.ArrayList;
 
 public class RentRequestAdapter extends RecyclerView.Adapter<RentRequestViewHolder>  {
 
     private ArrayList<Rent> rentRequestArrayList;
-    private rentRequestListener listener;
+    private RentRequestListener listener;
 
-    public RentRequestAdapter(ArrayList<Rent> rentArrayList, rentRequestListener listener) {
+    public RentRequestAdapter(ArrayList<Rent> rentArrayList, RentRequestListener listener) {
         this.rentRequestArrayList = rentArrayList;
         this.listener = listener;
     }
 
-    public interface rentRequestListener{
+    public interface RentRequestListener {
         void onClickRentRequestListener(Rent rent);
     }
 

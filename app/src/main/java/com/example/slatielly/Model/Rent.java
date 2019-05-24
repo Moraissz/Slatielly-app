@@ -3,15 +3,15 @@ package com.example.slatielly.Model;
 public class Rent {
     private int id;
     private Dress dress;
-    private Person person;
+    private User user;
     private String startDate;
     private String endDate;
     private String status;
 
-    public Rent(int id, Dress dress, Person person, String startDate, String endDate,  String status) {
+    public Rent(int id, Dress dress, User user, String startDate, String endDate,  String status) {
         this.id = id;
         this.dress = dress;
-        this.person = person;
+        this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
@@ -33,12 +33,12 @@ public class Rent {
         this.dress = dress;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getUser() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getStartDate() {

@@ -9,4 +9,5 @@
     <color name="finishedBook">#1FE056</color>
     <color name="colorLightGray">#EFEFEF</color>
     <color name="colorBlue">#3B83CF</color>
+    <color name="colorGray600">#718096</color>
 </resources>
