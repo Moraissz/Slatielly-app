@@ -10,5 +10,11 @@
         <item android:id="@+id/nav_item_rent_requests"
             android:title="@string/rentsRequests"
             android:checkable="true" />
+        <item android:id="@+id/nav_item_register_dress"
+            android:title="@string/wRegisterDress"
+            android:checkable="true" />
+        <item android:id="@+id/nav_item_list_orders"
+            android:title="@string/wOrders"
+            android:checkable="true" />
     </group>
 </menu>

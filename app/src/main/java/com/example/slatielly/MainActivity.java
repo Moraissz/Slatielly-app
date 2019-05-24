@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
     private int[] icons = {
-            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid
+            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid,
+            R.string.fa_plus_solid, R.string.fa_tasks_solid
     };
     private MenuItem menuItemChecked;
 
@@ -107,6 +108,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_item_rent_requests: {
                 this.setNavigationFragment(new RentRequestsFragment());
+                break;
+            }
+
+            case R.id.nav_item_register_dress: {
+                this.setNavigationFragment(new RegisterDressFragment());
+                break;
+            }
+
+            case R.id.nav_item_list_orders: {
+                this.setNavigationFragment(new ListOrdersFragment());
                 break;
             }
 

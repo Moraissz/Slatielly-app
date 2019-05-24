@@ -11,11 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".ListOrdersActivity" />
-        <activity android:name=".RegisterDressActivity" />
-        <activity android:name=".EditDressActivity" />
-
+        
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
