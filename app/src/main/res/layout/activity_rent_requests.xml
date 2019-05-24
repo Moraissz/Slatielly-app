@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/allBooksRecyclerView"
+        android:id="@+id/RRRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
@@ -20,12 +20,12 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/allBooksToolbar"
+            android:id="@+id/RentRequestToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:textAlignment="center"
-            app:title="All Books"
+            app:title="@string/rentRequest"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
     </android.support.design.widget.AppBarLayout>

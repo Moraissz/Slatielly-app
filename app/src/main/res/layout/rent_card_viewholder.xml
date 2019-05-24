@@ -20,7 +20,7 @@
 
 
             <ImageView
-                android:id="@+id/bookThumbnail"
+                android:id="@+id/rentThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -28,10 +28,10 @@
                 android:scaleType="fitXY" />
 
             <TextView
-                android:id="@+id/bookDressDescription"
+                android:id="@+id/rentDressDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bookThumbnail"
+                android:layout_below="@id/rentThumbnail"
                 android:text="Vestido para Casamento"
                 android:textAlignment="center"
                 android:textColor="@color/dress_name"
@@ -41,7 +41,7 @@
                 android:id="@+id/hirerNameString"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bookDressDescription"
+                android:layout_below="@id/rentDressDescription"
                 android:text="@string/hirerName"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -53,7 +53,7 @@
                 android:id="@+id/hirerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bookDressDescription"
+                android:layout_below="@id/rentDressDescription"
                 android:layout_toRightOf="@id/hirerNameString"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -65,7 +65,7 @@
                 android:text="Casamento"
                 android:textSize="14sp" />
             <TextView
-                android:id="@+id/bookStatus"
+                android:id="@+id/rentStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/hirerNameString"

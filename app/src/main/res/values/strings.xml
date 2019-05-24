@@ -27,4 +27,29 @@
     <string name="wOrders">Orders</string>
 
 
+    <string name="app_name">Slatielly</string>
+    <string name="type">Type:</string>
+    <string name="price">Price:</string>
+    <string name="welcomeMessage">Welcome To Slatielly app</string>
+    <string name="subWelcomeMessage">The best dress for you!</string>
+    <string name="hirerName">Hirer Name:</string>
+    <string name="allRents">All Rents</string>
+    <string name="email">E-mail</string>
+    <string name="join">JOIN</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="submit">SUBMIT</string>
+    <string name="err_email">Enter a valid email</string>
+    <string name="err_password">Password should not be empty</string>
+    <string name="err_phone">Enter a valid phone number</string>
+    <string name="err_name">Name should not be empty</string>
+    <string name="startDate">Start</string>
+    <string name="endDate">End</string>
+    <string name="rentRequest">Rents Requests</string>
+    <string name="acceptRent">Accept</string>
+    <string name="declineRent">Decline</string>
+
 </resources>
