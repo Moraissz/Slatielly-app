@@ -119,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements DressAdapter.Dres
         }
     }
 
+
+    public void onClickTeste(View view){
+        Intent intent = new Intent(getBaseContext(), ListOrdersActivity.class);
+        startActivity(intent);
+    }
+
     /**
      * Converting dp to pixel
      */
