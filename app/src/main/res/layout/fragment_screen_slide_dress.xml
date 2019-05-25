@@ -1,0 +1,220 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    tools:context=".ScreenSlidePagerActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="479dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Vestido"
+                android:textAlignment="center"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager--dress_fragment_screen_slide"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView_description--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:fontFamily="arial"
+                android:text='"Vestido feminino modelo justo, confeccionado em tecido viscose. Possui decote redondo, babados, alças finas acabamento e costura no tom"'
+                android:textAlignment="center"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Tamanho:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_size--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="36 ao 44"
+                android:textAlignment="viewStart"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Cor:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_color--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Preto"
+                android:textAlignment="viewStart"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Preço:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_price--fragment_screen_slide_dress2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="50 reais"
+                android:textAlignment="viewStart"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Modelo:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_type--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Vestido Feminino Babados Alças Finas Marisa"
+                android:textAlignment="viewStart"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="Material:"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView_material--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="arial"
+                android:text="viscose"
+                android:textAlignment="viewStart"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_rent--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:onClick="Alugar"
+                android:text="ALUGAR"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_comments--fragment_screen_slide_dress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:onClick="Comentario"
+                android:text="COMENTÁRIOS"
+                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

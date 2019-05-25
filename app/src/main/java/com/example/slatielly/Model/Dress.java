@@ -7,6 +7,9 @@ public class Dress {
     private String description;
     private String type;
     private String price;
+    private String size;
+    private String color;
+    private String material;
 
 
     public Dress(int id, String description, String type, String price) {
