@@ -65,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.navigationView = this.findViewById(R.id.navView);
         this.navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView iconHeader = navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
+        ImageView iconHeader = this.navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
         FontDrawable drawable = new FontDrawable(this, R.string.fa_font_awesome, false, true);
         drawable.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         drawable.setTextSize(35);
         iconHeader.setImageDrawable(drawable);
 
-        this.renderMenuIcons(navigationView.getMenu());
+        this.renderMenuIcons(this.navigationView.getMenu());
     }
 
     private void renderMenuIcons(Menu menu) {

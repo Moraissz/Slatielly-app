@@ -2,14 +2,27 @@
 <resources>
     // pink
     <color name="colorPink100">#FFF5F7</color>
+    <color name="colorPink200">#FED7E2</color>
+    <color name="colorPink300">#FBB6CE</color>
     <color name="colorPink400">#F687B3</color>
+    <color name="colorPink500">#ED64A6</color>
     <color name="colorPink600">#D53F8C</color>
+    <color name="colorPink700">#B83280</color>
 
     // gray
+    <color name="colorGray100">#F7FAFC</color>
+    <color name="colorGray200">#EDF2F7</color>
+    <color name="colorGray300">#E2E8F0</color>
+    <color name="colorGray400">#CBD5E0</color>
+    <color name="colorGray500">#A0AEC0</color>
     <color name="colorGray600">#718096</color>
+    <color name="colorGray700">#4A5568</color>
+    <color name="colorGray800">#2D3748</color>
+    <color name="colorGray900">#1A202C</color>
+
 
     <color name="colorPrimary">@color/colorPink600</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">@color/colorPink600</color>
     <color name="colorAccent">@color/colorPink400</color>
 
     <color name="dress_name">#4c4c4c</color>

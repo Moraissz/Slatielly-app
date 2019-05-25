@@ -38,7 +38,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ubuntu"
+                    android:fontFamily="@font/ubuntu_medium"
                     android:text="@string/register"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
