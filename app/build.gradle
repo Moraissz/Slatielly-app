@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
     implementation 'com.basgeekball:awesome-validation:4.2'
     implementation 'info.androidhive:fontawesome:0.0.5'
+    implementation'com.squareup.picasso:picasso:2.5.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
