@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuItem.setChecked(true);
         this.menuItemChecked = menuItem;
 
-        this.setNavigationFragment(new DressesFragment());
+        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
     }
 
     private void initDrawerLayout() {
@@ -97,32 +97,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.nav_item_all_dresses: {
-                this.setNavigationFragment(new DressesFragment());
+                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
                 break;
             }
 
             case R.id.nav_item_all_rents: {
-                this.setNavigationFragment(new RentsFragment());
+                this.setNavigationFragment(new RentsFragment(), R.string.allRents);
                 break;
             }
 
             case R.id.nav_item_rent_requests: {
-                this.setNavigationFragment(new RentRequestsFragment());
+                this.setNavigationFragment(new RentRequestsFragment(), R.string.rentsRequests);
                 break;
             }
 
             case R.id.nav_item_register_dress: {
-                this.setNavigationFragment(new RegisterDressFragment());
+                this.setNavigationFragment(new RegisterDressFragment(), R.string.wRegisterDress);
                 break;
             }
 
             case R.id.nav_item_list_orders: {
-                this.setNavigationFragment(new ListOrdersFragment());
+                this.setNavigationFragment(new ListOrdersFragment(), R.string.wOrders);
                 break;
             }
 
             default: {
-                this.setNavigationFragment(new DressesFragment());
+                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
                 break;
             }
         }
@@ -147,9 +147,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void setNavigationFragment(Fragment fragment) {
+    private void setNavigationFragment(Fragment fragment, int title) {
         this.fragmentManager.beginTransaction()
                 .replace(R.id.fragment_content, fragment)
                 .commit();
+
+        this.toolbar.setTitle(title);
     }
 }
