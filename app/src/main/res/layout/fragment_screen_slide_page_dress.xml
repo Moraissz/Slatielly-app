@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/image_dress--fragment_screen_slide_page_dress"
+        android:id="@+id/image_dress_fragment_screen_slide_page_dress"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"

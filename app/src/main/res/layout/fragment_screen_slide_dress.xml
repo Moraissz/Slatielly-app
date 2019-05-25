@@ -1,5 +1,5 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,13 +30,13 @@
                 android:textStyle="bold" />
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/pager--dress_fragment_screen_slide"
+                android:id="@+id/pager_dress_fragment_screen_slide"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/textView_description--fragment_screen_slide_dress"
+                android:id="@+id/textView_description_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -63,7 +63,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/textView_size--fragment_screen_slide_dress"
+                android:id="@+id/textView_size_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -90,7 +90,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/textView_color--fragment_screen_slide_dress"
+                android:id="@+id/textView_color_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -117,7 +117,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/textView_price--fragment_screen_slide_dress2"
+                android:id="@+id/textView_price_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -144,7 +144,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/textView_type--fragment_screen_slide_dress"
+                android:id="@+id/textView_type_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -171,7 +171,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/textView_material--fragment_screen_slide_dress"
+                android:id="@+id/textView_material_fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -192,6 +192,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:onClick="Rent_click"
                 android:text="ALUGAR"
                 android:textColor="@color/color_text_fragment_screen_slide_dress"
                 android:textSize="20dp"
@@ -206,6 +207,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:onClick="Comments_click"
                 android:text="COMENTÁRIOS"
                 android:textColor="@color/color_text_fragment_screen_slide_dress"
                 android:textSize="20dp"

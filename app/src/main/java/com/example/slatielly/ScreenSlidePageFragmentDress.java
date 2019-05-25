@@ -30,7 +30,7 @@ public class ScreenSlidePageFragmentDress extends Fragment
         //instanciar a foto
 
 
-        image = (ImageView) rootView.findViewById(R.id.image_dress__fragment_screen_slide_page_dress);
+        image = (ImageView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
 
 
         Picasso.with(container.getContext()).load("").into(image);

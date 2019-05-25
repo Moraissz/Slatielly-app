@@ -1,8 +1,6 @@
 package com.example.slatielly;
 
 
-
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,6 +11,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -24,6 +23,13 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
 
     private PagerAdapter pagerAdapter;
 
+    private TextView textView_description_fragment_screen_slide_dress;
+    private TextView textView_size_fragment_screen_slide_dress;
+    private TextView textView_color_fragment_screen_slide_dress;
+    private TextView textView_price_fragment_screen_slide_dress;
+    private TextView textView_type_fragment_screen_slide_dress;
+    private TextView textView_material_fragment_screen_slide_dress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,8 +38,15 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         setContentView(R.layout.fragment_screen_slide_dress);
 
 
-        // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) findViewById(R.id.pager__dress_fragment_screen_slide);
+        mPager = (ViewPager) findViewById(R.id.pager_dress_fragment_screen_slide);
+
+        textView_description_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_description_fragment_screen_slide_dress);
+        textView_size_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_size_fragment_screen_slide_dress);
+        textView_color_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_color_fragment_screen_slide_dress);
+        textView_price_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_price_fragment_screen_slide_dress);
+        textView_type_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_type_fragment_screen_slide_dress);
+        textView_material_fragment_screen_slide_dress =  (TextView) findViewById(R.id.textView_material_fragment_screen_slide_dress);
+
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
 
@@ -76,13 +89,14 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         }
     }
 
-    public void Comentario(View view)
+    public void Rent_click(View view)
     {
 
     }
 
-    public void Alugar(View view)
+    public void Comments_click(View view)
     {
 
     }
+
 }

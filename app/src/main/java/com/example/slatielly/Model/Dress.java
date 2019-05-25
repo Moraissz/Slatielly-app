@@ -11,12 +11,39 @@ public class Dress {
     private String color;
     private String material;
 
+    public String getSize() {
+        return size;
+    }
 
-    public Dress(int id, String description, String type, String price) {
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public Dress(int id, String description, String type, String price, String size, String color, String material)
+    {
         this.id = id;
         this.description = description;
         this.type = type;
         this.price = price;
+        this.size = size;
+        this.color = color;
+        this.material = material;
     }
 
     public int getId() {
