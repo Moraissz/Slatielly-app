@@ -7,12 +7,30 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="android:textColor">@color/colorGray900</item>
+
+        <item name="toolbarStyle">@style/custom_toolbar</item>
+        <item name="drawerArrowStyle">@style/custom_drawer</item>
+        <item name="android:statusBarColor">@color/colorPink100</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="custom_toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPink100</item>
+        <item name="android:backgroundStacked">@color/colorPink100</item>
+        <item name="android:backgroundSplit">@color/colorPink100</item>
+    </style>
+
+    <style name="custom_drawer" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/colorPrimary</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

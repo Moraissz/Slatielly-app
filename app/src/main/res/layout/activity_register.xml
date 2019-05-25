@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
+    android:background="@color/colorBackground"
     tools:context=".RegisterActivity">
 
     <LinearLayout
@@ -38,7 +38,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ubuntu"
+                    android:fontFamily="@font/ubuntu_medium"
                     android:text="@string/register"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
