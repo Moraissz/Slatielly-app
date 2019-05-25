@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    // pink
+    <color name="colorPink100">#FFF5F7</color>
+    <color name="colorPink400">#F687B3</color>
+    <color name="colorPink600">#D53F8C</color>
+
+    // gray
+    <color name="colorGray600">#718096</color>
+
+    <color name="colorPrimary">@color/colorPink600</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">@color/colorPink400</color>
+
     <color name="dress_name">#4c4c4c</color>
     <color name="viewBg">#f1f5f8</color>
     <color name="unfinishedBook">#f4d742</color>
     <color name="finishedBook">#1FE056</color>
     <color name="colorLightGray">#EFEFEF</color>
     <color name="colorBlue">#3B83CF</color>
-    <color name="colorGray600">#718096</color>
+    <color name="colorBackground">#F0F0F0</color>
 </resources>
