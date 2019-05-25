@@ -20,6 +20,19 @@
     <color name="colorGray800">#2D3748</color>
     <color name="colorGray900">#1A202C</color>
 
+    // green
+    <color name="colorGreen400">#68D391</color>
+    <color name="colorGreen500">#48BB78</color>
+    <color name="colorGreen600">#38A169</color>
+    <color name="colorGreen700">#2F855A</color>
+
+    // red
+    <color name="colorRed300">#FEB2B2</color>
+    <color name="colorRed400">#FC8181</color>
+    <color name="colorRed500">#F56565</color>
+    <color name="colorRed600">#E53E3E</color>
+    <color name="colorRed700">#C53030</color>
+
 
     <color name="colorPrimary">@color/colorPink600</color>
     <color name="colorPrimaryDark">@color/colorPink600</color>
