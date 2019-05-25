@@ -18,10 +18,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo2" />
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnJoin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -38,17 +37,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnRegister"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@drawable/outlined_button"
         android:fontFamily="@font/ubuntu"
         android:onClick="onClickRegister"
         android:text="@string/register"
