@@ -43,7 +43,7 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
         Rent rent;
         //Preencher ArrayList
         for (int i = 0; i < 20;i++){
-            rent = new Rent(i, new Dress(i, "Vestido Doidao", "Para doidos", "R$ 70,00"),
+            rent = new Rent(i, new Dress(i, "Vestido Doidao", "Para doidos", "R$ 70,00","38 a 40","Preto","Pano"),
                     new User(""+i, "Lucas", "Avenida dos doido", "333333"), "30-02-2020", "31-02-2021", "Pendente");
 
             if(i > 10){
