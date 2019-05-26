@@ -192,7 +192,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/custom_button_fragment_screen_slide_dress"
-                android:onClick="Rent_click"
+                android:onClick="Order_click"
                 android:text="ALUGAR"
                 android:textColor="@color/color_text_fragment_screen_slide_dress"
                 android:textSize="20dp"

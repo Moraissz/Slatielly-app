@@ -89,7 +89,7 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         }
     }
 
-    public void Rent_click(View view)
+    public void Order_click(View view)
     {
 
     }

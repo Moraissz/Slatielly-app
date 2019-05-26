@@ -16,7 +16,7 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class ScreenSlidePageFragmentDress extends Fragment
 {
-    private ImageView image;
+    private ImageView image_dress_fragment_screen_slide_page_dress;
 
     private List<Bitmap> fotos;
 
@@ -30,10 +30,10 @@ public class ScreenSlidePageFragmentDress extends Fragment
         //instanciar a foto
 
 
-        image = (ImageView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+        image_dress_fragment_screen_slide_page_dress = (ImageView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
 
 
-        Picasso.with(container.getContext()).load("").into(image);
+        Picasso.with(container.getContext()).load("").into(image_dress_fragment_screen_slide_page_dress);
 
 
         return rootView;
