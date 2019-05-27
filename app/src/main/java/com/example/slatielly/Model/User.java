@@ -5,13 +5,14 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private String address;
+    private Address address;
 
-    public User(String id, String name, String email, String phone) {
+    public User(String id, String name, String email, String phone, Address address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.address = address;
     }
 
     public String getId() {
@@ -46,11 +47,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 }
