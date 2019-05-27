@@ -14,15 +14,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.slatielly.Model.User;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import info.androidhive.fontawesome.FontDrawable;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnSuccessListener<DocumentSnapshot> {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FragmentManager fragmentManager;
+    private TextView txtNavHeader;
     private int[] icons = {
             R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid,
             R.string.fa_plus_solid, R.string.fa_tasks_solid
@@ -35,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         this.initNavView();
+        this.getUser();
         this.initDrawerLayout();
 
         this.fragmentManager = this.getSupportFragmentManager();
@@ -61,15 +71,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
+    private void getUser() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .document(firebaseUser.getUid())
+                .get()
+                .addOnSuccessListener(this);
+    }
+
     private void initNavView() {
         this.navigationView = this.findViewById(R.id.navView);
         this.navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView iconHeader = this.navigationView.getHeaderView(0).findViewById(R.id.nav_header_imageView);
-        FontDrawable drawable = new FontDrawable(this, R.string.fa_font_awesome, false, true);
+        ImageView iconHeader = this.navigationView.getHeaderView(0).findViewById(R.id.ivNavHeader);
+        FontDrawable drawable = new FontDrawable(this, R.string.fa_user_circle_solid, true, true);
         drawable.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         drawable.setTextSize(35);
         iconHeader.setImageDrawable(drawable);
+        this.txtNavHeader = this.navigationView.getHeaderView(0).findViewById(R.id.txtNavHeader);
 
         this.renderMenuIcons(this.navigationView.getMenu());
     }
@@ -153,5 +174,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .commit();
 
         this.toolbar.setTitle(title);
+    }
+
+    @Override
+    public void onSuccess(DocumentSnapshot documentSnapshot) {
+        User user = documentSnapshot.toObject(User.class);
+        this.txtNavHeader.setText(user.getName());
     }
 }
