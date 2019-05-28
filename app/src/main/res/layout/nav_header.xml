@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_medium"
         android:paddingTop="16dp"
-        android:text="AndroidPro"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white" />
 

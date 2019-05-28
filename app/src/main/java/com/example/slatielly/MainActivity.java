@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import info.androidhive.fontawesome.FontDrawable;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnSuccessListener<DocumentSnapshot> {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnSuccessListener<DocumentSnapshot>, View.OnClickListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.fa_plus_solid, R.string.fa_tasks_solid
     };
     private MenuItem menuItemChecked;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +88,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.navigationView = this.findViewById(R.id.navView);
         this.navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView iconHeader = this.navigationView.getHeaderView(0).findViewById(R.id.ivNavHeader);
+        View headerView = this.navigationView.getHeaderView(0);
+        ImageView iconHeader = headerView.findViewById(R.id.ivNavHeader);
         FontDrawable drawable = new FontDrawable(this, R.string.fa_user_circle_solid, true, true);
         drawable.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         drawable.setTextSize(35);
         iconHeader.setImageDrawable(drawable);
-        this.txtNavHeader = this.navigationView.getHeaderView(0).findViewById(R.id.txtNavHeader);
+
+        this.txtNavHeader = headerView.findViewById(R.id.txtNavHeader);
+        headerView.setOnClickListener(this);
 
         this.renderMenuIcons(this.navigationView.getMenu());
     }
@@ -153,24 +159,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void unCheckMenuItem() {
-        this.menuItemChecked.setChecked(false);
-        FontDrawable icon = (FontDrawable) this.menuItemChecked.getIcon();
-        icon.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
-        this.menuItemChecked = null;
+        if (this.menuItemChecked != null) {
+            this.menuItemChecked.setChecked(false);
+            FontDrawable icon = (FontDrawable) this.menuItemChecked.getIcon();
+            icon.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
+            this.menuItemChecked = null;
+        }
     }
 
     @Override
     public void onBackPressed() {
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+            return;
         }
+
+        super.onBackPressed();
     }
 
     private void setNavigationFragment(Fragment fragment, int title) {
         this.fragmentManager.beginTransaction()
                 .replace(R.id.fragment_content, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
 
         this.toolbar.setTitle(title);
@@ -178,7 +188,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onSuccess(DocumentSnapshot documentSnapshot) {
-        User user = documentSnapshot.toObject(User.class);
-        this.txtNavHeader.setText(user.getName());
+        this.currentUser = documentSnapshot.toObject(User.class);
+        this.txtNavHeader.setText(this.currentUser.getName());
+    }
+
+    @Override
+    public void onClick(View v) {
+        this.unCheckMenuItem();
+        this.setNavigationFragment(ProfileFragment.newInstance(this.currentUser), R.string.profile);
+        this.drawerLayout.closeDrawer(GravityCompat.START);
     }
 }

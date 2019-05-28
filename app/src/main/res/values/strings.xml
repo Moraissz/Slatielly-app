@@ -55,4 +55,10 @@
     <string name="rentsRequests" translatable="false">Rents Requests</string>
     <string name="acceptRent" translatable="false">Accept</string>
     <string name="declineRent" translatable="false">Decline</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="edit_profile" translatable="false">Edit Profile</string>
+    <string name="edit_address" translatable="false">Edit Address</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="success_edit_profile" translatable="false">Profile was edited successfully!</string>
+    <string name="success_edit_address" translatable="false">Address was edited successfully!</string>
 </resources>
