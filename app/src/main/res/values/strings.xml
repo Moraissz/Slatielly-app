@@ -31,11 +31,22 @@
     <string name="name" translatable="false">Name</string>
     <string name="password" translatable="false">Password</string>
     <string name="phone" translatable="false">Phone</string>
+    <string name="cep" translatable="false">CEP</string>
+    <string name="street" translatable="false">Street</string>
+    <string name="city" translatable="false">City</string>
+    <string name="number" translatable="false">Number</string>
+    <string name="neighborhood" translatable="false">Neighborhood</string>
+    <string name="complement" translatable="false">Complement</string>
     <string name="submit" translatable="false">SUBMIT</string>
     <string name="err_email" translatable="false">Enter a valid email</string>
     <string name="err_password" translatable="false">Password should not be empty</string>
     <string name="err_phone" translatable="false">Enter a valid phone number</string>
     <string name="err_name" translatable="false">Name should not be empty</string>
+    <string name="err_cep" translatable="false">Enter a valid CEP</string>
+    <string name="err_city" translatable="false">City should not be empty</string>
+    <string name="err_neighborhood" translatable="false">Neighborhood should not be empty</string>
+    <string name="err_street" translatable="false">Street should not be empty</string>
+    <string name="err_number" translatable="false">Number should not be empty</string>
     <string name="open_drawer" translatable="false">Open</string>
     <string name="close_drawer" translatable="false">Close</string>
     <string name="all_dresses" translatable="false">All Dresses</string>
@@ -44,4 +55,10 @@
     <string name="rentsRequests" translatable="false">Rents Requests</string>
     <string name="acceptRent" translatable="false">Accept</string>
     <string name="declineRent" translatable="false">Decline</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="edit_profile" translatable="false">Edit Profile</string>
+    <string name="edit_address" translatable="false">Edit Address</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="success_edit_profile" translatable="false">Profile was edited successfully!</string>
+    <string name="success_edit_address" translatable="false">Address was edited successfully!</string>
 </resources>

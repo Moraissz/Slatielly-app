@@ -36,7 +36,7 @@ public class ListOrdersFragment extends Fragment implements  OrderAdapter.OrderL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = this.getActivity().findViewById(R.id.rvListOrders);
+        this.recyclerView = view.findViewById(R.id.rvListOrders);
         this.orderArrayList = new ArrayList<>();
 
         for(int i = 0; i < 100; i++){

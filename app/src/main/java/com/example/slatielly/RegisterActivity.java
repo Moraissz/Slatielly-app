@@ -9,10 +9,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.example.slatielly.Model.Address;
 import com.example.slatielly.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,8 +30,15 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
     private TextInputEditText ptxtPassword;
     private TextInputEditText ptxtPhone;
     private TextInputEditText ptxtName;
+    private TextInputEditText ptxtCep;
+    private TextInputEditText ptxtCity;
+    private TextInputEditText ptxtNeighborhood;
+    private TextInputEditText ptxtStreet;
+    private TextInputEditText ptxtNumber;
+    private TextInputEditText ptxtComplement;
     private TextView txtErrorMessage;
     private ProgressBar loadingBar;
+    private ScrollView scrollView;
     private Button btnSubmit;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
@@ -53,8 +62,16 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
         this.ptxtPassword = this.findViewById(R.id.ptxtPassword);
         this.ptxtName = this.findViewById(R.id.ptxtName);
         this.ptxtPhone = this.findViewById(R.id.ptxtPhone);
+        this.ptxtCep = this.findViewById(R.id.ptxtCep);
+        this.ptxtCity = this.findViewById(R.id.ptxtCity);
+        this.ptxtNeighborhood = this.findViewById(R.id.ptxtNeighborhood);
+        this.ptxtStreet = this.findViewById(R.id.ptxtStreet);
+        this.ptxtNumber = this.findViewById(R.id.ptxtNumber);
+        this.ptxtComplement = this.findViewById(R.id.ptxtComplement);
+
         this.txtErrorMessage = this.findViewById(R.id.txtErrorMessage);
 
+        this.scrollView = this.findViewById(R.id.mainScrollView);
         this.loadingBar = this.findViewById(R.id.loadingBar);
         this.btnSubmit = this.findViewById(R.id.btnSubmit);
 
@@ -67,10 +84,16 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
         this.awesomeValidation.addValidation(this, R.id.tilEmail, Patterns.EMAIL_ADDRESS, R.string.err_email);
         this.awesomeValidation.addValidation(this, R.id.tilPhone, Patterns.PHONE, R.string.err_phone);
         this.awesomeValidation.addValidation(this, R.id.tilPassword, "^(?=\\s*\\S).*$", R.string.err_password);
+        this.awesomeValidation.addValidation(this, R.id.tilCep, "\\d{8}", R.string.err_cep);
+        this.awesomeValidation.addValidation(this, R.id.tilCity, "^(?=\\s*\\S).*$", R.string.err_city);
+        this.awesomeValidation.addValidation(this, R.id.tilNeighborhood, "^(?=\\s*\\S).*$", R.string.err_neighborhood);
+        this.awesomeValidation.addValidation(this, R.id.tilStreet, "^(?=\\s*\\S).*$", R.string.err_street);
+        this.awesomeValidation.addValidation(this, R.id.tilNumber, "^(?=\\s*\\S).*$", R.string.err_number);
     }
 
     public void onClickRegister(View v) {
         if (this.awesomeValidation.validate()) {
+            this.scrollView.fullScroll(ScrollView.FOCUS_UP);
             this.loadingBar.setVisibility(ProgressBar.VISIBLE);
             this.btnSubmit.setEnabled(false);
 
@@ -100,7 +123,15 @@ public class RegisterActivity extends AppCompatActivity implements OnCompleteLis
             String phone = this.ptxtPhone.getText().toString();
             String name = this.ptxtName.getText().toString();
 
-            User user = new User(id, name, email, phone);
+            int cep = Integer.parseInt(this.ptxtCep.getText().toString());
+            String city = this.ptxtCity.getText().toString();
+            String neighborhood = this.ptxtNeighborhood.getText().toString();
+            String street = this.ptxtStreet.getText().toString();
+            int number = Integer.parseInt(this.ptxtNumber.getText().toString());
+            String complement = this.ptxtComplement.getText().toString();
+
+            Address address = new Address(cep, city, neighborhood, street, number, complement);
+            User user = new User(id, name, email, phone, address);
             this.db.collection("users")
                     .document(id)
                     .set(user)

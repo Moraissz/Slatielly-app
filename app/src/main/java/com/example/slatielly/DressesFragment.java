@@ -37,7 +37,7 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = this.getView().findViewById(R.id.recycler_view);
+        this.recyclerView = view.findViewById(R.id.recycler_view);
         this.dressArrayList = new ArrayList<>();
 
         //Preencher array

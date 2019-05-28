@@ -21,6 +21,7 @@
     <color name="colorGray900">#1A202C</color>
 
     // green
+    <color name="colorGreen300">#9AE6B4</color>
     <color name="colorGreen400">#68D391</color>
     <color name="colorGreen500">#48BB78</color>
     <color name="colorGreen600">#38A169</color>

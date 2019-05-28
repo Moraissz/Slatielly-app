@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.slatielly.Model.Address;
 import com.example.slatielly.Model.Dress;
 import com.example.slatielly.Model.Rent;
 import com.example.slatielly.Model.User;
@@ -37,12 +38,12 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = this.getView().findViewById(R.id.RRRecyclerView);
+        this.recyclerView = view.findViewById(R.id.RRRecyclerView);
         this.rentArrayList = new ArrayList<>();
         //Preencher ArrayList
         for (int i = 0; i < 20; i++) {
             Rent rent = new Rent(i, new Dress(i, "Vestido Doidao", "Para doidos", "R$ 70,00","38 a 40","Preto","Pano"),
-                    new User(""+i, "Lucas", "Avenida dos doido", "333333"), "30-02-2020", "31-02-2021", "Pendente");
+                    new User(""+i, "Lucas", "Avenida dos doido", "333333", new Address()), "30-02-2020", "31-02-2021", "Pendente");
             if (i > 10) {
                 rent.setStatus("Concluido");
             }
