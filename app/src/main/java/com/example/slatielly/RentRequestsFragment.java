@@ -38,7 +38,7 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = this.getView().findViewById(R.id.RRRecyclerView);
+        this.recyclerView = view.findViewById(R.id.RRRecyclerView);
         this.rentArrayList = new ArrayList<>();
         //Preencher ArrayList
         for (int i = 0; i < 20; i++) {

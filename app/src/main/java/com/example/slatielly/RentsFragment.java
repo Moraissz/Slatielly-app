@@ -38,7 +38,7 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = this.getView().findViewById(R.id.allRentsRecyclerView);
+        this.recyclerView = view.findViewById(R.id.allRentsRecyclerView);
         this.rentArrayList = new ArrayList<>();
 
         Rent rent;
