@@ -44,4 +44,6 @@
     <string name="rentsRequests" translatable="false">Rents Requests</string>
     <string name="acceptRent" translatable="false">Accept</string>
     <string name="declineRent" translatable="false">Decline</string>
+    <string name="wShowDress">Show Dress</string>
+    <string name="wDetail">Detail</string>
 </resources>
