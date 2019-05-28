@@ -16,7 +16,7 @@ import java.util.Date;
 public class CalendarDateFinishActivity extends AppCompatActivity
 {
     public Calendar calendar;
-    
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState)
     {
