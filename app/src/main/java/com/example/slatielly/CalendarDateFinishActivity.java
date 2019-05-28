@@ -15,6 +15,8 @@ import java.util.Date;
 
 public class CalendarDateFinishActivity extends AppCompatActivity
 {
+    public Calendar calendar;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,7 +26,7 @@ public class CalendarDateFinishActivity extends AppCompatActivity
         CalendarView calendarViewFinish = (CalendarView) findViewById(R.id.MaterialCalendarView_calendar_date_finish);
 
 
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
 
         calendarViewFinish.setMinimumDate(calendar);
 
@@ -37,9 +39,6 @@ public class CalendarDateFinishActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-
-
-
         calendarViewFinish.setOnDayClickListener(new OnDayClickListener()
         {
             @Override
@@ -51,5 +50,4 @@ public class CalendarDateFinishActivity extends AppCompatActivity
             }
         });
     }
-
 }
