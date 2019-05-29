@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnSuccessListener<DocumentSnapshot>, View.OnClickListener {
@@ -39,12 +41,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.fa_plus_solid, R.string.fa_tasks_solid
     };
     private MenuItem menuItemChecked;
+    private ArrayList<MenuItem> menuItems;
     private User currentUser;
+    private ArrayList<Integer> titles;
+    private int lastTitle;
+    private boolean isProfileActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.titles = new ArrayList<>();
+        this.menuItems = new ArrayList<>();
 
         this.initNavView();
         this.getUser();
@@ -53,12 +62,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.fragmentManager = this.getSupportFragmentManager();
 
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
-        FontDrawable icon = (FontDrawable) menuItem.getIcon();
-        icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        menuItem.setChecked(true);
-        this.menuItemChecked = menuItem;
+        this.checkMenuItem(menuItem);
 
-        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
+        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
     }
 
     private void initDrawerLayout() {
@@ -115,41 +121,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        this.unCheckMenuItem();
+        if (this.menuItemChecked == menuItem) {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+            return false;
+        }
 
-        menuItem.setChecked(true);
-        FontDrawable icon = (FontDrawable) menuItem.getIcon();
-        icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        this.menuItemChecked = menuItem;
+        this.unCheckMenuItem(true);
+        this.checkMenuItem(menuItem);
 
         switch (menuItem.getItemId()) {
             case R.id.nav_item_all_dresses: {
-                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
+                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, false);
                 break;
             }
 
             case R.id.nav_item_all_rents: {
-                this.setNavigationFragment(new RentsFragment(), R.string.allRents);
+                this.setNavigationFragment(new RentsFragment(), R.string.allRents, false);
                 break;
             }
 
             case R.id.nav_item_rent_requests: {
-                this.setNavigationFragment(new RentRequestsFragment(), R.string.rentsRequests);
+                this.setNavigationFragment(new RentRequestsFragment(), R.string.rentsRequests, false);
                 break;
             }
 
             case R.id.nav_item_register_dress: {
-                this.setNavigationFragment(new RegisterDressFragment(), R.string.wRegisterDress);
+                this.setNavigationFragment(new RegisterDressFragment(), R.string.wRegisterDress, false);
                 break;
             }
 
             case R.id.nav_item_list_orders: {
-                this.setNavigationFragment(new ListOrdersFragment(), R.string.wOrders);
+                this.setNavigationFragment(new ListOrdersFragment(), R.string.wOrders, false);
                 break;
             }
 
             default: {
-                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses);
+                this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, false);
                 break;
             }
         }
@@ -158,8 +165,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void unCheckMenuItem() {
+    private void checkMenuItem(MenuItem menuItem) {
+        menuItem.setChecked(true);
+        FontDrawable icon = (FontDrawable) menuItem.getIcon();
+        icon.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        this.menuItemChecked = menuItem;
+    }
+
+    private void unCheckMenuItem(boolean addToMenuItemsList) {
         if (this.menuItemChecked != null) {
+            if (addToMenuItemsList) {
+                this.menuItems.add(this.menuItemChecked);
+            }
+
             this.menuItemChecked.setChecked(false);
             FontDrawable icon = (FontDrawable) this.menuItemChecked.getIcon();
             icon.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
@@ -174,16 +192,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
+        if (!this.titles.isEmpty()) {
+            int titlesSize = this.titles.size();
+            int title = this.titles.get(titlesSize - 1);
+            this.toolbar.setTitle(title);
+            this.lastTitle = title;
+            this.titles.remove(titlesSize - 1);
+        }
+
+        if (!this.menuItems.isEmpty() && this.lastTitle != R.string.profile) {
+            int menuItemsSize = this.menuItems.size();
+            if (!this.isProfileActive) {
+                this.unCheckMenuItem(false);
+            }
+
+            MenuItem menuItem = this.menuItems.get(menuItemsSize - 1);
+            this.checkMenuItem(menuItem);
+            this.menuItems.remove(menuItemsSize - 1);
+            this.isProfileActive = false;
+        }
+
+        if (this.lastTitle == R.string.profile) {
+            this.unCheckMenuItem(false);
+            this.isProfileActive = true;
+        }
+
         super.onBackPressed();
     }
 
-    private void setNavigationFragment(Fragment fragment, int title) {
-        this.fragmentManager.beginTransaction()
+    private void setNavigationFragment(Fragment fragment, int title, boolean isFirst) {
+        FragmentTransaction fragmentTransaction = this.fragmentManager
+                .beginTransaction()
                 .replace(R.id.fragment_content, fragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+        if (!isFirst) {
+            fragmentTransaction = fragmentTransaction.addToBackStack(null);
+            this.titles.add(lastTitle);
+        }
+
+        fragmentTransaction.commit();
 
         this.toolbar.setTitle(title);
+        this.lastTitle = title;
     }
 
     @Override
@@ -194,8 +245,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onClick(View v) {
-        this.unCheckMenuItem();
-        this.setNavigationFragment(ProfileFragment.newInstance(this.currentUser), R.string.profile);
+        this.isProfileActive = true;
+        this.unCheckMenuItem(true);
+        this.setNavigationFragment(ProfileFragment.newInstance(this.currentUser), R.string.profile, false);
         this.drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
