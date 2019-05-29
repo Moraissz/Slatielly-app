@@ -16,23 +16,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:fontFamily="arial"
-                android:text="Vestido"
-                android:textAlignment="center"
-                android:textColor="@color/color_text_fragment_screen_slide_dress"
-                android:textSize="16dp"
-                android:textStyle="bold" />
-
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager_dress_fragment_screen_slide"
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="550dp"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -186,15 +173,17 @@
 
             <Button
                 android:id="@+id/button_rent--fragment_screen_slide_dress"
+                style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:layout_marginRight="12dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/ubuntu"
                 android:onClick="Order_click"
                 android:text="ALUGAR"
-                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -202,14 +191,15 @@
                 android:id="@+id/button_comments--fragment_screen_slide_dress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="12dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_button_fragment_screen_slide_dress"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/ubuntu"
                 android:onClick="Comments_click"
                 android:text="COMENTÁRIOS"
-                android:textColor="@color/color_text_fragment_screen_slide_dress"
+                android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

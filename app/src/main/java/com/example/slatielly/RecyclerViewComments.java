@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.slatielly.view.Comment.AdapterComment;
 
@@ -22,5 +23,10 @@ public class RecyclerViewComments extends AppCompatActivity
         RecyclerView_recyclerview_comments.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView_recyclerview_comments.setHasFixedSize(true);
         RecyclerView_recyclerview_comments.setAdapter(adapterComment);
+    }
+
+    public void Comment(View view)
+    {
+
     }
 }
