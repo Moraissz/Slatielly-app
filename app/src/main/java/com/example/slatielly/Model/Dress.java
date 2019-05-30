@@ -10,6 +10,34 @@ public class Dress {
     private String size;
     private String color;
     private String material;
+    private String status;
+    private int washingDays;
+    private int prepareDays;
+
+    public int getWashingDays() {
+        return washingDays;
+    }
+
+    public void setWashingDays(int washingDays) {
+        this.washingDays = washingDays;
+    }
+
+    public int getPrepareDays() {
+        return prepareDays;
+    }
+
+    public void setPrepareDays(int prepareDays) {
+        this.prepareDays = prepareDays;
+    }
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
 
     public String getSize() {
         return size;
