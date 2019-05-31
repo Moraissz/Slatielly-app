@@ -1,10 +1,10 @@
 package com.example.slatielly.Controller;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class DateVerification
 {
-    public static boolean compareDates (Date dateStart, Date datefinish, Date comparation1, Date comparation2)
+    public static boolean comparardatas (Timestamp dateStart, Timestamp datefinish, Timestamp comparation1, Timestamp comparation2)
     {
         boolean estado = false;
 
