@@ -1,17 +1,13 @@
 package com.example.slatielly.app.login;
 
+import com.example.slatielly.app.FormContract;
+
 public interface LoginContract {
-    interface View {
-        void setLoadingStatus(boolean isLoading);
-
-        void setErrorMessage(String errorMessage);
-
+    interface View extends FormContract.View {
         void navigateToMainScreen();
     }
 
-    interface Presenter {
-        void createValidationSchema();
-
+    interface Presenter extends FormContract.Presenter {
         void loginUser(String email, String password);
     }
 }

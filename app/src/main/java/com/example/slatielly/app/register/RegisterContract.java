@@ -1,19 +1,14 @@
 package com.example.slatielly.app.register;
 
 import com.example.slatielly.Model.User;
+import com.example.slatielly.app.FormContract;
 
 public interface RegisterContract {
-    interface View {
-        void setLoadingStatus(boolean isLoading);
-
-        void setErrorMessage(String errorMessage);
-
+    interface View extends FormContract.View {
         void navigateToMainScreen();
     }
 
-    interface Presenter {
-        void createValidationSchema();
-
+    interface Presenter extends FormContract.Presenter {
         void registerUser(User user, String password);
     }
 }

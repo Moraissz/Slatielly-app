@@ -1,9 +1,9 @@
 package com.example.slatielly.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.example.slatielly.Model.repository.Identifiable;
+import com.google.firebase.firestore.Exclude;
 
-public class User implements Parcelable {
+public class User implements Identifiable<String> {
     private String id;
     private String name;
     private String email;
@@ -28,26 +28,6 @@ public class User implements Parcelable {
         this.phone = phone;
         this.address = address;
     }
-
-    protected User(Parcel in) {
-        id = in.readString();
-        name = in.readString();
-        email = in.readString();
-        phone = in.readString();
-        address = in.readParcelable(Address.class.getClassLoader());
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public String getId() {
         return id;
@@ -89,17 +69,9 @@ public class User implements Parcelable {
         this.address = address;
     }
 
+    @Exclude
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(name);
-        dest.writeString(email);
-        dest.writeString(phone);
-        dest.writeParcelable(address, flags);
+    public String getEntityKey() {
+        return id;
     }
 }
