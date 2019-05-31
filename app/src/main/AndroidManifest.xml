@@ -18,7 +18,7 @@
         <activity android:name=".ScreenSlidePagerActivityCommentImages" />
         <activity android:name=".RecyclerViewComments" />
         <activity
-            android:name=".AuthActivity"
+            android:name=".auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
