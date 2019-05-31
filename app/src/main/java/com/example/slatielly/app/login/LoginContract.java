@@ -1,4 +1,4 @@
-package com.example.slatielly.login;
+package com.example.slatielly.app.login;
 
 public interface LoginContract {
     interface View {

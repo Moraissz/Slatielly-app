@@ -12,13 +12,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".app.login.LoginActivity" />
+        <activity android:name=".app.register.RegisterActivity" />
         <activity android:name=".ScreenSlidePagerActivityDress" />
         <activity android:name=".ScreenSlidePagerActivityCommentImages" />
         <activity android:name=".RecyclerViewComments" />
         <activity
-            android:name=".auth.AuthActivity"
+            android:name=".app.auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

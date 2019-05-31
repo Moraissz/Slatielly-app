@@ -1,14 +1,14 @@
-package com.example.slatielly.auth;
+package com.example.slatielly.app.auth;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.slatielly.login.LoginActivity;
+import com.example.slatielly.app.login.LoginActivity;
 import com.example.slatielly.MainActivity;
 import com.example.slatielly.R;
-import com.example.slatielly.RegisterActivity;
+import com.example.slatielly.app.register.RegisterActivity;
 
 public class AuthActivity extends AppCompatActivity implements AuthContract.View {
 

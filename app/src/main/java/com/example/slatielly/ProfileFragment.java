@@ -20,7 +20,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.example.slatielly.Model.Address;
 import com.example.slatielly.Model.User;
-import com.example.slatielly.auth.AuthActivity;
+import com.example.slatielly.app.auth.AuthActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

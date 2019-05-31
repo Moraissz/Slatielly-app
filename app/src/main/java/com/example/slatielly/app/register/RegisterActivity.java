@@ -1,4 +1,4 @@
-package com.example.slatielly;
+package com.example.slatielly.app.register;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.example.slatielly.MainActivity;
 import com.example.slatielly.Model.Address;
 import com.example.slatielly.Model.User;
+import com.example.slatielly.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

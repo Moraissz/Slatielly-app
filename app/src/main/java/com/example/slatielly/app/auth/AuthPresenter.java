@@ -1,4 +1,4 @@
-package com.example.slatielly.auth;
+package com.example.slatielly.app.auth;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

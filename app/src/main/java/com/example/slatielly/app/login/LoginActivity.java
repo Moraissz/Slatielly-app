@@ -1,4 +1,4 @@
-package com.example.slatielly.login;
+package com.example.slatielly.app.login;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;

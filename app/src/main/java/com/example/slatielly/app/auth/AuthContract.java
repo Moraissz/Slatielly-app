@@ -1,4 +1,4 @@
-package com.example.slatielly.auth;
+package com.example.slatielly.app.auth;
 
 public interface AuthContract {
     interface View {
