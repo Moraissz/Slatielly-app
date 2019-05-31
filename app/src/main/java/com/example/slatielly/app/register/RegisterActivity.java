@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.slatielly.MainActivity;
 import com.example.slatielly.Model.Address;
 import com.example.slatielly.Model.User;
+import com.example.slatielly.Model.repository.FirestoreRepository;
 import com.example.slatielly.R;
 import com.example.slatielly.service.ValidationService;
 
@@ -39,7 +40,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         setContentView(R.layout.activity_register);
 
         ValidationService validationService = new ValidationService(this);
-        this.presenter = new RegisterPresenter(this, validationService);
+        FirestoreRepository<User> userRepository = new FirestoreRepository<>(User.class, "users");
+        this.presenter = new RegisterPresenter(this, validationService, userRepository);
 
         this.setupViews();
         this.presenter.createValidationSchema();

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Patterns;
 
 import com.example.slatielly.Model.User;
+import com.example.slatielly.Model.repository.FirestoreRepository;
 import com.example.slatielly.R;
 import com.example.slatielly.service.ValidationService;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,20 +14,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterPresenter implements RegisterContract.Presenter,
         OnCompleteListener<AuthResult>, OnSuccessListener<Void>, OnFailureListener {
 
     private RegisterContract.View view;
     private ValidationService validationService;
+    private FirestoreRepository<User> userRepository;
+
     private FirebaseAuth firebaseAuth;
     private User user;
 
-    public RegisterPresenter(RegisterContract.View view, ValidationService validationService) {
+    public RegisterPresenter(RegisterContract.View view, ValidationService validationService,
+                             FirestoreRepository<User> userRepository) {
         this.view = view;
         this.validationService = validationService;
         this.firebaseAuth = FirebaseAuth.getInstance();
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -61,11 +65,8 @@ public class RegisterPresenter implements RegisterContract.Presenter,
             String id = firebaseUser.getUid();
             this.user.setId(id);
 
-            FirebaseFirestore
-                    .getInstance()
-                    .collection("users")
-                    .document(id)
-                    .set(this.user)
+            this.userRepository
+                    .create(this.user)
                     .addOnSuccessListener(this)
                     .addOnFailureListener(this);
 
