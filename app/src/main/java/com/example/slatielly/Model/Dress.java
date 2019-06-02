@@ -2,17 +2,38 @@ package com.example.slatielly.Model;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 public class Dress {
-    private int id;
+
+    private String id;
+    private String color;
     private String description;
-    private String type;
+    private String material;
+    private int prepareDays;
     private String price;
     private String size;
-    private String color;
-    private String material;
     private String status;
+    private String type;
     private int washingDays;
-    private int prepareDays;
+    private List<Image> images;
+    private List<Comment> comments;
+
+    public List<Image> getImagens() {
+        return images;
+    }
+
+    public void setImagens(List<Image> imagens) {
+        this.images = imagens;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public int getWashingDays() {
         return washingDays;
@@ -63,7 +84,7 @@ public class Dress {
         this.material = material;
     }
 
-    public Dress(int id, String description, String type, String price, String size, String color, String material)
+    public Dress(String id, String description, String type, String price, String size, String color, String material)
     {
         this.id = id;
         this.description = description;
@@ -74,11 +95,11 @@ public class Dress {
         this.material = material;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

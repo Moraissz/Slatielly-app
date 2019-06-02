@@ -42,7 +42,7 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
         this.rentArrayList = new ArrayList<>();
         //Preencher ArrayList
         for (int i = 0; i < 20; i++) {
-            Rent rent = new Rent(i, new Dress(i, "Vestido Doidao", "Para doidos", "R$ 70,00","38 a 40","Preto","Pano"),
+            Rent rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", "R$ 70,00","38 a 40","Preto","Pano"),
                     new User(""+i, "Lucas", "Avenida dos doido", "333333", new Address()), "30-02-2020", "31-02-2021", "Pendente");
             if (i > 10) {
                 rent.setStatus("Concluido");
