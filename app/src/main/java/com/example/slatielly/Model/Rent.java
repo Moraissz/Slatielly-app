@@ -1,14 +1,15 @@
 package com.example.slatielly.Model;
 
 public class Rent {
-    private int id;
+    private String id;
     private Dress dress;
     private User user;
     private String startDate;
     private String endDate;
     private String status;
+    private String description;
 
-    public Rent(int id, Dress dress, User user, String startDate, String endDate,  String status) {
+    public Rent(String id, Dress dress, User user, String startDate, String endDate,  String status) {
         this.id = id;
         this.dress = dress;
         this.user = user;
@@ -17,11 +18,11 @@ public class Rent {
         this.status = status;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -63,5 +64,13 @@ public class Rent {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

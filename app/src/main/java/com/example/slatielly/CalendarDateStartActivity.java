@@ -12,9 +12,9 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CalendarDateStartActivity extends AppCompatActivity
@@ -24,8 +24,6 @@ public class CalendarDateStartActivity extends AppCompatActivity
     public static List<Calendar> disabledays;
 
     public Intent intent;
-
-    public static Date dateStartChose;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState)
@@ -60,7 +58,15 @@ public class CalendarDateStartActivity extends AppCompatActivity
             {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
 
-                Date dateStart = clickedDayCalendar.getTime();
+                int day = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
+                int month = clickedDayCalendar.get(Calendar.MONTH);
+                int year = clickedDayCalendar.get(Calendar.YEAR);
+
+                Calendar aux = Calendar.getInstance();
+                aux.set(year,month,day,0,0,0);
+
+                Timestamp dateStart = new Timestamp(aux.getTimeInMillis());
+                dateStart.setNanos(0);
             }
         });
 

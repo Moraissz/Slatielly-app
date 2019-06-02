@@ -10,8 +10,8 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 public class CalendarDateFinishActivity extends AppCompatActivity
 {
@@ -46,7 +46,16 @@ public class CalendarDateFinishActivity extends AppCompatActivity
             {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
 
-                Date dateFinish = clickedDayCalendar.getTime();
+                int day = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
+                int month = clickedDayCalendar.get(Calendar.MONTH);
+                int year = clickedDayCalendar.get(Calendar.YEAR);
+
+                Calendar aux = Calendar.getInstance();
+
+                aux.set(year,month,day,0,0,0);
+
+                Timestamp dateFinish = new Timestamp(aux.getTimeInMillis());
+                dateFinish.setNanos(0);
             }
         });
     }
