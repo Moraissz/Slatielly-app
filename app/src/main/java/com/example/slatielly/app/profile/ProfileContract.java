@@ -1,7 +1,7 @@
 package com.example.slatielly.app.profile;
 
-import com.example.slatielly.Model.Address;
-import com.example.slatielly.Model.User;
+import com.example.slatielly.model.Address;
+import com.example.slatielly.model.User;
 import com.example.slatielly.app.FormContract;
 
 public interface ProfileContract {

@@ -11,12 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.slatielly.Model.Address;
-import com.example.slatielly.Model.Dress;
-import com.example.slatielly.Model.Rent;
-import com.example.slatielly.Model.User;
+import com.example.slatielly.model.Address;
+import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.Rent;
+import com.example.slatielly.model.User;
 import com.example.slatielly.view.GridSpacingItemDecoration;
-import com.example.slatielly.view.RentRequest.RentRequestAdapter;
+import com.example.slatielly.view.rentRequest.RentRequestAdapter;
 
 import java.util.ArrayList;
 

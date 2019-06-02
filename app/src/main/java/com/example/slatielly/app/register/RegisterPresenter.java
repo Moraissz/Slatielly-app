@@ -3,8 +3,8 @@ package com.example.slatielly.app.register;
 import android.support.annotation.NonNull;
 import android.util.Patterns;
 
-import com.example.slatielly.Model.User;
-import com.example.slatielly.Model.repository.FirestoreRepository;
+import com.example.slatielly.model.User;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.R;
 import com.example.slatielly.service.ValidationService;
 import com.google.android.gms.tasks.OnCompleteListener;

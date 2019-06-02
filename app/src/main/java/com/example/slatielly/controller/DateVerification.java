@@ -1,4 +1,4 @@
-package com.example.slatielly.Controller;
+package com.example.slatielly.controller;
 
 import java.sql.Timestamp;
 

@@ -1,4 +1,4 @@
-package com.example.slatielly.Model;
+package com.example.slatielly.model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

@@ -1,12 +1,11 @@
-package com.example.slatielly.view.Order;
+package com.example.slatielly.view.order;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.slatielly.Model.Order;
+import com.example.slatielly.model.Order;
 
 
 public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

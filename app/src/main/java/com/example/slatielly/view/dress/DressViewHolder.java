@@ -1,11 +1,11 @@
-package com.example.slatielly.view.Dress;
+package com.example.slatielly.view.dress;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.slatielly.Model.Dress;
+import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
 
 public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -1,4 +1,4 @@
-package com.example.slatielly.view.Rent;
+package com.example.slatielly.view.rent;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.slatielly.Model.Rent;
+import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
 
 public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

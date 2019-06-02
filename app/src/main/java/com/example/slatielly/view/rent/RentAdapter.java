@@ -1,4 +1,4 @@
-package com.example.slatielly.view.Rent;
+package com.example.slatielly.view.rent;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.slatielly.Model.Rent;
+import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
 
 import java.util.ArrayList;

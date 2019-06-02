@@ -1,6 +1,6 @@
-package com.example.slatielly.Model;
+package com.example.slatielly.model;
 
-import com.example.slatielly.Model.repository.Identifiable;
+import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 
 public class User implements Identifiable<String> {

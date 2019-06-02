@@ -1,6 +1,4 @@
-package com.example.slatielly.Model;
-
-import android.graphics.Bitmap;
+package com.example.slatielly.model;
 
 import java.util.List;
 

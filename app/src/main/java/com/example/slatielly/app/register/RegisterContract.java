@@ -1,6 +1,6 @@
 package com.example.slatielly.app.register;
 
-import com.example.slatielly.Model.User;
+import com.example.slatielly.model.User;
 import com.example.slatielly.app.FormContract;
 
 public interface RegisterContract {

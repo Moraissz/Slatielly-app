@@ -1,4 +1,4 @@
-package com.example.slatielly.Model;
+package com.example.slatielly.model;
 
 public class Rent {
     private String id;

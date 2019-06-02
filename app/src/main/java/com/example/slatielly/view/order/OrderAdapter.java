@@ -1,4 +1,4 @@
-package com.example.slatielly.view.Order;
+package com.example.slatielly.view.order;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.slatielly.Model.Order;
+import com.example.slatielly.model.Order;
 import com.example.slatielly.R;
 
 import java.util.ArrayList;

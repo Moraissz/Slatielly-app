@@ -11,9 +11,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.slatielly.MainActivity;
-import com.example.slatielly.Model.Address;
-import com.example.slatielly.Model.User;
-import com.example.slatielly.Model.repository.FirestoreRepository;
+import com.example.slatielly.model.Address;
+import com.example.slatielly.model.User;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.R;
 import com.example.slatielly.service.ValidationService;
 

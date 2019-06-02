@@ -1,4 +1,4 @@
-package com.example.slatielly.Model.repository;
+package com.example.slatielly.model.repository;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
