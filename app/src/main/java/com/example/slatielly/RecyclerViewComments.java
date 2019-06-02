@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.slatielly.view.Comment.AdapterComment;
+import com.example.slatielly.view.comment.AdapterComment;
 
 public class RecyclerViewComments extends AppCompatActivity
 {

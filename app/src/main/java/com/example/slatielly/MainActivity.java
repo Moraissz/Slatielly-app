@@ -18,7 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.slatielly.Model.User;
+import com.example.slatielly.model.User;
+import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -247,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View v) {
         this.isProfileActive = true;
         this.unCheckMenuItem(true);
-        this.setNavigationFragment(ProfileFragment.newInstance(this.currentUser), R.string.profile, false);
+        this.setNavigationFragment(ProfileFragment.newInstance(), R.string.profile, false);
         this.drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
