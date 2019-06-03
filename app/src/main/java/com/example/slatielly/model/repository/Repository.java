@@ -1,6 +1,7 @@
 package com.example.slatielly.model.repository;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 
 public interface Repository<TEntity extends Identifiable<TKey>, TKey> {
 
@@ -25,6 +26,13 @@ public interface Repository<TEntity extends Identifiable<TKey>, TKey> {
      * @return An {@link Task} to be notified of failures.
      */
     Task<Void> create(TEntity entity);
+
+    /**
+     * Stores an entity in the repository so it is accessible via its unique id.
+     * @param entity the entity implementing {@link Identifiable} to be stored.
+     * @return An {@link Task} to be notified of failures.
+     */
+    Task<DocumentReference> add(TEntity entity);
 
     /**
      * Updates an entity in the repository

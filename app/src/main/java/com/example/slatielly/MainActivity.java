@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +31,8 @@ import java.util.ArrayList;
 
 import info.androidhive.fontawesome.FontDrawable;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnSuccessListener<DocumentSnapshot>, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -250,5 +252,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(true);
         this.setNavigationFragment(ProfileFragment.newInstance(), R.string.profile, false);
         this.drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public void navigateToAllDresses() {
+        this.unCheckMenuItem(false);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof RegisterDressFragment) {
+            RegisterDressFragment registerDressFragment = (RegisterDressFragment) fragment;
+            registerDressFragment.setOnNavigationListener(this);
+        }
     }
 }
