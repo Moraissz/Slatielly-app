@@ -72,7 +72,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
-                android:text="Curtir"
+                android:text="@string/Like"
                 android:textSize="8dp" />
 
             <Button
@@ -81,7 +81,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
-                android:text="Responder"
+                android:text="@string/Answer"
                 android:textSize="8dp" />
 
             <TextView

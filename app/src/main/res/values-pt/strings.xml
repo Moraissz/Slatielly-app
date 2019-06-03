@@ -18,4 +18,15 @@
     <string name="wDateEnd">Término</string>
     <string name="wOrders">Pedidos</string>
     <string name="wTotalPrice">Valor Total</string>
+    <string name="Tamanho" translatable="false">Tamanho:</string>
+    <string name="Cor">Cor:</string>
+    <string name="Preço">Preço:</string>
+    <string name="Type">Tipo:</string>
+    <string name="Material">Material:</string>
+    <string name="Rent">ALUGAR</string>
+    <string name="COMMENTS">COMENTÁRIOS</string>
+    <string name="Like">Curtir</string>
+    <string name="Answer">Responder</string>
+    <string name="select_start">SELECIONE A DATA INICIAL:</string>
+    <string name="select_finish">SELECIONE A DATA DE DEVOLUÇÃO:</string>
 </resources>
