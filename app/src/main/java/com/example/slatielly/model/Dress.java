@@ -50,12 +50,12 @@ public class Dress implements Identifiable<String> {
         this.timestamp = new Date();
     }
 
-    public List<Image> getImagens() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImagens(List<Image> imagens) {
-        this.images = imagens;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public List<Comment> getComments() {
