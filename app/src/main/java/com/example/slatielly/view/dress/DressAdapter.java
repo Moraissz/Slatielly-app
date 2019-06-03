@@ -1,28 +1,29 @@
 package com.example.slatielly.view.dress;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.ArrayList;
 
-public class DressAdapter extends RecyclerView.Adapter<DressViewHolder> {
-    private ArrayList<Dress> dressArrayList;
+public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolder> {
     private DressListener listener;
 
-    public DressAdapter(ArrayList<Dress> dressArrayList, DressListener listener) {
-        this.dressArrayList = dressArrayList;
+    public DressAdapter(FirestoreRecyclerOptions<Dress> options, DressListener listener) {
+        super(options);
         this.listener = listener;
     }
 
     public interface DressListener{
         void onClickDressListener(Dress dress);
     }
+
     @NonNull
     @Override
     public DressViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -33,13 +34,7 @@ public class DressAdapter extends RecyclerView.Adapter<DressViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DressViewHolder dressViewHolder, int i) {
-        dressViewHolder.bind(dressArrayList.get(i));
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return dressArrayList.size();
+    protected void onBindViewHolder(@NonNull DressViewHolder holder, int position, @NonNull Dress model) {
+        holder.bind(model);
     }
 }

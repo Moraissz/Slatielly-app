@@ -11,6 +11,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class FirestoreRepository<TEntity extends Identifiable<String>> implements Repository<TEntity, String>  {
     private static final String TAG = "FirestoreRepository";
@@ -63,6 +64,11 @@ public class FirestoreRepository<TEntity extends Identifiable<String>> implement
                 }
             }
         });
+    }
+
+    @Override
+    public Query getQuery() {
+        return collectionReference.orderBy("timestamp");
     }
 
     @Override

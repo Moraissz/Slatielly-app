@@ -2,6 +2,7 @@ package com.example.slatielly.model.repository;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
 
 public interface Repository<TEntity extends Identifiable<TKey>, TKey> {
 
@@ -19,6 +20,8 @@ public interface Repository<TEntity extends Identifiable<TKey>, TKey> {
      * @return A {@link Task} for an entity implementing {@link Identifiable}.
      */
     Task<TEntity> get(TKey id);
+
+    Query getQuery();
 
     /**
      * Stores an entity in the repository so it is accessible via its unique id.

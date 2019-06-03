@@ -2,7 +2,9 @@ package com.example.slatielly.model;
 
 import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.ServerTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 public class Dress implements Identifiable<String> {
@@ -17,8 +19,13 @@ public class Dress implements Identifiable<String> {
     private String status;
     private String type;
     private int washingDays;
+    private Date timestamp;
     private List<Image> images;
     private List<Comment> comments;
+
+    public Dress() {
+
+    }
 
     public Dress(String id, String description, String type, Double price, String size, String color, String material) {
         this.id = id;
@@ -40,6 +47,7 @@ public class Dress implements Identifiable<String> {
         this.material = material;
         this.washingDays = washingDays;
         this.prepareDays = prepareDays;
+        this.timestamp = new Date();
     }
 
     public List<Image> getImagens() {
@@ -150,5 +158,14 @@ public class Dress implements Identifiable<String> {
     @Override
     public String setEntityKey(String entityKey) {
         return this.id = entityKey;
+    }
+
+    @ServerTimestamp
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }
