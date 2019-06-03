@@ -35,6 +35,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     private Button btnSaveChanges;
     private Button btnEditPhotos;
     private RegisterDressContract.Presenter presenter;
+    private NavigateListener navigateListener;
 
     public RegisterDressFragment() {
         // Required empty public constructor
@@ -121,6 +122,14 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
     @Override
     public void navigateToAllDresses() {
+        this.navigateListener.navigateToAllDresses();
+    }
 
+    public void setNavigateListener(NavigateListener navigateListener) {
+        this.navigateListener = navigateListener;
+    }
+
+    public interface NavigateListener {
+        void navigateToAllDresses();
     }
 }
