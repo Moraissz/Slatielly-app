@@ -44,7 +44,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="Tamanho:"
+                android:text="@string/Tamanho"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
@@ -71,7 +71,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="Cor:"
+                android:text="@string/Cor"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
@@ -98,7 +98,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="Preço:"
+                android:text="@string/Preço"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
@@ -125,7 +125,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="Modelo:"
+                android:text="@string/Type"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
@@ -152,7 +152,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="Material:"
+                android:text="@string/Material"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />
@@ -182,7 +182,7 @@
                 android:background="@color/colorPrimary"
                 android:fontFamily="@font/ubuntu"
                 android:onClick="Order_click"
-                android:text="ALUGAR"
+                android:text="@string/Rent"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -198,7 +198,7 @@
                 android:background="@color/colorPrimary"
                 android:fontFamily="@font/ubuntu"
                 android:onClick="Comments_click"
-                android:text="COMENTÁRIOS"
+                android:text="@string/COMMENTS"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />

@@ -18,13 +18,18 @@ import com.example.slatielly.model.User;
 import com.example.slatielly.view.GridSpacingItemDecoration;
 import com.example.slatielly.view.rent.RentAdapter;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class RentsFragment extends Fragment implements RentAdapter.RentListener {
     private RecyclerView recyclerView;
     private RentAdapter adapter;
     private ArrayList<Rent> rentArrayList;
+
+
+    public Calendar calendar = Calendar.getInstance();
 
     public RentsFragment() {
     }
@@ -44,6 +49,8 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
         Rent rent;
         //Preencher ArrayList
         for (int i = 0; i < 20; i++) {
+            rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", "R$ 70,00", "38 a 40", "Preto", "Pano"),
+                    new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()), "Pendente");
             rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", 70.00, "38 a 40", "Preto", "Pano"),
                     new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), "30-02-2020", "31-02-2021", "Pendente");
 

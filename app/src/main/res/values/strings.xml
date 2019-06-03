@@ -71,4 +71,15 @@
     <string name="err_prepare" translatable="false">Days of prepare should not be empty</string>
     <string name="err_type" translatable="false">Type should not be empty</string>
     <string name="err_color" translatable="false">Color should not be empty</string>
+    <string name="Tamanho">Size:</string>
+    <string name="Cor">Color:</string>
+    <string name="Preço">Price:</string>
+    <string name="Type">Type:</string>
+    <string name="Material">Material:</string>
+    <string name="Rent">RENT</string>
+    <string name="COMMENTS">COMMENTS</string>
+    <string name="Like">Like</string>
+    <string name="Answer">Answer</string>
+    <string name="select_start">SELECT THE INITIAL DATE:</string>
+    <string name="select_finish">SELECT THE RETURN DATE:</string>
 </resources>
