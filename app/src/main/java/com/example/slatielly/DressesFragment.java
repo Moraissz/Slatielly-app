@@ -62,7 +62,8 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     }
 
     @Override
-    public void onClickDressListener(Dress dress) {
+    public void onClickDressListener(Dress dress)
+    {
 
     }
 }

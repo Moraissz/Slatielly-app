@@ -2,23 +2,26 @@ package com.example.slatielly.model;
 
 public class Image
 {
-    private String id;
-    private String addressLink;
+    private String addressStorage;
+    private String downloadLink;
 
-    public String getId() {
-        return id;
+    public String getaddressStorage()
+    {
+        return addressStorage;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setaddressStorage(String addressStorage)
+    {
+        this.addressStorage = addressStorage;
     }
 
-    public String getAddress() {
-        return addressLink;
+    public String getdownloadLink()
+    {
+        return downloadLink;
     }
 
-    public void setAddress(String address) {
-        this.addressLink = address;
+    public void setdownloadLink(String downloadLink)
+    {
+        this.downloadLink = downloadLink;
     }
-
 }
