@@ -86,7 +86,7 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         @Override
         public int getCount()
         {
-            return dress.getImagens().size();
+            return dress.getImages().size();
         }
     }
 
@@ -108,7 +108,7 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
             image_dress_fragment_screen_slide_page_dress = (ImageView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
 
 
-            Glide.with(this).load(dress.getImagens().get(position).getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
+            Glide.with(this).load(dress.getImages().get(position).getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
 
 
             return rootView;
@@ -137,7 +137,7 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         textView_description_fragment_screen_slide_dress.setText(dress.getDescription());
         textView_size_fragment_screen_slide_dress.setText(dress.getSize());
         textView_color_fragment_screen_slide_dress.setText(dress.getColor());
-        textView_price_fragment_screen_slide_dress.setText(dress.getPrice().toString());
+        textView_price_fragment_screen_slide_dress.setText(String.valueOf(dress.getPrice()));
         textView_type_fragment_screen_slide_dress.setText(dress.getType());
         textView_material_fragment_screen_slide_dress.setText(dress.getMaterial());
     }
