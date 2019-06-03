@@ -1,4 +1,4 @@
-package com.example.slatielly;
+package com.example.slatielly.app.dress.dresses;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,21 +11,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.slatielly.R;
 import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.dress.DressAdapter;
 import com.example.slatielly.view.GridSpacingItemDecoration;
+import com.example.slatielly.view.dress.DressViewHolder;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.ArrayList;
 
 
-public class DressesFragment extends Fragment implements DressAdapter.DressListener {
+public class DressesFragment extends Fragment implements DressAdapter.DressListener, DressesContract.View {
 
     private RecyclerView recyclerView;
     private DressAdapter adapter;
-    private ArrayList<Dress> dressArrayList;
+    private DressesContract.Presenter presenter;
 
     public DressesFragment() {
-
     }
 
     @Override
@@ -37,14 +41,10 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.recyclerView = view.findViewById(R.id.recycler_view);
-        this.dressArrayList = new ArrayList<>();
+        FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, "dresses");
+        this.presenter = new DressesPresenter(this, firestoreRepository);
 
-        //Preencher array
-        for (int i = 0; i < 20; i++) {
-            Dress dress = new Dress("i", "Vestido para Casamento", "Tipo " + i, 50.00,"38 a 40","Preto","Pano");
-            this.dressArrayList.add(dress);
-        }
+        this.recyclerView = view.findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
         this.recyclerView.setLayoutManager(mLayoutManager);
@@ -54,15 +54,26 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
                         GridSpacingItemDecoration.dpToPx(10, this.getResources()), true
                 )
         );
-
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        this.adapter = new DressAdapter(this.dressArrayList, this);
+        this.adapter = new DressAdapter(this.presenter.getRecyclerOptions(), this);
         this.recyclerView.setAdapter(this.adapter);
     }
 
     @Override
     public void onClickDressListener(Dress dress) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.adapter.stopListening();
     }
 }
