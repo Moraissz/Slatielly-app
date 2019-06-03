@@ -20,7 +20,7 @@ public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolde
         this.listener = listener;
     }
 
-    public interface DressListener{
+    public interface DressListener {
         void onClickDressListener(Dress dress);
     }
 
@@ -28,9 +28,9 @@ public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolde
     @Override
     public DressViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        View view = layoutInflater.inflate(R.layout.dresses_card_viewholder,viewGroup,false);
-        DressViewHolder dressViewHolder = new DressViewHolder(view,this.listener);
-        return dressViewHolder;
+        View view = layoutInflater.inflate(R.layout.dresses_card_viewholder, viewGroup, false);
+
+        return new DressViewHolder(view, this.listener);
     }
 
     @Override

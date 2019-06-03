@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.model.User;
@@ -33,7 +34,8 @@ import java.util.ArrayList;
 import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener {
+        OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
+        DressesFragment.NavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -269,5 +271,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RegisterDressFragment registerDressFragment = (RegisterDressFragment) fragment;
             registerDressFragment.setOnNavigationListener(this);
         }
+
+        if (fragment instanceof DressesFragment) {
+            DressesFragment dressesFragment = (DressesFragment) fragment;
+            dressesFragment.setNavigationListener(this);
+        }
+    }
+
+    @Override
+    public void navigateToDress(String id) {
+        this.setNavigationFragment(DressFragment.newInstance(id), R.string.all_dresses, false);
     }
 }

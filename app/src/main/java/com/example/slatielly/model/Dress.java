@@ -4,6 +4,7 @@ import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class Dress implements Identifiable<String> {
     private String type;
     private int washingDays;
     private Date timestamp;
-    private List<Image> images;
-    private List<Comment> comments;
+    private ArrayList<Image> images;
+    private ArrayList<Comment> comments;
 
     public Dress() {
 
@@ -50,19 +51,19 @@ public class Dress implements Identifiable<String> {
         this.timestamp = new Date();
     }
 
-    public List<Image> getImages() {
+    public ArrayList<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(ArrayList<Image> images) {
         this.images = images;
     }
 
-    public List<Comment> getComments() {
+    public ArrayList<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 

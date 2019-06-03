@@ -46,7 +46,7 @@ public class ScreenSlidePagerActivityCommentImages extends AppCompatActivity
     }
 
     /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * A simple pager adapter that represents 5 ScreenSlideFragment objects, in
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
