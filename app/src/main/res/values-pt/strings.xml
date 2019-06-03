@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Slatielly</string>
     <string name="wRegisterDress">Cadastrar Vestido</string>
-    <string name="wTitleD">Título</string>
     <string name="wSizeDress">Tamanho</string>
     <string name="wDaysOfPrepare">Dias de Preparo</string>
     <string name="wDaysOfWashing">Dias de Lavagem</string>

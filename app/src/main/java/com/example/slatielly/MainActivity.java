@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;

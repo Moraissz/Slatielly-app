@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -75,6 +76,25 @@ public class FirestoreRepository<TEntity extends Identifiable<String>> implement
                 Log.d(TAG, "There was an error creating '" + documentName + "' in '" + collectionName + "'!", e);
             }
         });
+    }
+
+    @Override
+    public Task<DocumentReference> add(final TEntity entity) {
+        return collectionReference
+                .add(entity)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        entity.setEntityKey(documentReference.getId());
+                        documentReference.set(entity);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "There was an error creating in '" + collectionName + "'!", e);
+                    }
+                });
     }
 
     @Override

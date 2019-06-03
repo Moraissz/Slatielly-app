@@ -74,4 +74,10 @@ public class User implements Identifiable<String> {
     public String getEntityKey() {
         return id;
     }
+
+    @Exclude
+    @Override
+    public String setEntityKey(String entityKey) {
+        return this.id = entityKey;
+    }
 }

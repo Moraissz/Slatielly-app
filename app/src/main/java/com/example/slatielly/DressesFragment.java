@@ -42,7 +42,7 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
 
         //Preencher array
         for (int i = 0; i < 20; i++) {
-            Dress dress = new Dress("i", "Vestido para Casamento", "Tipo " + i, "R$ 50,00","38 a 40","Preto","Pano");
+            Dress dress = new Dress("i", "Vestido para Casamento", "Tipo " + i, 50.00,"38 a 40","Preto","Pano");
             this.dressArrayList.add(dress);
         }
 

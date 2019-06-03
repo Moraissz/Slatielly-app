@@ -7,7 +7,9 @@
     <string name="hirerName" translatable="false">Hirer Name:</string>
     <string name="allBooks" translatable="false">All Books</string>
     <string name="wRegisterDress">Register Dress</string>
-    <string name="wTitleD">Title</string>
+    <string name="wTitleD" translatable="false">Title</string>
+    <string name="wMaterial" translatable="false">Material</string>
+    <string name="wColor" translatable="false">Color</string>
     <string name="wSizeDress">Size</string>
     <string name="wDaysOfPrepare">Days of Prepare</string>
     <string name="wDaysOfWashing">Days of Washing</string>
@@ -61,4 +63,12 @@
     <string name="logout" translatable="false">Logout</string>
     <string name="success_edit_profile" translatable="false">Profile was edited successfully!</string>
     <string name="success_edit_address" translatable="false">Address was edited successfully!</string>
+    <string name="err_material" translatable="false">Material should not be empty</string>
+    <string name="err_size" translatable="false">Size should not be empty</string>
+    <string name="err_description" translatable="false">Description should not be empty</string>
+    <string name="err_price" translatable="false">Price should not be empty</string>
+    <string name="err_washing" translatable="false">Days of washing should not be empty</string>
+    <string name="err_prepare" translatable="false">Days of prepare should not be empty</string>
+    <string name="err_type" translatable="false">Type should not be empty</string>
+    <string name="err_color" translatable="false">Color should not be empty</string>
 </resources>
