@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.NavigateListener {
+        OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof RegisterDressFragment) {
             RegisterDressFragment registerDressFragment = (RegisterDressFragment) fragment;
-            registerDressFragment.setNavigateListener(this);
+            registerDressFragment.setOnNavigationListener(this);
         }
     }
 }
