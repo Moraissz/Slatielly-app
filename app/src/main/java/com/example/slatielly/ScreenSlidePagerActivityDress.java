@@ -137,7 +137,7 @@ public class ScreenSlidePagerActivityDress extends AppCompatActivity
         textView_description_fragment_screen_slide_dress.setText(dress.getDescription());
         textView_size_fragment_screen_slide_dress.setText(dress.getSize());
         textView_color_fragment_screen_slide_dress.setText(dress.getColor());
-        textView_price_fragment_screen_slide_dress.setText(dress.getPrice());
+        textView_price_fragment_screen_slide_dress.setText(dress.getPrice().toString());
         textView_type_fragment_screen_slide_dress.setText(dress.getType());
         textView_material_fragment_screen_slide_dress.setText(dress.getMaterial());
     }
