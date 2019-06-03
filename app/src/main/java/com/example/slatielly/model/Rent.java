@@ -1,15 +1,18 @@
 package com.example.slatielly.model;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Rent {
     private String id;
     private Dress dress;
     private User user;
-    private String startDate;
-    private String endDate;
+    private Timestamp startDate;
+    private Timestamp endDate;
     private String status;
     private String description;
 
-    public Rent(String id, Dress dress, User user, String startDate, String endDate,  String status) {
+    public Rent(String id, Dress dress, User user, Timestamp startDate, Timestamp endDate,  String status) {
         this.id = id;
         this.dress = dress;
         this.user = user;
@@ -42,19 +45,19 @@ public class Rent {
         this.user = user;
     }
 
-    public String getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

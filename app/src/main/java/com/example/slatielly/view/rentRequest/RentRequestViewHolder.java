@@ -38,8 +38,8 @@ public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements V
     public void bind(Rent rent){
         this.description.setText(rent.getDress().getDescription());
         this.hirerName.setText(rent.getUser().getName());
-        this.startDate.setText(rent.getStartDate());
-        this.endDate.setText(rent.getEndDate());
+        this.startDate.setText(rent.getStartDate().toString());
+        this.endDate.setText(rent.getEndDate().toString());
         this.totalPrice.setText(rent.getDress().getPrice());
         this.rent = rent;
     }
