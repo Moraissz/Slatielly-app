@@ -10,7 +10,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 {
     public boolean dateVerificationRents (List<Rent> rents,Timestamp dateStart, Timestamp datefinish)
     {
-        boolean state = false;
+        boolean state = true;
         for(int i=0;i<rents.size();i=i+1)
         {
             Timestamp comparation1 = rents.get(i).getStartDate();
@@ -30,7 +30,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
             if(!state)
             {
-                state = false;
                 break;
             }
         }

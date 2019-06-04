@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CalendarDateFinishContract
 {
-    interface View extends FormContract.View
+    interface View
     {
         Timestamp formDate(Calendar clickedDayCalendar);
     }
