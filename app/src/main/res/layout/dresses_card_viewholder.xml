@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_marginHorizontal="7dp"
+        android:layout_marginVertical="13dp"
         android:elevation="3dp"
         card_view:cardCornerRadius="0dp">
 
@@ -18,79 +20,138 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <ImageView
-                android:id="@+id/thumbnail"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/album8"
-                android:scaleType="fitXY" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
 
-            <TextView
-                android:id="@+id/dressDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/thumbnail"
-                android:text="Vestido para Casamento"
-                android:textAlignment="center"
-                android:textColor="@color/dress_name"
-                android:textSize="17sp" />
+                >
 
-            <TextView
-                android:id="@+id/dressTypeString"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dressDescription"
-                android:text="@string/type"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:textSize="14sp"
-                />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dressType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dressDescription"
-                android:layout_toRightOf="@id/dressTypeString"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="gravity"
-                android:gravity="end"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:text="Casamento"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/dressPriceString"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dressTypeString"
-                android:text="@string/price"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:textSize="14sp"
-                />
+                    <TextView
+                        android:id="@+id/drawableBorder"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/border_left_pink" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/dressPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dressTypeString"
-                android:layout_toRightOf="@id/dressPriceString"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textAlignment="gravity"
-                android:gravity="end"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:text="R$ 40"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:id="@+id/DressLLInfo"
+                    android:layout_width="246dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/dressDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:paddingTop="10dp"
+                        android:textAlignment="viewStart"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorGray900"
+                        android:textSize="20sp"
+                        tools:text="Vestido de Casamento" />
+
+                    <TextView
+                        android:id="@+id/dressPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="R$ 50,00"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/colorGray700"
+                        android:textSize="20sp" />
+
+
+                    <TextView
+                        android:id="@+id/dressType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/colorGray700"
+                        android:text="Casamento"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <info.androidhive.fontawesome.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fa_arrows_alt_h_solid"
+                            android:textColor="@color/colorGray600"
+                            android:textSize="20sp"
+                            app:solid_icon="true"/>
+                        <TextView
+                            android:id="@+id/dressSize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:textColor="@color/colorGray700"
+                            android:text="P à GG"
+                            android:textAlignment="viewStart"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <info.androidhive.fontawesome.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fa_cubes_solid"
+                            android:textColor="@color/colorGray600"
+                            android:textSize="20sp"
+                            app:solid_icon="true"/>
+                        <TextView
+                            android:id="@+id/dressMaterial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:textColor="@color/colorGray700"
+                            android:text="Seda"
+                            android:textAlignment="gravity"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/thumbnail"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/album8" />
+                </LinearLayout>
+            </LinearLayout>
 
 
         </RelativeLayout>

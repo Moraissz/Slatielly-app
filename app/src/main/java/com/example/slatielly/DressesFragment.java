@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,14 +47,8 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
             this.dressArrayList.add(dress);
         }
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
-        this.recyclerView.setLayoutManager(mLayoutManager);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        this.recyclerView.addItemDecoration(
-                new GridSpacingItemDecoration(2,
-                        GridSpacingItemDecoration.dpToPx(10, this.getResources()), true
-                )
-        );
 
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
 
