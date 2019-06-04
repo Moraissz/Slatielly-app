@@ -24,13 +24,13 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
 
     public static List<Calendar> disabledays;
 
-    public List<Rent> rents;
-
-    public Intent intent;
+    public static List<Rent> rents; //AQUI DEVE CHEGAR TODOS OS ALUGUÉIS DO VESTIDO CORRESPONDENTE
 
     private CalendarDateStartContract.Presenter presenter;
 
-    public Timestamp dateToday;
+    private Timestamp dateToday;
+
+    public static Timestamp dateStart;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -38,12 +38,9 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
     {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.calendar_date_start);
-        intent = new Intent(this,CalendarDateStartActivity.class);
 
         presenter = new CalendarDateStartPresenter();
 
-        dateToday = new Timestamp(calendar.getTimeInMillis());
-        dateToday.setNanos(0);
 
         CalendarView calendarViewStart = (CalendarView) findViewById(R.id.MaterialCalendarView_calendar_date_start);
 
@@ -68,6 +65,8 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
         }
 
 
+        dateToday = formDate(calendar);
+
 
         calendarViewStart.setDisabledDays(disabledays);
 
@@ -79,17 +78,17 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
             {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
 
-                Timestamp dateStart = formDate(clickedDayCalendar);
+                dateStart = formDate(clickedDayCalendar);
 
-                if(dateStart.before(dateToday))
+                if(dateStart.before(dateToday))//verifica se a data escolhida é anterior a data de hoje, se entrar aqui a data escolhida é invalida
                 {
 
                 }
-                else if(presenter.dateVerificationDisableDays(disabledays,dateStart))
+                else if(!presenter.dateVerificationDisableDays(disabledays,dateStart)) //verifica se a data escolhida não é uma data desabilitada, se entrar aqui a data escolhida é invalida
                 {
 
                 }
-                else
+                else //pode prosseguir para escolher a data de devolução
                 {
 
                 }
@@ -111,17 +110,5 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
         Timestamp dateStart = new Timestamp(aux.getTimeInMillis());
         dateStart.setNanos(0);
         return dateStart;
-    }
-
-    @Override
-    public void setLoadingStatus(boolean isLoading)
-    {
-
-    }
-
-    @Override
-    public void setErrorMessage(String errorMessage)
-    {
-
     }
 }

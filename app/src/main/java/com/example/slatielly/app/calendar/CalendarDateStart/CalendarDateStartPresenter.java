@@ -23,7 +23,7 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
             disabledays.add(aux);
 
             Timestamp dataaux = rents.get(i).getStartDate();
-            while (dataaux.before(rents.get( i).getEndDate()))
+            while (dataaux.before(rents.get(i).getEndDate()))
             {
                 aux = Calendar.getInstance();
                 aux.setTime( dataaux );
