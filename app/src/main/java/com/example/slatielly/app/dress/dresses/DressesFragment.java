@@ -16,11 +16,6 @@ import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.dress.DressAdapter;
 import com.example.slatielly.view.GridSpacingItemDecoration;
-import com.example.slatielly.view.dress.DressViewHolder;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-
-import java.util.ArrayList;
 
 
 public class DressesFragment extends Fragment implements DressAdapter.DressListener, DressesContract.View {
@@ -28,7 +23,7 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     private RecyclerView recyclerView;
     private DressAdapter adapter;
     private DressesContract.Presenter presenter;
-    private NavigationListener listener;
+    private OnNavigationListener listener;
 
     public DressesFragment() {
     }
@@ -63,15 +58,15 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
 
     @Override
     public void onClickDressListener(Dress dress) {
-        this.listener.navigateToDress(dress.getId());
+        this.listener.onNavigateToDress(dress.getId());
     }
 
-    public void setNavigationListener(NavigationListener listener) {
+    public void setNavigationListener(OnNavigationListener listener) {
         this.listener = listener;
     }
 
-    public interface NavigationListener {
-        void navigateToDress(String id);
+    public interface OnNavigationListener {
+        void onNavigateToDress(String id);
     }
 
     @Override

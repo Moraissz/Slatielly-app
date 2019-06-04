@@ -102,7 +102,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         if (v == btnComments) {
             if (this.getArguments() != null) {
                 String id = this.getArguments().getString("id");
-                this.listener.navigateToComments(id);
+                this.listener.onNavigateToComments(id);
                 return;
             }
 
@@ -115,6 +115,6 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     public interface OnNavigationListener {
-        void navigateToComments(String dressId);
+        void onNavigateToComments(String dressId);
     }
 }
