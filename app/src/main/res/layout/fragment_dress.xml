@@ -17,7 +17,7 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textView_description_fragment_screen_slide_dress"
+            android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -44,7 +44,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/textView_size_fragment_screen_slide_dress"
+            android:id="@+id/txtSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -71,7 +71,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/textView_color_fragment_screen_slide_dress"
+            android:id="@+id/txtColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -98,7 +98,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/textView_price_fragment_screen_slide_dress"
+            android:id="@+id/txtPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -125,7 +125,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/textView_type_fragment_screen_slide_dress"
+            android:id="@+id/txtType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -152,7 +152,7 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/textView_material_fragment_screen_slide_dress"
+            android:id="@+id/txtMaterial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -166,7 +166,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button_rent--fragment_screen_slide_dress"
+            android:id="@+id/btnRent"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button_comments--fragment_screen_slide_dress"
+            android:id="@+id/btnComments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"

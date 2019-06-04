@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.slatielly.R;
@@ -19,17 +20,20 @@ import com.example.slatielly.model.repository.FirestoreRepository;
 
 import java.util.ArrayList;
 
-public class DressFragment extends Fragment implements DressContract.View {
+public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
 
     private ViewPager mPager;
     private PagerAdapter pagerAdapter;
-    private TextView textView_description_fragment_screen_slide_dress;
-    private TextView textView_size_fragment_screen_slide_dress;
-    private TextView textView_color_fragment_screen_slide_dress;
-    private TextView textView_price_fragment_screen_slide_dress;
-    private TextView textView_type_fragment_screen_slide_dress;
-    private TextView textView_material_fragment_screen_slide_dress;
+    private TextView txtDescription;
+    private TextView txtSize;
+    private TextView txtColor;
+    private TextView txtPrice;
+    private TextView txtType;
+    private TextView txtMaterial;
+    private Button btnComments;
+    private Button btnRent;
     private DressContract.Presenter presenter;
+    private OnNavigationListener listener;
 
     public static DressFragment newInstance(String id) {
         DressFragment dressFragment = new DressFragment();
@@ -65,27 +69,48 @@ public class DressFragment extends Fragment implements DressContract.View {
     }
 
     private void setupViews(View view) {
-        textView_description_fragment_screen_slide_dress = view.findViewById(R.id.textView_description_fragment_screen_slide_dress);
-        textView_size_fragment_screen_slide_dress = view.findViewById(R.id.textView_size_fragment_screen_slide_dress);
-        textView_color_fragment_screen_slide_dress = view.findViewById(R.id.textView_color_fragment_screen_slide_dress);
-        textView_price_fragment_screen_slide_dress = view.findViewById(R.id.textView_price_fragment_screen_slide_dress);
-        textView_type_fragment_screen_slide_dress = view.findViewById(R.id.textView_type_fragment_screen_slide_dress);
-        textView_material_fragment_screen_slide_dress = view.findViewById(R.id.textView_material_fragment_screen_slide_dress);
+        txtDescription = view.findViewById(R.id.txtDescription);
+        txtSize = view.findViewById(R.id.txtSize);
+        txtColor = view.findViewById(R.id.txtColor);
+        txtPrice = view.findViewById(R.id.txtPrice);
+        txtType = view.findViewById(R.id.txtType);
+        txtMaterial = view.findViewById(R.id.txtMaterial);
+
+        btnComments = view.findViewById(R.id.btnComments);
+        btnRent = view.findViewById(R.id.btnRent);
+        btnComments.setOnClickListener(this);
+        btnRent.setOnClickListener(this);
     }
 
     @Override
     public void setDressViews(Dress dress) {
-        textView_description_fragment_screen_slide_dress.setText(dress.getDescription());
-        textView_size_fragment_screen_slide_dress.setText(dress.getSize());
-        textView_color_fragment_screen_slide_dress.setText(dress.getColor());
-        textView_price_fragment_screen_slide_dress.setText(dress.getPrice().toString());
-        textView_type_fragment_screen_slide_dress.setText(dress.getType());
-        textView_material_fragment_screen_slide_dress.setText(dress.getMaterial());
+        txtDescription.setText(dress.getDescription());
+        txtSize.setText(dress.getSize());
+        txtColor.setText(dress.getColor());
+        txtPrice.setText(dress.getPrice().toString());
+        txtType.setText(dress.getType());
+        txtMaterial.setText(dress.getMaterial());
     }
 
     @Override
     public void setScreenSlideAdapter(ArrayList<Image> images) {
         pagerAdapter = new ScreenSlideAdapter(this.getFragmentManager(), images);
         mPager.setAdapter(pagerAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnComments) {
+            this.listener.navigateToComments();
+            return;
+        }
+    }
+
+    public void setOnNavigationListener(OnNavigationListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnNavigationListener {
+        void navigateToComments();
     }
 }

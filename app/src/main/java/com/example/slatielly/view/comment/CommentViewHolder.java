@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.slatielly.R;
 
-public class HolderComment extends RecyclerView.ViewHolder
+public class CommentViewHolder extends RecyclerView.ViewHolder
 {
     ImageView image_profile_image_comment_model;
     ImageView image_comment_comment_model;
@@ -22,7 +22,7 @@ public class HolderComment extends RecyclerView.ViewHolder
     Button button_reply_comment_model;
     Button button_see_answers_comment_model;
 
-    public HolderComment(@NonNull View itemView)
+    public CommentViewHolder(@NonNull View itemView)
     {
         super( itemView );
 

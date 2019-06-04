@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
-import com.example.slatielly.view.comment.AdapterComment;
+import com.example.slatielly.view.comment.CommentAdapter;
 
 public class CommentsFragment extends Fragment implements CommentsContract.View {
 
-    private RecyclerView RecyclerView_recyclerview_comments;
-    private AdapterComment adapterComment;
+    private RecyclerView rvComments;
+    private CommentAdapter commentAdapter;
     private CommentsContract.Presenter presenter;
 
     public static CommentsFragment newInstance() {
@@ -40,10 +40,10 @@ public class CommentsFragment extends Fragment implements CommentsContract.View 
 
         this.presenter = new CommentsPresenter(this);
 
-        RecyclerView_recyclerview_comments= view.findViewById(R.id.RecyclerView_recyclerview_comments);
-        adapterComment = new AdapterComment();
-        RecyclerView_recyclerview_comments.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        RecyclerView_recyclerview_comments.setHasFixedSize(true);
-        RecyclerView_recyclerview_comments.setAdapter(adapterComment);
+        rvComments = view.findViewById(R.id.rvComments);
+        commentAdapter = new CommentAdapter();
+        rvComments.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        rvComments.setHasFixedSize(true);
+        rvComments.setAdapter(commentAdapter);
     }
 }

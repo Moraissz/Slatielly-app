@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.slatielly.app.dress.DressFragment;
+import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.model.User;
@@ -35,7 +36,7 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.NavigationListener {
+        DressesFragment.NavigationListener, DressFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -258,14 +259,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void navigateToAllDresses() {
-        this.unCheckMenuItem(false);
-        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
-        this.checkMenuItem(menuItem);
-        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
-    }
-
-    @Override
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof RegisterDressFragment) {
             RegisterDressFragment registerDressFragment = (RegisterDressFragment) fragment;
@@ -276,10 +269,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DressesFragment dressesFragment = (DressesFragment) fragment;
             dressesFragment.setNavigationListener(this);
         }
+
+        if (fragment instanceof DressFragment) {
+            DressFragment dressFragment = (DressFragment) fragment;
+            dressFragment.setOnNavigationListener(this);
+        }
+    }
+
+    @Override
+    public void navigateToAllDresses() {
+        this.unCheckMenuItem(false);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
     }
 
     @Override
     public void navigateToDress(String id) {
         this.setNavigationFragment(DressFragment.newInstance(id), R.string.all_dresses, false);
+    }
+
+    @Override
+    public void navigateToComments() {
+        this.setNavigationFragment(CommentsFragment.newInstance(), R.string.COMMENTS, false);
     }
 }

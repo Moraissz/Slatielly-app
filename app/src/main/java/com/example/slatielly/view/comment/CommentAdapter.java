@@ -8,26 +8,26 @@ import android.view.ViewGroup;
 
 import com.example.slatielly.R;
 
-public class AdapterComment extends RecyclerView.Adapter<HolderComment>
+public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder>
 {
-    public AdapterComment()
+    public CommentAdapter()
     {
 
     }
     @NonNull
     @Override
-    public HolderComment onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
     {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.comment_model,viewGroup,false);
 
-        HolderComment holder_comentarios = new HolderComment(view);
+        CommentViewHolder holder_comentarios = new CommentViewHolder(view);
 
         return holder_comentarios;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderComment holderComment, int i)
+    public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i)
     {
 
     }
