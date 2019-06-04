@@ -122,7 +122,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
     @Override
     public void navigateToAllDresses() {
-        this.onNavigationListener.navigateToAllDresses();
+        this.onNavigationListener.onNavigateToAllDresses();
     }
 
     public void setOnNavigationListener(OnNavigationListener onNavigationListener) {
@@ -130,6 +130,6 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     }
 
     public interface OnNavigationListener {
-        void navigateToAllDresses();
+        void onNavigateToAllDresses();
     }
 }

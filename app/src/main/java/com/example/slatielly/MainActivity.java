@@ -36,7 +36,7 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.NavigationListener, DressFragment.OnNavigationListener {
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void navigateToAllDresses() {
+    public void onNavigateToAllDresses() {
         this.unCheckMenuItem(false);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
@@ -285,12 +285,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void navigateToDress(String id) {
+    public void onNavigateToDress(String id) {
         this.setNavigationFragment(DressFragment.newInstance(id), R.string.all_dresses, false);
     }
 
     @Override
-    public void navigateToComments(String dressId) {
+    public void onNavigateToComments(String dressId) {
         this.setNavigationFragment(CommentsFragment.newInstance(dressId), R.string.COMMENTS, false);
     }
 }
