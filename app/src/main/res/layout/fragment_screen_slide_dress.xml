@@ -44,7 +44,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="arial"
-                android:text="@string/Tamanho"
+                android:text="@string/Size2"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="16dp" />

@@ -175,15 +175,26 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
+                    android:id="@+id/btnTakePhotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:text="@string/TAKE_PHOTO"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <Button
                     android:id="@+id/btnEditPhotos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginTop="15dp"
+                    android:layout_weight="1"
                     android:background="@android:color/white"
                     android:text="@string/wSetPhotos"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnSaveChanges"

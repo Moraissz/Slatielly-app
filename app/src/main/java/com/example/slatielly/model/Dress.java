@@ -140,6 +140,7 @@ public class Dress implements Identifiable<String> {
         this.type = type;
     }
 
+
     public Double getPrice() {
         return price;
     }
@@ -147,6 +148,7 @@ public class Dress implements Identifiable<String> {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 
     @Exclude
     @Override
