@@ -1,4 +1,4 @@
-package com.example.slatielly;
+package com.example.slatielly.app.dress.comments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+
+import com.example.slatielly.R;
 
 public class ScreenSlidePagerActivityCommentImages extends AppCompatActivity
 {
@@ -46,7 +46,7 @@ public class ScreenSlidePagerActivityCommentImages extends AppCompatActivity
     }
 
     /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * A simple pager adapter that represents 5 ScreenSlideFragment objects, in
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter

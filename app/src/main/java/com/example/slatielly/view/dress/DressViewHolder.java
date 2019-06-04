@@ -24,15 +24,15 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
         itemView.setOnClickListener(this);
     }
 
-    public void bind(Dress dress){
+    public void bind(Dress dress) {
         this.description.setText(dress.getDescription());
         this.type.setText(dress.getType());
         this.price.setText(dress.getPrice().toString());
         this.dress = dress;
     }
+
     @Override
     public void onClick(View v) {
         listener.onClickDressListener(this.dress);
-
     }
 }

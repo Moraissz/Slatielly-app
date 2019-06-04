@@ -28,6 +28,7 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     private RecyclerView recyclerView;
     private DressAdapter adapter;
     private DressesContract.Presenter presenter;
+    private NavigationListener listener;
 
     public DressesFragment() {
     }
@@ -61,9 +62,16 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     }
 
     @Override
-    public void onClickDressListener(Dress dress)
-    {
+    public void onClickDressListener(Dress dress) {
+        this.listener.navigateToDress(dress.getId());
+    }
 
+    public void setNavigationListener(NavigationListener listener) {
+        this.listener = listener;
+    }
+
+    public interface NavigationListener {
+        void navigateToDress(String id);
     }
 
     @Override

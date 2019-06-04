@@ -4,14 +4,13 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Comment
-{
+public class Comment {
     private String id;
     private Timestamp date;
     private String description;
     private User user;
-    private List<Image> images= new ArrayList<>(  );
-    private List<Ansher> anshers=new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -53,11 +52,11 @@ public class Comment
         this.images = imagens;
     }
 
-    public List<Ansher> getAnshers() {
-        return anshers;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setAnshers(List<Ansher> anshers) {
-        this.anshers = anshers;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

@@ -4,6 +4,7 @@ import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class Dress implements Identifiable<String> {
     private String type;
     private int washingDays;
     private Date timestamp;
-    private List<Image> images;
-    private List<Comment> comments;
+    private ArrayList<Image> images;
+    private ArrayList<Comment> comments;
 
     public Dress() {
 
@@ -35,6 +36,8 @@ public class Dress implements Identifiable<String> {
         this.size = size;
         this.color = color;
         this.material = material;
+        this.images = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public Dress(String description, String type, Double price, String size, String color,
@@ -48,21 +51,23 @@ public class Dress implements Identifiable<String> {
         this.washingDays = washingDays;
         this.prepareDays = prepareDays;
         this.timestamp = new Date();
+        this.images = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
-    public List<Image> getImages() {
+    public ArrayList<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(ArrayList<Image> images) {
         this.images = images;
     }
 
-    public List<Comment> getComments() {
+    public ArrayList<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 
@@ -82,13 +87,11 @@ public class Dress implements Identifiable<String> {
         this.prepareDays = prepareDays;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 

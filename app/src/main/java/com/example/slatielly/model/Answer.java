@@ -4,13 +4,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ansher
-{
+public class Answer {
     private String id;
     private Timestamp date;
     private String description;
     private User user;
-    private List<Image> images= new ArrayList<>(  );
+    private List<Image> images = new ArrayList<>();
 
     public String getId() {
         return id;
