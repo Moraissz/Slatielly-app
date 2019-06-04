@@ -1,4 +1,4 @@
-package com.example.slatielly;
+package com.example.slatielly.app.dress.comments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.slatielly.R;
 import com.squareup.picasso.Picasso;
 
 @SuppressLint("ValidFragment")
