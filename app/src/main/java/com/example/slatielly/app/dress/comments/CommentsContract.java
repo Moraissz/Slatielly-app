@@ -1,7 +1,15 @@
 package com.example.slatielly.app.dress.comments;
 
-public interface CommentsContract {
-    interface View {}
+import com.example.slatielly.model.Comment;
 
-    interface Presenter {}
+import java.util.ArrayList;
+
+public interface CommentsContract {
+    interface View {
+        void setComments(ArrayList<Comment> comments);
+    }
+
+    interface Presenter {
+        void loadComments(String dressId);
+    }
 }

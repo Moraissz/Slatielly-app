@@ -12,16 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
+import com.example.slatielly.model.Comment;
+import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.comment.CommentAdapter;
+
+import java.util.ArrayList;
 
 public class CommentsFragment extends Fragment implements CommentsContract.View {
 
     private RecyclerView rvComments;
-    private CommentAdapter commentAdapter;
     private CommentsContract.Presenter presenter;
 
-    public static CommentsFragment newInstance() {
-        return new CommentsFragment();
+    public static CommentsFragment newInstance(String id) {
+        CommentsFragment commentsFragment = new CommentsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        commentsFragment.setArguments(bundle);
+
+        return commentsFragment;
     }
 
     public CommentsFragment() {
@@ -37,13 +47,26 @@ public class CommentsFragment extends Fragment implements CommentsContract.View 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.setupViews(view);
 
-        this.presenter = new CommentsPresenter(this);
+        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, "dresses");
+        this.presenter = new CommentsPresenter(this, repository);
 
+       if (this.getArguments() != null) {
+           String dressId = this.getArguments().getString("id");
+           this.presenter.loadComments(dressId);
+       }
+    }
+
+    private void setupViews(View view) {
         rvComments = view.findViewById(R.id.rvComments);
-        commentAdapter = new CommentAdapter();
         rvComments.setLayoutManager(new LinearLayoutManager(this.getContext()));
         rvComments.setHasFixedSize(true);
+    }
+
+    @Override
+    public void setComments(ArrayList<Comment> comments) {
+        CommentAdapter commentAdapter = new CommentAdapter(comments);
         rvComments.setAdapter(commentAdapter);
     }
 }

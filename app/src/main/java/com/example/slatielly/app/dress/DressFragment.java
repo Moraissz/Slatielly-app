@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
 
     private ViewPager mPager;
-    private PagerAdapter pagerAdapter;
     private TextView txtDescription;
     private TextView txtSize;
     private TextView txtColor;
@@ -94,14 +93,19 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     @Override
     public void setScreenSlideAdapter(ArrayList<Image> images) {
-        pagerAdapter = new ScreenSlideAdapter(this.getFragmentManager(), images);
+        PagerAdapter pagerAdapter = new ScreenSlideAdapter(this.getFragmentManager(), images);
         mPager.setAdapter(pagerAdapter);
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnComments) {
-            this.listener.navigateToComments();
+            if (this.getArguments() != null) {
+                String id = this.getArguments().getString("id");
+                this.listener.navigateToComments(id);
+                return;
+            }
+
             return;
         }
     }
@@ -111,6 +115,6 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     public interface OnNavigationListener {
-        void navigateToComments();
+        void navigateToComments(String dressId);
     }
 }

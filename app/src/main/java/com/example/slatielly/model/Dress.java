@@ -36,6 +36,8 @@ public class Dress implements Identifiable<String> {
         this.size = size;
         this.color = color;
         this.material = material;
+        this.images = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public Dress(String description, String type, Double price, String size, String color,
@@ -49,6 +51,8 @@ public class Dress implements Identifiable<String> {
         this.washingDays = washingDays;
         this.prepareDays = prepareDays;
         this.timestamp = new Date();
+        this.images = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public ArrayList<Image> getImages() {
@@ -83,13 +87,11 @@ public class Dress implements Identifiable<String> {
         this.prepareDays = prepareDays;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 

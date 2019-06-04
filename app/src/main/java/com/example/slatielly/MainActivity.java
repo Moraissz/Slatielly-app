@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void navigateToComments() {
-        this.setNavigationFragment(CommentsFragment.newInstance(), R.string.COMMENTS, false);
+    public void navigateToComments(String dressId) {
+        this.setNavigationFragment(CommentsFragment.newInstance(dressId), R.string.COMMENTS, false);
     }
 }
