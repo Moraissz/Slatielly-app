@@ -1,9 +1,12 @@
 package com.example.slatielly.model;
 
+import com.example.slatielly.model.repository.Identifiable;
+import com.google.firebase.firestore.Exclude;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class Rent {
+public class Rent implements Identifiable<String> {
     private String id;
     private Dress dress;
     private User user;
@@ -75,5 +78,19 @@ public class Rent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Exclude
+    @Override
+    public String getEntityKey()
+    {
+        return id;
+    }
+
+    @Exclude
+    @Override
+    public String setEntityKey(String entityKey)
+    {
+        return this.id = entityKey;
     }
 }
