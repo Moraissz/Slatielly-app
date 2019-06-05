@@ -40,8 +40,9 @@
             android:fontFamily="arial"
             android:text="@string/Size2"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtSize"
@@ -67,8 +68,9 @@
             android:fontFamily="arial"
             android:text="@string/Cor"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtColor"
@@ -94,8 +96,9 @@
             android:fontFamily="arial"
             android:text="@string/Preço"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtPrice"
@@ -121,8 +124,9 @@
             android:fontFamily="arial"
             android:text="@string/Type"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtType"
@@ -148,8 +152,9 @@
             android:fontFamily="arial"
             android:text="@string/Material"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="16dp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtMaterial"
