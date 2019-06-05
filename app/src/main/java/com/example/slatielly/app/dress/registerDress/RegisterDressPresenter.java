@@ -24,7 +24,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class RegisterDressPresenter implements RegisterDressContract.Presenter, OnFailureListener, OnSuccessListener<DocumentReference> {
@@ -32,8 +31,7 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     private RegisterDressContract.View view;
     private ValidationService validationService;
     private FirestoreRepository<Dress> repository;
-
-    private List<Bitmap> images;
+    private ArrayList<Bitmap> images;
     private Dress dress;
 
     public RegisterDressPresenter(RegisterDressContract.View view, ValidationService validationService,
@@ -41,6 +39,7 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         this.view = view;
         this.validationService = validationService;
         this.repository = repository;
+        this.images = new ArrayList<>();
     }
 
     @Override
@@ -56,11 +55,9 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     }
 
     @Override
-    public void createDress(Dress dress, List<Bitmap> images) {
+    public void createDress(Dress dress) {
         if (this.validationService.validate()) {
             this.view.setLoadingStatus(true);
-
-            this.images = images;
             this.dress = dress;
 
             this.repository
@@ -71,83 +68,79 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     }
 
     @Override
+    public void saveImage(String imagePath) {
+        Bitmap image = this.compressedBitmap(imagePath);
+        this.images.add(image);
+    }
+
+    @Override
     public void onFailure(@NonNull Exception e) {
         this.view.setLoadingStatus(false);
         this.view.setErrorMessage(e.getLocalizedMessage());
     }
 
     @Override
-    public void onSuccess(DocumentReference documentReference)
-    {
-        this.SaveImages(documentReference);
-
-        this.view.navigateToAllDresses();
+    public void onSuccess(DocumentReference documentReference) {
+        this.saveImages(documentReference);
     }
 
-    public void SaveImages(DocumentReference documentReference)
-    {
+    private void saveImages(DocumentReference documentReference) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
         Random generator = new Random();
         final ArrayList<Image> imagesAux = new ArrayList<>();
 
-        for(int i=0;i<this.images.size();i=i+1)
-        {
-            final String address = "images/dresses/"+documentReference.getId()+"/"+ generator.nextInt(1000000000);
+        for (Bitmap image : this.images) {
+            final String address = "images/dresses/" + documentReference.getId() + "/" + generator.nextInt(1000000000);
 
             final StorageReference imageRef = storageRef.child(address);
 
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            images.get(i).compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
 
             byte[] data = byteStream.toByteArray();
 
-            final int finalConstant = i;
+            final int finalConstant = this.images.indexOf(image);
 
-            imageRef.putBytes(data).addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>()
-            {
+            imageRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-                {
-                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                    {
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(Uri uri)
-                        {
+                        public void onSuccess(Uri uri) {
                             Image image = new Image();
                             image.setaddressStorage(address);
                             image.setdownloadLink(uri.toString());
 
                             imagesAux.add(image);
 
-                            if(finalConstant == imagesAux.size()-1)
-                            {
-                                dress.setImages(imagesAux );
-                                repository.update(dress);
+                            if (finalConstant == imagesAux.size() - 1) {
+                                dress.setImages(imagesAux);
+                                repository.update(dress)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        view.navigateToAllDresses();
+                                    }
+                                });
                             }
                         }
                     });
                 }
-
-
             });
         }
     }
 
-    public Bitmap CompressedBitmap(String imagePath)
-    {
+    private Bitmap compressedBitmap(String imagePath) {
         Bitmap thumbnail = (BitmapFactory.decodeFile(imagePath));
         float maxHeight;
         float maxWidth;
 
-        if(thumbnail.getHeight()>thumbnail.getWidth())
-        {
+        if (thumbnail.getHeight() > thumbnail.getWidth()) {
             maxHeight = 1080.0f;
             maxWidth = 1920.0f;
-        }
-        else
-        {
+        } else {
             maxHeight = 1920.0f;
             maxWidth = 1080.0f;
         }
@@ -162,22 +155,16 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         float imgRatio = (float) actualWidth / (float) actualHeight;
         float maxRatio = maxWidth / maxHeight;
 
-        if (actualHeight > maxHeight || actualWidth > maxWidth)
-        {
-            if (imgRatio < maxRatio)
-            {
+        if (actualHeight > maxHeight || actualWidth > maxWidth) {
+            if (imgRatio < maxRatio) {
                 imgRatio = maxHeight / actualHeight;
                 actualWidth = (int) (imgRatio * actualWidth);
                 actualHeight = (int) maxHeight;
-            }
-            else if (imgRatio > maxRatio)
-            {
+            } else if (imgRatio > maxRatio) {
                 imgRatio = maxWidth / actualWidth;
                 actualHeight = (int) (imgRatio * actualHeight);
                 actualWidth = (int) maxWidth;
-            }
-            else
-            {
+            } else {
                 actualHeight = (int) maxHeight;
                 actualWidth = (int) maxWidth;
             }
@@ -190,20 +177,14 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         options.inInputShareable = true;
         options.inTempStorage = new byte[16 * 1024];
 
-        try
-        {
+        try {
             bmp = BitmapFactory.decodeFile(imagePath, options);
-        }
-        catch (OutOfMemoryError exception)
-        {
+        } catch (OutOfMemoryError exception) {
             exception.printStackTrace();
         }
-        try
-        {
+        try {
             scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
-        }
-        catch (OutOfMemoryError exception)
-        {
+        } catch (OutOfMemoryError exception) {
             exception.printStackTrace();
         }
 
@@ -220,27 +201,19 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
 
         ExifInterface exif = null;
-        try
-        {
+        try {
             exif = new ExifInterface(imagePath);
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
             Matrix matrix = new Matrix();
-            if (orientation == 6)
-            {
+            if (orientation == 6) {
                 matrix.postRotate(90);
-            }
-            else if (orientation == 3)
-            {
+            } else if (orientation == 3) {
                 matrix.postRotate(180);
-            }
-            else if (orientation == 8)
-            {
+            } else if (orientation == 8) {
                 matrix.postRotate(270);
             }
             scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -253,14 +226,12 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         return updatedBitmap;
     }
 
-    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
-    {
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
 
-        if (height > reqHeight || width > reqWidth)
-        {
+        if (height > reqHeight || width > reqWidth) {
             final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
@@ -269,8 +240,7 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         final float totalPixels = width * height;
         final float totalReqPixelsCap = reqWidth * reqHeight * 2;
 
-        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap)
-        {
+        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
             inSampleSize++;
         }
         return inSampleSize;

@@ -1,21 +1,15 @@
 package com.example.slatielly.app.dress.registerDress;
 
-import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +45,6 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     private Button btnSaveChanges;
     private Button btnEditPhotos;
     private Button btnTakePhotos;
-    private List<Bitmap> images;
     private RegisterDressContract.Presenter presenter;
     private OnNavigationListener onNavigationListener;
 
@@ -96,8 +89,6 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         this.txtErrorMessage = view.findViewById(R.id.txtErrorMessage);
         this.loadingBar = view.findViewById(R.id.loadingBar);
         this.svRegisterDress = view.findViewById(R.id.svRegisterDress);
-
-        images = new ArrayList<>();
     }
 
     @Override
@@ -136,15 +127,14 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
             Dress dress = new Dress(description, type, price, size, color, material, washingDays, prepareDays);
 
-            this.presenter.createDress(dress,images);
+            this.presenter.createDress(dress);
             return;
         }
 
-        if (v == this.btnTakePhotos)
-        {
-            Intent intent = new Intent( Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
+        if (v == this.btnTakePhotos) {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            startActivityForResult(intent, 1 );
+            startActivityForResult(intent, 1);
         }
     }
 
@@ -157,25 +147,22 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         this.onNavigationListener = onNavigationListener;
     }
 
-    public interface OnNavigationListener {
-        void onNavigateToAllDresses();
-    }
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult( requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 1)
-        {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1) {
             Uri selectedImage = data.getData();
             String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor c = getActivity().getContentResolver().query( selectedImage,filePath, null, null, null );
+            Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
             c.moveToFirst();
-            int columnIndex = c.getColumnIndex( filePath[0]);
-            String picturePath = c.getString( columnIndex );
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
             c.close();
-            Bitmap compressBitMap = this.presenter.CompressedBitmap(picturePath);
-            this.images.add(compressBitMap );
+            this.presenter.saveImage(picturePath);
         }
+    }
+
+    public interface OnNavigationListener {
+        void onNavigateToAllDresses();
     }
 }
