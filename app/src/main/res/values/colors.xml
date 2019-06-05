@@ -34,6 +34,16 @@
     <color name="colorRed600">#E53E3E</color>
     <color name="colorRed700">#C53030</color>
 
+    //purple
+
+    <color name="colorPurple300">#D6BCFA</color>
+
+    //yellow
+    <color name="colorYellow100">#FFFFF0</color>
+    <color name="colorYellow200">#FEFCBF</color>
+    <color name="colorYellow300">#FAF089</color>
+    <color name="colorYellow400">#F6E05E</color>
+    <color name="colorYellow500">#ECC94B</color>
 
     <color name="colorPrimary">@color/colorPink600</color>
     <color name="colorPrimaryDark">@color/colorPink600</color>
