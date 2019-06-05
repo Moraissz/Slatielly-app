@@ -39,7 +39,7 @@
 
                     <TextView
                         android:id="@+id/drawableBorder"
-                        android:layout_width="10dp"
+                        android:layout_width="4dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/border_left_yellow" />
                 </LinearLayout>
