@@ -62,7 +62,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         super.onViewCreated(view, savedInstanceState);
 
         ValidationService validationService = new ValidationService(this.getActivity());
-        FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, "dresses");
+        FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new RegisterDressPresenter(this, validationService, firestoreRepository);
 
         this.setupViews(view);

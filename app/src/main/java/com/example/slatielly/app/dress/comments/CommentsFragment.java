@@ -49,7 +49,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View 
         super.onViewCreated(view, savedInstanceState);
         this.setupViews(view);
 
-        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, "dresses");
+        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new CommentsPresenter(this, repository);
 
        if (this.getArguments() != null) {

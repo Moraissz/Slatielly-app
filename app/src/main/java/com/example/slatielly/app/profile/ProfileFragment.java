@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
         super.onViewCreated(view, savedInstanceState);
         ValidationService vsEditProfile = new ValidationService(this.getActivity());
         ValidationService vsEditAddress = new ValidationService(this.getActivity());
-        FirestoreRepository<User> userRepository = new FirestoreRepository<>(User.class, "users");
+        FirestoreRepository<User> userRepository = new FirestoreRepository<>(User.class, User.DOCUMENT_NAME);
 
         this.presenter = new ProfilePresenter(this, vsEditProfile, vsEditAddress, userRepository);
 

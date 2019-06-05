@@ -3,10 +3,11 @@ package com.example.slatielly.model;
 import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Rent implements Identifiable<String> {
+    public final static String DOCUMENT_NAME = "rents";
+
     private String id;
     private Dress dress;
     private User user;

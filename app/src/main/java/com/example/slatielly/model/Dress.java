@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Dress implements Identifiable<String> {
+    public final static String DOCUMENT_NAME = "dresses";
 
     private String id;
     private String color;
