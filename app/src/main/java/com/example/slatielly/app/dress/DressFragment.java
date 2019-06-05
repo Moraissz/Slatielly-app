@@ -58,6 +58,10 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new DressPresenter(this, repository);
 
+        if (this.listener != null) {
+            this.listener.enableViews(true);
+        }
+
         this.setupViews(view);
         mPager = view.findViewById(R.id.pager_dress_fragment_screen_slide);
 
@@ -116,5 +120,6 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     public interface OnNavigationListener {
         void onNavigateToComments(String dressId);
+        void enableViews(boolean enable);
     }
 }
