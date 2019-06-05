@@ -23,6 +23,8 @@ public interface Repository<TEntity extends Identifiable<TKey>, TKey> {
 
     Query getQuery();
 
+    Query getQuery(String field, Object filter);
+
     /**
      * Stores an entity in the repository so it is accessible via its unique id.
      * @param entity the entity implementing {@link Identifiable} to be stored.

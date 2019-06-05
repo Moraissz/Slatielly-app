@@ -51,7 +51,7 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
         //Preencher ArrayList
         for (int i = 0; i < 20; i++) {
             rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", 70.00, "38 a 40", "Preto", "Pano"),
-                    new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()), "Pendente");
+                    new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()));
 
             if (i > 10) {
                 rent.setStatus("Concluido");
