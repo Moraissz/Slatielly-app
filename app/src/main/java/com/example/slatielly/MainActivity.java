@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Integer> titles;
     private int lastTitle;
     private boolean isProfileActive;
+    private ActionBarDrawerToggle toggle;
+    private boolean toolBarNavigationListenerIsRegistered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +82,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.drawerLayout = this.findViewById(R.id.drawerLayout);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, this.drawerLayout, this.toolbar,
+        this.toggle = new ActionBarDrawerToggle(this, this.drawerLayout, this.toolbar,
                 R.string.open_drawer, R.string.close_drawer);
 
-        this.drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        this.drawerLayout.addDrawerListener(this.toggle);
+        this.toggle.syncState();
+    }
+
+    @Override
+    public void enableViews(boolean enable) {
+        if (enable) {
+            this.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            this.toggle.setDrawerIndicatorEnabled(false);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            if (!this.toolBarNavigationListenerIsRegistered) {
+                this.toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                });
+
+                this.toolBarNavigationListenerIsRegistered = true;
+            }
+
+        } else {
+            this.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            this.toggle.setDrawerIndicatorEnabled(true);
+            this.toggle.setToolbarNavigationClickListener(null);
+            this.toolBarNavigationListenerIsRegistered = false;
+        }
     }
 
     private void getUser() {
@@ -197,6 +227,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
             return;
+        }
+
+        if (this.toolBarNavigationListenerIsRegistered) {
+            this.enableViews(false);
         }
 
         if (!this.titles.isEmpty()) {
