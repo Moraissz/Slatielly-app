@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     tools:layout_editor_absoluteY="479dp">
 
     <LinearLayout

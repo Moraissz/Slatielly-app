@@ -146,7 +146,7 @@
                     <ImageView
                         android:id="@+id/dressImage"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="254dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:scaleType="fitXY"
                         android:src="@drawable/album8" />
