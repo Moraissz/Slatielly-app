@@ -32,20 +32,21 @@ public class ScreenSlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Fresco.initialize(container.getContext());
+        //Fresco.initialize(container.getContext());
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page_dress, container, false);
-        //ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+        ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
 
 
-        if (this.getArguments() != null) {
+        if (this.getArguments() != null)
+        {
             Image image = this.getArguments().getParcelable("image");
 
             if (image != null)
             {
-                Uri uri = Uri.parse(image.getdownloadLink());
-                SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
-                draweeView.setImageURI(uri);
-                //Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
+                //Uri uri = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png");
+                //SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+                Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
             }
         }
 
