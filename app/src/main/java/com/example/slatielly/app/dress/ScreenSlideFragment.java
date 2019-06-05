@@ -1,5 +1,6 @@
 package com.example.slatielly.app.dress;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Image;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 public class ScreenSlideFragment extends Fragment {
     public static ScreenSlideFragment newInstance(Image image) {
@@ -27,15 +30,22 @@ public class ScreenSlideFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        Fresco.initialize(container.getContext());
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page_dress, container, false);
-        ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+        //ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+
 
         if (this.getArguments() != null) {
             Image image = this.getArguments().getParcelable("image");
 
-            if (image != null) {
-                Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
+            if (image != null)
+            {
+                Uri uri = Uri.parse(image.getdownloadLink());
+                SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+                draweeView.setImageURI(uri);
+                //Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
             }
         }
 
