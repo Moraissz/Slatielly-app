@@ -72,6 +72,13 @@ public class FirestoreRepository<TEntity extends Identifiable<String>> implement
     }
 
     @Override
+    public Query getQuery(String field, Object filter) {
+        return collectionReference
+                .orderBy("timestamp")
+                .whereEqualTo(field, filter);
+    }
+
+    @Override
     public Task<Void> create(TEntity entity) {
         final String documentName = entity.getEntityKey();
         DocumentReference documentReference = collectionReference.document(documentName);

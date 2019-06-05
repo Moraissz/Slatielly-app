@@ -55,7 +55,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, "dresses");
+        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new DressPresenter(this, repository);
 
         this.setupViews(view);

@@ -38,7 +38,7 @@ public class DressesFragment extends Fragment implements DressAdapter.DressListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, "dresses");
+        FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new DressesPresenter(this, firestoreRepository);
 
         this.recyclerView = view.findViewById(R.id.recycler_view);

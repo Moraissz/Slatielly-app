@@ -4,6 +4,8 @@ import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 
 public class User implements Identifiable<String> {
+    public final static String DOCUMENT_NAME = "users";
+
     private String id;
     private String name;
     private String email;

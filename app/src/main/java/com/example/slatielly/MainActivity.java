@@ -22,6 +22,7 @@ import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
+import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             case R.id.nav_item_rent_requests: {
-                this.setNavigationFragment(new RentRequestsFragment(), R.string.rentsRequests, false);
+                this.setNavigationFragment(RentRequestsFragment.newInstance(), R.string.rentsRequests, false);
                 break;
             }
 
