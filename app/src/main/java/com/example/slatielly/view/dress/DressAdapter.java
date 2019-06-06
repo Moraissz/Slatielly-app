@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
+import com.example.slatielly.model.Dress;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-
-import java.util.ArrayList;
 
 public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolder> {
     private DressListener listener;
@@ -18,10 +16,6 @@ public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolde
     public DressAdapter(FirestoreRecyclerOptions<Dress> options, DressListener listener) {
         super(options);
         this.listener = listener;
-    }
-
-    public interface DressListener {
-        void onClickDressListener(Dress dress);
     }
 
     @NonNull
@@ -36,5 +30,9 @@ public class DressAdapter extends FirestoreRecyclerAdapter<Dress, DressViewHolde
     @Override
     protected void onBindViewHolder(@NonNull DressViewHolder holder, int position, @NonNull Dress model) {
         holder.bind(model);
+    }
+
+    public interface DressListener {
+        void onClickDressListener(Dress dress);
     }
 }

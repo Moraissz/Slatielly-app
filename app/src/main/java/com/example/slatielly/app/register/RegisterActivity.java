@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         setContentView(R.layout.activity_register);
 
         ValidationService validationService = new ValidationService(this);
-        FirestoreRepository<User> userRepository = new FirestoreRepository<>(User.class, "users");
+        FirestoreRepository<User> userRepository = new FirestoreRepository<>(User.class, User.DOCUMENT_NAME);
         this.presenter = new RegisterPresenter(this, validationService, userRepository);
 
         this.setupViews();

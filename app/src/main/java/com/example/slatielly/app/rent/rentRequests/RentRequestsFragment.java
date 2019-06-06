@@ -1,4 +1,4 @@
-package com.example.slatielly;
+package com.example.slatielly.app.rent.rentRequests;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,15 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.slatielly.R;
 import com.example.slatielly.model.Address;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.GridSpacingItemDecoration;
 import com.example.slatielly.view.rentRequest.RentRequestAdapter;
 
@@ -22,15 +25,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class RentRequestsFragment extends Fragment implements RentRequestAdapter.RentRequestListener {
+public class RentRequestsFragment extends Fragment implements RentRequestAdapter.RentRequestListener,
+        RentRequestsContract.View {
 
     private RecyclerView recyclerView;
     private RentRequestAdapter adapter;
-    private ArrayList<Rent> rentArrayList;
+    private RentRequestsContract.Presenter presenter;
 
-
-
-    public Calendar calendar = Calendar.getInstance();
+    public static RentRequestsFragment newInstance() {
+        return new RentRequestsFragment();
+    }
 
     public RentRequestsFragment() {
     }
@@ -43,35 +47,33 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
+        this.presenter = new RentRequestsPresenter(this, repository);
 
         this.recyclerView = view.findViewById(R.id.RRRecyclerView);
-        this.rentArrayList = new ArrayList<>();
-        //Preencher ArrayList
-        for (int i = 0; i < 20; i++) {
-            Rent rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", 70.00,"38 a 40","Preto","Pano"),
-                    new User(""+i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()), "Pendente");
-            if (i > 10) {
-                rent.setStatus("Concluido");
-            }
-            this.rentArrayList.add(rent);
-        }
-
-        this.adapter = new RentRequestAdapter(this.rentArrayList, this);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 1);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         this.recyclerView.setLayoutManager(mLayoutManager);
 
-        this.recyclerView.addItemDecoration(
-                new GridSpacingItemDecoration(2,
-                        GridSpacingItemDecoration.dpToPx(10, this.getResources()), true
-                )
-        );
-
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
-        this.recyclerView.setAdapter(adapter);
+
+        this.adapter = new RentRequestAdapter(this.presenter.getRecyclerOptions(), this);
+        this.recyclerView.setAdapter(this.adapter);
     }
 
     @Override
     public void onClickRentRequestListener(Rent rent) {
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.adapter.stopListening();
     }
 }

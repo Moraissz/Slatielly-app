@@ -13,6 +13,7 @@
         <item name="drawerArrowStyle">@style/custom_drawer</item>
         <item name="android:statusBarColor">@color/colorPink100</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorControlNormal">@color/colorPrimary</item>
     </style>
 
     <style name="custom_toolbar" parent="@style/Widget.AppCompat.Toolbar">
