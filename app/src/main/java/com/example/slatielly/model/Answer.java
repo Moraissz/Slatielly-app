@@ -9,7 +9,7 @@ public class Answer {
     private Timestamp date;
     private String description;
     private User user;
-    private List<Image> images = new ArrayList<>();
+    private Image image;
 
     public String getId() {
         return id;
@@ -43,12 +43,12 @@ public class Answer {
         this.user = user;
     }
 
-    public List<Image> getImagens() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImagens(List<Image> imagens) {
-        this.images = imagens;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
 }

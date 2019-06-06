@@ -60,39 +60,71 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_like_comment_model"
-                android:layout_width="5dp"
-                android:layout_height="35dp"
+            <TextView
+                android:id="@+id/textView_Likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/buttonImage_like_comment_model"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
-                android:text="@string/Like"
-                android:textSize="8dp" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/likeImage"
+                android:textSize="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_Likes"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/button_reply_comment_model"
-                android:layout_width="5dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginBottom="2.5dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
+                android:backgroundTint="@android:color/background_light"
                 android:text="@string/Answer"
-                android:textSize="8dp" />
+                android:textColor="?attr/colorPrimary"
+                android:textSize="8dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonImage_like_comment_model"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/TextView_date_comment_model"
-                android:layout_width="15dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginBottom="2.5dp"
                 android:layout_weight="1"
                 android:text="25/05/2019"
                 android:textAlignment="viewEnd"
-                android:textSize="12dp" />
-        </LinearLayout>
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_reply_comment_model"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
         <ImageView
             android:id="@+id/image_comment_comment_model"

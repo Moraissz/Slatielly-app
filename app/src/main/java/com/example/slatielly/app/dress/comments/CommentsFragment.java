@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.slatielly.R;
 import com.example.slatielly.model.Comment;
@@ -19,10 +20,12 @@ import com.example.slatielly.view.comment.CommentAdapter;
 
 import java.util.ArrayList;
 
-public class CommentsFragment extends Fragment implements CommentsContract.View {
+public class CommentsFragment extends Fragment implements CommentsContract.View, View.OnClickListener {
 
     private RecyclerView rvComments;
     private CommentsContract.Presenter presenter;
+
+    private Button btnComment;
 
     public static CommentsFragment newInstance(String id) {
         CommentsFragment commentsFragment = new CommentsFragment();
@@ -58,15 +61,28 @@ public class CommentsFragment extends Fragment implements CommentsContract.View 
        }
     }
 
-    private void setupViews(View view) {
+    private void setupViews(View view)
+    {
         rvComments = view.findViewById(R.id.rvComments);
         rvComments.setLayoutManager(new LinearLayoutManager(this.getContext()));
         rvComments.setHasFixedSize(true);
+
+        btnComment = (Button) view.findViewById(R.id.btnComment);
+        btnComment.setOnClickListener(this);
     }
 
     @Override
     public void setComments(ArrayList<Comment> comments) {
         CommentAdapter commentAdapter = new CommentAdapter(comments);
         rvComments.setAdapter(commentAdapter);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (v == btnComment)
+        {
+
+        }
     }
 }

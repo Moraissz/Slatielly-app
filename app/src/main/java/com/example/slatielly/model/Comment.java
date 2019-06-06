@@ -9,8 +9,10 @@ public class Comment {
     private Timestamp date;
     private String description;
     private User user;
-    private List<Image> images = new ArrayList<>();
+    private Image image;
     private List<Answer> answers = new ArrayList<>();
+    private int numberLikes = 0;
+    private List<Like> likes =  new ArrayList<>();
 
     public String getId() {
         return id;
@@ -44,12 +46,12 @@ public class Comment {
         this.user = user;
     }
 
-    public List<Image> getImagens() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImagens(List<Image> imagens) {
-        this.images = imagens;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public List<Answer> getAnswers() {
@@ -58,5 +60,22 @@ public class Comment {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public List<Like> getLikes()
+    {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public int getNumberLikes() {
+        return numberLikes;
+    }
+
+    public void setNumberLikes(int numberLikes) {
+        this.numberLikes = numberLikes;
     }
 }
