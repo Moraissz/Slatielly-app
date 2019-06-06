@@ -83,4 +83,8 @@
     <string name="select_start">SELECT THE INITIAL DATE:</string>
     <string name="select_finish">SELECT THE RETURN DATE:</string>
     <string name="TAKE_PHOTO">TAKE A PHOTO</string>
+    <string name="Comment">Comment</string>
+    <string name="mais_image">+ Image</string>
+    <string name="menos_Imagem">- Image</string>
+    <string name="comment2">Comment</string>
 </resources>

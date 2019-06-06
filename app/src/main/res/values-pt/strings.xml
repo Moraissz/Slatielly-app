@@ -29,4 +29,7 @@
     <string name="select_start">SELECIONE A DATA INICIAL:</string>
     <string name="select_finish">SELECIONE A DATA DE DEVOLUÇÃO:</string>
     <string name="TAKE_PHOTO">Adicionar uma foto</string>
+    <string name="Comment">Comentário</string>
+    <string name="mais_image">+ Imagem</string>
+    <string name="comment2">Comentar</string>
 </resources>
