@@ -19,7 +19,6 @@
         
         <activity android:name=".app.login.LoginActivity" />
         <activity android:name=".app.register.RegisterActivity" />
-        <activity android:name=".app.dress.comments.ScreenSlidePagerActivityCommentImages" />
         <activity
             android:name=".app.auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
