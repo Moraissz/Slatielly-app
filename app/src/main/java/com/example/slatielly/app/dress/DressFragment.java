@@ -98,7 +98,9 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     @Override
     public void setScreenSlideAdapter(ArrayList<Image> images) {
         PagerAdapter pagerAdapter = new ScreenSlideAdapter(this.getFragmentManager(), images);
+        PagerAdapter pagerAdapter2 = new ScreenSlideAdapter(this.getFragmentManager(), images);
         mPager.setAdapter(pagerAdapter);
+        mPager.setAdapter(pagerAdapter2);
     }
 
     @Override

@@ -7,9 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
-import com.example.slatielly.model.Image;
 
 public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
@@ -41,7 +41,7 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.price.setText(dress.getPrice().toString());
         this.size.setText(dress.getSize());
         this.material.setText(dress.getMaterial());
-        //Glide.with(this.context).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
+        Glide.with(this.context).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
         this.dress = dress;
     }
 
