@@ -175,7 +175,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
             String picturePath = c.getString( columnIndex );
             c.close();
             Bitmap compressBitMap = this.presenter.CompressedBitmap(picturePath);
-            this.images.add(compressBitMap );
+            this.images.add(compressBitMap);
         }
     }
 }

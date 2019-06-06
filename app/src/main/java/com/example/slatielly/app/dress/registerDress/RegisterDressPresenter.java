@@ -56,7 +56,8 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     }
 
     @Override
-    public void createDress(Dress dress, List<Bitmap> images) {
+    public void createDress(Dress dress, List<Bitmap> images)
+    {
         if (this.validationService.validate()) {
             this.view.setLoadingStatus(true);
 
@@ -98,8 +99,9 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
             final StorageReference imageRef = storageRef.child(address);
 
+
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            images.get(i).compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+            images.get(i).compress(Bitmap.CompressFormat.JPEG, 50, byteStream);
 
             byte[] data = byteStream.toByteArray();
 
@@ -123,14 +125,12 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
                             if(finalConstant == imagesAux.size()-1)
                             {
-                                dress.setImages(imagesAux );
+                                dress.setImages(imagesAux);
                                 repository.update(dress);
                             }
                         }
                     });
                 }
-
-
             });
         }
     }

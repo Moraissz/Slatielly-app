@@ -12,9 +12,15 @@ import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Image;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-public class ScreenSlideFragment extends Fragment {
+import java.util.ArrayList;
+
+public class ScreenSlideFragment extends Fragment
+{
+    public ArrayList<Uri> uris;
+    public int posição = 0;
     public static ScreenSlideFragment newInstance(Image image) {
         ScreenSlideFragment fragment = new ScreenSlideFragment();
 
@@ -32,7 +38,7 @@ public class ScreenSlideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        //Fresco.initialize(container.getContext());
+        Fresco.initialize(container.getContext());
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page_dress, container, false);
         ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
@@ -44,9 +50,11 @@ public class ScreenSlideFragment extends Fragment {
 
             if (image != null)
             {
-                //Uri uri = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png");
-                //SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
-                Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
+                Uri uri = Uri.parse(image.getdownloadLink());
+                SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
+                draweeView.getHierarchy().setProgressBarImage(new ProgressBarDrawable());
+                draweeView.setImageURI(uri);
+                //Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
             }
         }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image_dress_fragment_screen_slide_page_dress"
         android:layout_width="0dp"
         android:layout_height="550dp"
