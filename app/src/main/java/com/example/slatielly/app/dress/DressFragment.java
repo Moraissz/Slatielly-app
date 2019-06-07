@@ -16,7 +16,13 @@ import android.widget.TextView;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Image;
+import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -105,7 +111,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     @Override
     public void onClick(View v) {
-        if (v == btnComments) {
+        if (v == btnComments)
+        {
             if (this.getArguments() != null) {
                 String id = this.getArguments().getString("id");
                 this.listener.onNavigateToComments(id);

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
+import com.example.slatielly.app.dress.newComment.NewCommentFragment;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
 import com.example.slatielly.model.User;
@@ -37,7 +38,7 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener {
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -309,6 +310,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DressFragment dressFragment = (DressFragment) fragment;
             dressFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof CommentsFragment) {
+            CommentsFragment commentsFragment = (CommentsFragment) fragment;
+            commentsFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -324,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment(DressFragment.newInstance(id), R.string.all_dresses, false);
+        this.setNavigationFragment(DressFragment.newInstance(id), R.string.Dress, false);
     }
 
     @Override
@@ -333,5 +338,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
         this.setNavigationFragment(CommentsFragment.newInstance(dressId), R.string.COMMENTS, false);
+    }
+
+    public void onNavigateToNewComment(String dressId)
+    {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment( NewCommentFragment.newInstance(dressId), R.string.New_comment, false);
     }
 }

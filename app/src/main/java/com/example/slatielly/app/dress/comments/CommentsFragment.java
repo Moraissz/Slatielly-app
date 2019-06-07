@@ -13,19 +13,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.comment.CommentAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class CommentsFragment extends Fragment implements CommentsContract.View, View.OnClickListener {
+public class CommentsFragment extends Fragment implements CommentsContract.View, View.OnClickListener{
 
     private RecyclerView rvComments;
     private CommentsContract.Presenter presenter;
 
+    private CommentsFragment.OnNavigationListener listener;
+
     private Button btnComment;
+
+    private String dressId;
 
     public static CommentsFragment newInstance(String id) {
         CommentsFragment commentsFragment = new CommentsFragment();
@@ -56,7 +67,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
         this.presenter = new CommentsPresenter(this, repository);
 
        if (this.getArguments() != null) {
-           String dressId = this.getArguments().getString("id");
+           dressId = this.getArguments().getString("id");
            this.presenter.loadComments(dressId);
        }
     }
@@ -82,7 +93,25 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
     {
         if (v == btnComment)
         {
+            if (this.getArguments() != null)
+            {
+                String id = this.getArguments().getString("id");
+                this.listener.onNavigateToNewComment(id);
+                return;
+            }
+
+            return;
 
         }
+    }
+
+    public interface OnNavigationListener
+    {
+        void onNavigateToNewComment(String dressId);
+    }
+
+    public void setOnNavigationListener(CommentsFragment.OnNavigationListener listener)
+    {
+        this.listener = listener;
     }
 }

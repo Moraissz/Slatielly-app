@@ -36,7 +36,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private View context;
 
-    public CommentViewHolder(@NonNull View itemView) {
+    public CommentViewHolder(@NonNull View itemView)
+    {
         super(itemView);
 
         context = itemView;
