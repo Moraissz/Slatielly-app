@@ -1,6 +1,10 @@
 package com.example.slatielly.app.dress.newComment;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,12 +15,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Image;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-public class NewCommentFragment extends Fragment implements NewCommentContract.View
+import static android.app.Activity.RESULT_OK;
+
+public class NewCommentFragment extends Fragment implements NewCommentContract.View, View.OnClickListener
 {
     private NewCommentContract.Presenter presenter;
 
@@ -24,6 +32,8 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
     private Button btnImage_newComment;
     private  Button btnComment_newComment;
     private ImageView imageComment;
+
+    private View context;
 
 
     private String dressId;
@@ -68,11 +78,56 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
         btnComment_newComment = view.findViewById(R.id.btnComment_newComment);
         imageComment = view.findViewById(R.id.imageComment);
 
+        imageComment.setVisibility(ImageView.GONE);
 
+        context = view;
+
+        btnComment_newComment.setOnClickListener(this);
+        btnImage_newComment.setOnClickListener(this);
     }
 
-    public void getComment()
+    public void onClick(View v)
     {
+        if (v == btnComment_newComment)
+        {
+            this.presenter.saveComment(text_view_new_comment.getText().toString(),dressId);
+        }
+        if (v == btnImage_newComment)
+        {
+            if(this.presenter.getImage() == null)
+            {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 1);
+            }
+            else
+            {
+                this.presenter.setImage(null);
+                imageComment.setVisibility(ImageView.GONE);
+                btnImage_newComment.setText(R.string.mais_image);
+            }
+        }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1)
+        {
+            Uri selectedImage = data.getData();
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
+            c.close();
+            this.presenter.saveImage(picturePath);
+
+            Glide.with(context).load(this.presenter.getImage()).into(imageComment);
+
+            imageComment.setVisibility(ImageView.VISIBLE);
+
+            btnImage_newComment.setText(R.string.menos_Imagem);
+        }
     }
 }
