@@ -7,7 +7,9 @@
     <string name="hirerName" translatable="false">Hirer Name:</string>
     <string name="allBooks" translatable="false">All Books</string>
     <string name="wRegisterDress">Register Dress</string>
-    <string name="wTitleD">Title</string>
+    <string name="wTitleD" translatable="false">Title</string>
+    <string name="wMaterial" translatable="false">Material</string>
+    <string name="wColor" translatable="false">Color</string>
     <string name="wSizeDress">Size</string>
     <string name="wDaysOfPrepare">Days of Prepare</string>
     <string name="wDaysOfWashing">Days of Washing</string>
@@ -31,11 +33,22 @@
     <string name="name" translatable="false">Name</string>
     <string name="password" translatable="false">Password</string>
     <string name="phone" translatable="false">Phone</string>
+    <string name="cep" translatable="false">CEP</string>
+    <string name="street" translatable="false">Street</string>
+    <string name="city" translatable="false">City</string>
+    <string name="number" translatable="false">Number</string>
+    <string name="neighborhood" translatable="false">Neighborhood</string>
+    <string name="complement" translatable="false">Complement</string>
     <string name="submit" translatable="false">SUBMIT</string>
     <string name="err_email" translatable="false">Enter a valid email</string>
     <string name="err_password" translatable="false">Password should not be empty</string>
     <string name="err_phone" translatable="false">Enter a valid phone number</string>
     <string name="err_name" translatable="false">Name should not be empty</string>
+    <string name="err_cep" translatable="false">Enter a valid CEP</string>
+    <string name="err_city" translatable="false">City should not be empty</string>
+    <string name="err_neighborhood" translatable="false">Neighborhood should not be empty</string>
+    <string name="err_street" translatable="false">Street should not be empty</string>
+    <string name="err_number" translatable="false">Number should not be empty</string>
     <string name="open_drawer" translatable="false">Open</string>
     <string name="close_drawer" translatable="false">Close</string>
     <string name="all_dresses" translatable="false">All Dresses</string>
@@ -44,4 +57,34 @@
     <string name="rentsRequests" translatable="false">Rents Requests</string>
     <string name="acceptRent" translatable="false">Accept</string>
     <string name="declineRent" translatable="false">Decline</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="edit_profile" translatable="false">Edit Profile</string>
+    <string name="edit_address" translatable="false">Edit Address</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="success_edit_profile" translatable="false">Profile was edited successfully!</string>
+    <string name="success_edit_address" translatable="false">Address was edited successfully!</string>
+    <string name="err_material" translatable="false">Material should not be empty</string>
+    <string name="err_size" translatable="false">Size should not be empty</string>
+    <string name="err_description" translatable="false">Description should not be empty</string>
+    <string name="err_price" translatable="false">Price should not be empty</string>
+    <string name="err_washing" translatable="false">Days of washing should not be empty</string>
+    <string name="err_prepare" translatable="false">Days of prepare should not be empty</string>
+    <string name="err_type" translatable="false">Type should not be empty</string>
+    <string name="err_color" translatable="false">Color should not be empty</string>
+    <string name="Size2">Size:</string>
+    <string name="Cor">Color:</string>
+    <string name="Preço">Price:</string>
+    <string name="Type">Type:</string>
+    <string name="Material">Material:</string>
+    <string name="Rent">RENT</string>
+    <string name="COMMENTS">COMMENTS</string>
+    <string name="Like">Like</string>
+    <string name="Answer">Answer</string>
+    <string name="select_start">SELECT THE INITIAL DATE:</string>
+    <string name="select_finish">SELECT THE RETURN DATE:</string>
+    <string name="TAKE_PHOTO">TAKE A PHOTO</string>
+    <string name="Comment">Comment</string>
+    <string name="mais_image">+ Image</string>
+    <string name="menos_Imagem">- Image</string>
+    <string name="comment2">Comment</string>
 </resources>
