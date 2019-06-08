@@ -17,12 +17,9 @@ public interface NewCommentContract
 
     interface Presenter
     {
-        void setUser();
         void saveImage(String imagePath);
         void setImage(Bitmap image);
-        void setDress(Dress dress);
         Bitmap getImage();
-        FirestoreRepository<Dress> getRepository();
-        void saveComment(String comment,String id);
+        void saveComment(String description,String id);
     }
 }

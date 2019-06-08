@@ -7,87 +7,153 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.Image;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 public class NewCommentPresenter implements NewCommentContract.Presenter, OnSuccessListener<DocumentSnapshot>
 {
-    private User currentUser;
-    private NewCommentContract.View view;
-    private FirestoreRepository<Dress> repository;
-    private Dress dress;
     private Bitmap image;
+    private byte[] data;
+    private String dressId;
+    private String description;
 
-    public NewCommentPresenter(NewCommentContract.View view,  FirestoreRepository<Dress> repository)
+    public NewCommentPresenter()
     {
-        this.view = view;
-        this.repository = repository;
     }
 
-    public void setUser()
+    public void saveComment(String description,String dressId)
     {
+        this.dressId = dressId;
+        this.description = description;
+
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db.collection("users").document(firebaseUser.getUid()).get().addOnSuccessListener(this);
     }
-
 
     @Override
     public void onSuccess(DocumentSnapshot documentSnapshot)
     {
-        this.currentUser = documentSnapshot.toObject(User.class);
+        User currentUser = documentSnapshot.toObject(User.class);
+        currentUser.setAddress(null);
+
+        Calendar aux = Calendar.getInstance();
+
+        final Comment comment = new Comment();
+
+        final String id = String.valueOf(aux.getTimeInMillis());
+        comment.setId(id);
+        comment.setUser(currentUser);
+        comment.setDescription(this.description);
+        comment.setDate(new Timestamp(aux.getTimeInMillis()));
+        comment.setNumberLikes(0);
+
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        if(!(this.image == null))
+        {
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReference();
+
+            Random generator = new Random();
+
+            final String address = "images/comments/dresses/"+dressId+"/"+id+"/"+generator.nextInt(1000000000);
+
+            final StorageReference imageRef = storageRef.child(address);
+
+            imageRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+            {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                    {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Image imageAux = new Image();
+                            imageAux.setaddressStorage(address);
+                            imageAux.setdownloadLink(uri.toString());
+
+                            comment.setImage(imageAux);
+
+                            db.collection( "dresses" ).document(dressId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+                            {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot)
+                                {
+                                    final Dress dress = documentSnapshot.toObject(Dress.class);
+
+                                    dress.getComments().add(comment);
+
+                                    db.collection( "dresses" ).document(dress.getId()).update("comments", dress.getComments());
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        else
+        {
+            db.collection( "dresses" ).document(this.dressId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+            {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot)
+                {
+                    final Dress dress = documentSnapshot.toObject(Dress.class);
+
+                    dress.getComments().add(comment);
+
+                    db.collection( "dresses" ).document(dress.getId()).update("comments", dress.getComments());
+                }
+            });
+        }
     }
 
     @Override
-    public void saveImage(String imagePath) {
+    public void saveImage(String imagePath)
+    {
         Bitmap image = this.compressedBitmap(imagePath);
+
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 50, byteStream);
+        byte[] data = byteStream.toByteArray();
+
         this.image = image;
+        this.data = data;
     }
 
-    public Bitmap getImage() {
+    public Bitmap getImage()
+    {
         return image;
     }
-
-    public FirestoreRepository<Dress> getRepository()
+    public void setImage(Bitmap image)
     {
-        return repository;
-    }
-
-    public void setImage(Bitmap image) {
         this.image = image;
-    }
-
-    public void setDress(Dress dress) {
-        this.dress = dress;
-    }
-
-    public void saveComment(String description,String id)
-    {
-        Calendar aux = Calendar.getInstance();
-
-        setUser();
-
-        Comment comment = new Comment();
-        comment.setUser(this.currentUser);
-        comment.setDescription(description);
-        comment.setDate(new Timestamp(aux.getTimeInMillis()));
     }
 
     private Bitmap compressedBitmap(String imagePath) {

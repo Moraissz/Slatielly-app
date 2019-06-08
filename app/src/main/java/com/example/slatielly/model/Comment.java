@@ -2,11 +2,12 @@ package com.example.slatielly.model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Comment {
     private String id;
-    private Timestamp date;
+    private Date date;
     private String description;
     private User user;
     private Image image;
@@ -22,11 +23,11 @@ public class Comment {
         this.id = id;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

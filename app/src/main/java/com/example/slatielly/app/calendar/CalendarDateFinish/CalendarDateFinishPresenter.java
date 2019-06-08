@@ -13,8 +13,8 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
         boolean state = true;
         for(int i=0;i<rents.size();i=i+1)
         {
-            Timestamp comparation1 = rents.get(i).getStartDate();
-            Timestamp comparation2 = rents.get(i).getEndDate();
+            Timestamp comparation1 = new  Timestamp(rents.get(i).getStartDate().getTime());
+            Timestamp comparation2 = new  Timestamp(rents.get(i).getEndDate().getTime());
             if(dateStart.before(comparation1) && datefinish.before(comparation1))
             {
                 state =  true;

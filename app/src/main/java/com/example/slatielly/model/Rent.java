@@ -13,8 +13,8 @@ public class Rent implements Identifiable<String> {
     private String id;
     private Dress dress;
     private User user;
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private Date startDate;
+    private Date endDate;
     private String status;
     private String description;
     private Date timestamp;
@@ -56,19 +56,19 @@ public class Rent implements Identifiable<String> {
         this.user = user;
     }
 
-    public Timestamp getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

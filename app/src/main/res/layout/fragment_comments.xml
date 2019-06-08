@@ -10,6 +10,7 @@
         android:id="@+id/rvComments"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/btnComment"
         app:layout_constraintEnd_toEndOf="parent"

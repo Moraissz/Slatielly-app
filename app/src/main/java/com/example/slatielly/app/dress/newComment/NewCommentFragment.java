@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Image;
+import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -47,23 +48,23 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
         return commentsFragment;
     }
 
-    public NewCommentFragment() {
-        // Required empty public constructor
+    public NewCommentFragment()
+    {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         return inflater.inflate( R.layout.new_comment, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         this.setupViews(view);
 
-        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
-        this.presenter = new NewCommentPresenter( this,repository);
+        this.presenter = new NewCommentPresenter();
 
         if (this.getArguments() != null)
         {

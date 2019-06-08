@@ -22,7 +22,8 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
             aux.setTime(rents.get(i).getEndDate());
             disabledays.add(aux);
 
-            Timestamp dataaux = rents.get(i).getStartDate();
+            Timestamp dataaux = new  Timestamp(rents.get(i).getStartDate().getTime());
+
             while (dataaux.before(rents.get(i).getEndDate()))
             {
                 aux = Calendar.getInstance();
@@ -52,7 +53,6 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
         for(int i=0;i<disableDays.size();i=i+1)
         {
             Timestamp stampaux = new Timestamp(disableDays.get(i).getTimeInMillis());
-            stampaux.setNanos(0);
 
             if(dateStart.compareTo(stampaux)==0)
             {
@@ -60,7 +60,6 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
                 break;
             }
         }
-
         return state;
     }
 }

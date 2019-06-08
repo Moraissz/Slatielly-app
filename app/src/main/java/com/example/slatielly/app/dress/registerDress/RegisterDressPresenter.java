@@ -99,7 +99,6 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
             final StorageReference imageRef = storageRef.child(address);
 
-
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 
             image.compress(Bitmap.CompressFormat.JPEG, 50, byteStream);

@@ -20,6 +20,7 @@ import com.example.slatielly.model.Comment;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private ImageView image_profile_image_comment_model;
@@ -62,29 +63,19 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public void bind(Comment comment)
     {
-        final ProgressBar progressBar = (ProgressBar) context.findViewById(R.id.progressBar);
 
         TextView_comment_comment_view.setText(comment.getDescription());
         textView_Likes.setText(String.valueOf(comment.getNumberLikes()));
         TextView_date_comment_model.setText(formDate(comment.getDate()));
         TextView_name_comment_model.setText(comment.getUser().getName());
 
-        Glide.with(context).load(comment.getImage().getdownloadLink()).listener( new RequestListener<Drawable>()
+        if(!(comment.getImage() == null))
         {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource)
-            {
-                progressBar.setVisibility(View.GONE);
-                return false;
-            }
 
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource)
-            {
-                progressBar.setVisibility(View.GONE);
-                return false;
-            }
-        }).into(image_comment_comment_model);
+            Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
+
+            image_comment_comment_model.setVisibility(ImageView.VISIBLE);
+        }
     }
 
     @Override
@@ -109,22 +100,19 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         {
 
         }
-
-
-
     }
 
-    public String formDate(Timestamp timestamp)
+    public String formDate(Date date)
     {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(timestamp);
+        calendar.setTime(date);
 
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
 
-        String date = day+"/"+(month+1)+"/"+year;
+        String dateString = day+"/"+(month+1)+"/"+year;
 
-        return date;
+        return dateString;
     }
 }
