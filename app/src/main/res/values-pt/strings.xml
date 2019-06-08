@@ -18,6 +18,4 @@
     <string name="wDateEnd">Término</string>
     <string name="wOrders">Pedidos</string>
     <string name="wTotalPrice">Valor Total</string>
-    <string name="wShowDress">Ver Vestido</string>
-    <string name="wDetail">Detalhe</string>
 </resources>
