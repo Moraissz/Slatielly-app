@@ -10,6 +10,7 @@ public class User implements Identifiable<String> {
     private String name;
     private String email;
     private String phone;
+    private String role;
     private Address address;
 
     public User() {
@@ -22,6 +23,7 @@ public class User implements Identifiable<String> {
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.role = "user";
     }
 
     public User(String name, String email, String phone, Address address) {
@@ -29,6 +31,7 @@ public class User implements Identifiable<String> {
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.role = "user";
     }
 
     public String getId() {
@@ -81,5 +84,13 @@ public class User implements Identifiable<String> {
     @Override
     public String setEntityKey(String entityKey) {
         return this.id = entityKey;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
