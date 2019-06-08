@@ -1,11 +1,12 @@
 package com.example.slatielly.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Like
 {
     private User user;
-    private Timestamp dateLike;
+    private Date dateLike;
     public User getUser()
     {
         return user;
@@ -16,12 +17,12 @@ public class Like
         this.user = user;
     }
 
-    public Timestamp getDateLike()
+    public Date getDateLike()
     {
         return dateLike;
     }
 
-    public void setDateLike(Timestamp dateLike)
+    public void setDateLike(Date dateLike)
     {
         this.dateLike = dateLike;
     }

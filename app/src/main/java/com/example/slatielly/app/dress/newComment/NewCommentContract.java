@@ -12,7 +12,7 @@ public interface NewCommentContract
 {
     interface View
     {
-
+        void navigateToComments();
     }
 
     interface Presenter

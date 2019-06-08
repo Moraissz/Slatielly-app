@@ -11,9 +11,9 @@ public class Comment {
     private String description;
     private User user;
     private Image image;
-    private List<Answer> answers = new ArrayList<>();
+    private ArrayList<Answer> answers = new ArrayList<>();
     private int numberLikes = 0;
-    private List<Like> likes =  new ArrayList<>();
+    private ArrayList<Like> likes =  new ArrayList<>();
 
     public String getId() {
         return id;
@@ -55,20 +55,20 @@ public class Comment {
         this.image = image;
     }
 
-    public List<Answer> getAnswers() {
+    public ArrayList<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
     }
 
-    public List<Like> getLikes()
+    public ArrayList<Like> getLikes()
     {
         return likes;
     }
 
-    public void setLikes(List<Like> likes) {
+    public void setLikes(ArrayList<Like> likes) {
         this.likes = likes;
     }
 

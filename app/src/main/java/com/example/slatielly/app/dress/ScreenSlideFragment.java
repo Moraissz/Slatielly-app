@@ -18,9 +18,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.slatielly.R;
 import com.example.slatielly.model.Image;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ProgressBarDrawable;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -57,10 +54,6 @@ public class ScreenSlideFragment extends Fragment
 
             if (image != null)
             {
-                //Uri uri = Uri.parse(image.getdownloadLink());
-                //SimpleDraweeView draweeView = (SimpleDraweeView) rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
-                //draweeView.getHierarchy().setProgressBarImage(new ProgressBarDrawable());
-                //draweeView.setImageURI(uri);
                 Glide.with(this).load(image.getdownloadLink()).listener(new RequestListener<Drawable>()
                 {
                     @Override

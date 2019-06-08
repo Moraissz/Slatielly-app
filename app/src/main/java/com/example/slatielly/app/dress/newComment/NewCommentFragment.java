@@ -14,21 +14,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
-import com.example.slatielly.model.Dress;
-import com.example.slatielly.model.Image;
-import com.example.slatielly.model.User;
-import com.example.slatielly.model.repository.FirestoreRepository;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import static android.app.Activity.RESULT_OK;
 
 public class NewCommentFragment extends Fragment implements NewCommentContract.View, View.OnClickListener
 {
     private NewCommentContract.Presenter presenter;
-
+    private OnNavigationListener listener;
     private TextView text_view_new_comment;
     private Button btnImage_newComment;
     private  Button btnComment_newComment;
@@ -64,7 +58,7 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
         super.onViewCreated(view, savedInstanceState);
         this.setupViews(view);
 
-        this.presenter = new NewCommentPresenter();
+        this.presenter = new NewCommentPresenter(this);
 
         if (this.getArguments() != null)
         {
@@ -130,5 +124,20 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
 
             btnImage_newComment.setText(R.string.menos_Imagem);
         }
+    }
+
+    public void setOnNavigationListener(OnNavigationListener listener)
+    {
+        this.listener = listener;
+    }
+
+    public void navigateToComments()
+    {
+        this.listener.onBackPressed();
+    }
+
+    public interface OnNavigationListener
+    {
+        void onBackPressed();
     }
 }

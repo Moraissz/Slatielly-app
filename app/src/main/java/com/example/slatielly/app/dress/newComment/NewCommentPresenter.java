@@ -40,9 +40,11 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
     private byte[] data;
     private String dressId;
     private String description;
+    private NewCommentContract.View view;
 
-    public NewCommentPresenter()
+    public NewCommentPresenter(NewCommentContract.View view)
     {
+        this.view = view;
     }
 
     public void saveComment(String description,String dressId)
@@ -75,7 +77,7 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        if(!(this.image == null))
+        if(!(this.data == null))
         {
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
@@ -105,11 +107,13 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot)
                                 {
+
                                     final Dress dress = documentSnapshot.toObject(Dress.class);
 
                                     dress.getComments().add(comment);
 
                                     db.collection( "dresses" ).document(dress.getId()).update("comments", dress.getComments());
+                                    view.navigateToComments();
                                 }
                             });
                         }
@@ -124,11 +128,13 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot)
                 {
+
                     final Dress dress = documentSnapshot.toObject(Dress.class);
 
                     dress.getComments().add(comment);
 
                     db.collection( "dresses" ).document(dress.getId()).update("comments", dress.getComments());
+                    view.navigateToComments();
                 }
             });
         }
@@ -154,6 +160,7 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
     public void setImage(Bitmap image)
     {
         this.image = image;
+        this.data = null;
     }
 
     private Bitmap compressedBitmap(String imagePath) {

@@ -73,19 +73,19 @@
                 android:layout_marginLeft="7dp"
                 android:layout_weight="1"
                 android:text="0"
+                android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/buttonImage_like_comment_model"
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="4dp"
+                android:layout_marginStart="7dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
-                android:scaleType="centerCrop"
-                android:src="@drawable/like_image"
+                android:scaleType="centerInside"
                 android:textSize="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_Likes"
@@ -95,13 +95,12 @@
             <Button
                 android:id="@+id/button_reply_comment_model"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="2.5dp"
                 android:layout_marginBottom="2.5dp"
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
-                android:backgroundTint="@android:color/background_light"
                 android:text="@string/Answer"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="8dp"
@@ -132,7 +131,7 @@
             android:layout_height="300dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/custom_comment_model"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:visibility="gone"
             tools:ignore="MissingConstraints" />
 

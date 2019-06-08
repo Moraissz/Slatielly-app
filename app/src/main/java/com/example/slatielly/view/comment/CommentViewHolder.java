@@ -16,7 +16,13 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.comments.CommentsContract;
+import com.example.slatielly.app.dress.comments.CommentsPresenter;
 import com.example.slatielly.model.Comment;
+import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.Like;
+import com.example.slatielly.model.User;
+import com.example.slatielly.model.repository.FirestoreRepository;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -36,6 +42,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     private Button button_see_answers_comment_model;
 
     private View context;
+
+    private Comment comment;
+    private String dressId;
+
+    private CommentsPresenter presenter;
 
     public CommentViewHolder(@NonNull View itemView)
     {
@@ -59,10 +70,15 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         buttonImage_like_comment_model.setOnClickListener(this);
         button_reply_comment_model.setOnClickListener(this);
         button_see_answers_comment_model.setOnClickListener(this);
+
+        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
+        this.presenter = new CommentsPresenter(this);
     }
 
-    public void bind(Comment comment)
+    public void bind(Comment comment, String dressId)
     {
+        this.comment = comment;
+        this.dressId = dressId;
 
         TextView_comment_comment_view.setText(comment.getDescription());
         textView_Likes.setText(String.valueOf(comment.getNumberLikes()));
@@ -71,11 +87,12 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if(!(comment.getImage() == null))
         {
-
             Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
 
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
         }
+
+        this.presenter.checkUser(this.comment,1);
     }
 
     @Override
@@ -88,7 +105,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if (v == buttonImage_like_comment_model)
         {
-
+            this.presenter.checkUser(this.comment,0);
         }
 
         if (v == button_reply_comment_model)
@@ -100,6 +117,44 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         {
 
         }
+    }
+
+    public void addLike(User currentUser)
+    {
+        this.comment.setNumberLikes(this.comment.getNumberLikes()+1);
+
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
+
+        buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
+
+        Like like = new Like();
+
+        like.setUser(currentUser);
+
+        Calendar aux = Calendar.getInstance();
+        like.setDateLike(new Timestamp(aux.getTimeInMillis()));
+
+        this.comment.getLikes().add(like);
+
+        this.presenter.updateComment(this.comment,this.dressId);
+    }
+
+    public void subtractLike(User currentUser)
+    {
+        this.comment.setNumberLikes(this.comment.getNumberLikes()-1);
+
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
+
+        buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
+
+        for(int i=0;i<comment.getLikes().size();i=i+1)
+        {
+            if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
+            {
+                comment.getLikes().remove(comment.getLikes().get(i));
+            }
+        }
+        this.presenter.updateComment(this.comment,this.dressId);
     }
 
     public String formDate(Date date)
@@ -114,5 +169,15 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         String dateString = day+"/"+(month+1)+"/"+year;
 
         return dateString;
+    }
+
+    public void setLike()
+    {
+        buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
+    }
+
+    public void setLike2()
+    {
+        buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
     }
 }

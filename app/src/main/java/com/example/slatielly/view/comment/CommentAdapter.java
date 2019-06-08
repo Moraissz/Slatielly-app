@@ -13,9 +13,11 @@ import java.util.ArrayList;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private ArrayList<Comment> comments;
+    private String dressId;
 
-    public CommentAdapter(ArrayList<Comment> comments) {
+    public CommentAdapter(ArrayList<Comment> comments, String dressId) {
         this.comments = comments;
+        this.dressId = dressId;
     }
 
     public void setComments(ArrayList<Comment> comments) {
@@ -33,7 +35,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i) {
-        commentViewHolder.bind(this.comments.get(i));
+        commentViewHolder.bind(this.comments.get(i),dressId);
     }
 
     @Override
