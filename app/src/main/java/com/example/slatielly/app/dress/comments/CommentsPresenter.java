@@ -64,8 +64,6 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
-                System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO2: "+comment.getNumberLikes());
-
                 for(int i=0;i<comment.getLikes().size();i=i+1)
                 {
                     if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
@@ -122,7 +120,7 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
         });
     }
 
-    public void updateCommentAddLike(final String commentId, final String dressId, final User currentUser, final CommentsFragment.OnNavigationListener listener)
+    public void updateCommentAddLike(final String commentId, final String dressId, final User currentUser)
     {
         final Like like = new Like();
         like.setUser(currentUser);
@@ -151,12 +149,11 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
                     }
                 }
                 db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
-                //listener.onNavigateToComments2(dressId);
             }
         });
     }
 
-    public void updateCommentSubtractLike(final Comment comment, final String dressId, final User currentUser, final CommentsFragment.OnNavigationListener listener)
+    public void updateCommentSubtractLike(final Comment comment, final String dressId, final User currentUser)
     {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -187,7 +184,6 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
                     }
                 }
                 db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
-                //listener.onNavigateToComments2(dressId);
             }
         });
     }

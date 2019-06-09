@@ -17,10 +17,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private String dressId;
     private CommentsFragment.OnNavigationListener listener;
 
-    public CommentAdapter(ArrayList<Comment> comments, String dressId, CommentsFragment.OnNavigationListener listener) {
+    public CommentAdapter(ArrayList<Comment> comments, String dressId) {
         this.comments = comments;
         this.dressId = dressId;
-        this.listener = listener;
     }
 
     public void setComments(ArrayList<Comment> comments) {
@@ -38,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i) {
-        commentViewHolder.bind(this.comments.get(i),dressId,listener);
+        commentViewHolder.bind(this.comments.get(i),dressId);
     }
 
     @Override

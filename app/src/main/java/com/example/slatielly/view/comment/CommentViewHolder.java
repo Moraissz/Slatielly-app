@@ -49,8 +49,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private CommentsPresenter presenter;
 
-    private CommentsFragment.OnNavigationListener listener;
-
     public CommentViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -74,15 +72,13 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         button_reply_comment_model.setOnClickListener(this);
         button_see_answers_comment_model.setOnClickListener(this);
 
-        FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new CommentsPresenter(this);
     }
 
-    public void bind(Comment comment, String dressId,CommentsFragment.OnNavigationListener listener)
+    public void bind(Comment comment, String dressId)
     {
         this.comment = comment;
         this.dressId = dressId;
-        this.listener = listener;
 
         TextView_comment_comment_view.setText(comment.getDescription());
         textView_Likes.setText(String.valueOf(comment.getNumberLikes()));
@@ -94,6 +90,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
             Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
 
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
+        }
+
+        if(comment.getAnswers().size()>0)
+        {
+            button_see_answers_comment_model.setVisibility(Button.VISIBLE);
         }
 
         this.presenter.checkUserBind(this.comment);
@@ -130,18 +131,16 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         this.comment.getLikes().add(like);
         this.comment.setNumberLikes(this.comment.getNumberLikes()+1);
 
-        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "+this.comment.getNumberLikes());
         textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
 
-        this.presenter.updateCommentAddLike(this.comment.getId(),this.dressId,currentUser,listener);
+        this.presenter.updateCommentAddLike(this.comment.getId(),this.dressId,currentUser);
     }
 
     public void subtractLike(User currentUser)
     {
         this.comment.setNumberLikes(this.comment.getNumberLikes()-1);
-
         for(int i=0;i<this.comment.getLikes().size();i=i+1)
         {
             if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
@@ -153,11 +152,9 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
 
-        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO3: "+this.comment.getNumberLikes());
-
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
 
-        this.presenter.updateCommentSubtractLike(this.comment,this.dressId,currentUser,listener);
+        this.presenter.updateCommentSubtractLike(this.comment,this.dressId,currentUser);
     }
 
     public String formDate(Date date)
@@ -183,6 +180,4 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     {
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
     }
-
-
 }

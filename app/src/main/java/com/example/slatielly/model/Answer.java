@@ -10,6 +10,24 @@ public class Answer {
     private String description;
     private User user;
     private Image image;
+    private int numberLikes = 0;
+    private ArrayList<Like> likes =  new ArrayList<>();
+
+    public int getNumberLikes() {
+        return numberLikes;
+    }
+
+    public void setNumberLikes(int numberLikes) {
+        this.numberLikes = numberLikes;
+    }
+
+    public ArrayList<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(ArrayList<Like> likes) {
+        this.likes = likes;
+    }
 
     public String getId() {
         return id;
@@ -50,5 +68,6 @@ public class Answer {
     public void setImage(Image image) {
         this.image = image;
     }
+
 
 }

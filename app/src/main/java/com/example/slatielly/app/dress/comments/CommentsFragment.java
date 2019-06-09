@@ -84,7 +84,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
 
     @Override
     public void setComments(ArrayList<Comment> comments) {
-        CommentAdapter commentAdapter = new CommentAdapter(comments,dressId,listener);
+        CommentAdapter commentAdapter = new CommentAdapter(comments,dressId);
         rvComments.setAdapter(commentAdapter);
     }
 
