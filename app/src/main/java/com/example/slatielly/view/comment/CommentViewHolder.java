@@ -125,11 +125,13 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public void addLike(User currentUser)
     {
-        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()+1));
-
         Like like = new Like();
         like.setUser(currentUser);
         this.comment.getLikes().add(like);
+        this.comment.setNumberLikes(this.comment.getNumberLikes()+1);
+
+        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "+this.comment.getNumberLikes());
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
 
@@ -138,6 +140,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public void subtractLike(User currentUser)
     {
+        this.comment.setNumberLikes(this.comment.getNumberLikes()-1);
 
         for(int i=0;i<this.comment.getLikes().size();i=i+1)
         {
@@ -148,7 +151,9 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
             }
         }
 
-        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()-1));
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
+
+        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO3: "+this.comment.getNumberLikes());
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
 

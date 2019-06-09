@@ -64,6 +64,8 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
+                System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO2: "+comment.getNumberLikes());
+
                 for(int i=0;i<comment.getLikes().size();i=i+1)
                 {
                     if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
