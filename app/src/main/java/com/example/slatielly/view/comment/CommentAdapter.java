@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.model.Comment;
 
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ import java.util.ArrayList;
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private ArrayList<Comment> comments;
     private String dressId;
+    private CommentsFragment.OnNavigationListener listener;
 
-    public CommentAdapter(ArrayList<Comment> comments, String dressId) {
+    public CommentAdapter(ArrayList<Comment> comments, String dressId, CommentsFragment.OnNavigationListener listener) {
         this.comments = comments;
         this.dressId = dressId;
+        this.listener = listener;
     }
 
     public void setComments(ArrayList<Comment> comments) {
@@ -35,7 +38,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i) {
-        commentViewHolder.bind(this.comments.get(i),dressId);
+        commentViewHolder.bind(this.comments.get(i),dressId,listener);
     }
 
     @Override

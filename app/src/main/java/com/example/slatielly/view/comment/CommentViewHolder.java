@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.slatielly.R;
 import com.example.slatielly.app.dress.comments.CommentsContract;
+import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.comments.CommentsPresenter;
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
@@ -48,6 +49,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private CommentsPresenter presenter;
 
+    private CommentsFragment.OnNavigationListener listener;
+
     public CommentViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -75,10 +78,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         this.presenter = new CommentsPresenter(this);
     }
 
-    public void bind(Comment comment, String dressId)
+    public void bind(Comment comment, String dressId,CommentsFragment.OnNavigationListener listener)
     {
         this.comment = comment;
         this.dressId = dressId;
+        this.listener = listener;
 
         TextView_comment_comment_view.setText(comment.getDescription());
         textView_Likes.setText(String.valueOf(comment.getNumberLikes()));
@@ -92,7 +96,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
         }
 
-        this.presenter.checkUser(this.comment,1);
+        this.presenter.checkUserBind(this.comment);
     }
 
     @Override
@@ -105,7 +109,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if (v == buttonImage_like_comment_model)
         {
-            this.presenter.checkUser(this.comment,0);
+            this.presenter.checkUser(this.comment);
         }
 
         if (v == button_reply_comment_model)
@@ -121,40 +125,34 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public void addLike(User currentUser)
     {
-        this.comment.setNumberLikes(this.comment.getNumberLikes()+1);
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()+1));
 
-        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
+        Like like = new Like();
+        like.setUser(currentUser);
+        this.comment.getLikes().add(like);
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
 
-        Like like = new Like();
-
-        like.setUser(currentUser);
-
-        Calendar aux = Calendar.getInstance();
-        like.setDateLike(new Timestamp(aux.getTimeInMillis()));
-
-        this.comment.getLikes().add(like);
-
-        this.presenter.updateComment(this.comment,this.dressId);
+        this.presenter.updateCommentAddLike(this.comment.getId(),this.dressId,currentUser,listener);
     }
 
     public void subtractLike(User currentUser)
     {
-        this.comment.setNumberLikes(this.comment.getNumberLikes()-1);
 
-        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()));
-
-        buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
-
-        for(int i=0;i<comment.getLikes().size();i=i+1)
+        for(int i=0;i<this.comment.getLikes().size();i=i+1)
         {
             if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
             {
                 comment.getLikes().remove(comment.getLikes().get(i));
+                break;
             }
         }
-        this.presenter.updateComment(this.comment,this.dressId);
+
+        textView_Likes.setText(String.valueOf(this.comment.getNumberLikes()-1));
+
+        buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
+
+        this.presenter.updateCommentSubtractLike(this.comment,this.dressId,currentUser,listener);
     }
 
     public String formDate(Date date)
@@ -180,4 +178,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     {
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image);
     }
+
+
 }

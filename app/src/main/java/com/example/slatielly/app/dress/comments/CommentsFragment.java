@@ -84,7 +84,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
 
     @Override
     public void setComments(ArrayList<Comment> comments) {
-        CommentAdapter commentAdapter = new CommentAdapter(comments,dressId);
+        CommentAdapter commentAdapter = new CommentAdapter(comments,dressId,listener);
         rvComments.setAdapter(commentAdapter);
     }
 
@@ -101,13 +101,13 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
             }
 
             return;
-
         }
     }
 
     public interface OnNavigationListener
     {
         void onNavigateToNewComment(String dressId);
+        void onNavigateToComments2(String dressId);
     }
 
     public void setOnNavigationListener(CommentsFragment.OnNavigationListener listener)

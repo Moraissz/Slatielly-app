@@ -68,7 +68,7 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
 
         final Comment comment = new Comment();
 
-        final String id = String.valueOf(aux.getTimeInMillis());
+        final String id = (String.valueOf(aux.getTimeInMillis()))+"-"+currentUser.getName();
         comment.setId(id);
         comment.setUser(currentUser);
         comment.setDescription(this.description);

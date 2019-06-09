@@ -352,4 +352,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.checkMenuItem(menuItem);
         this.setNavigationFragment( NewCommentFragment.newInstance(dressId), R.string.New_comment, false);
     }
+
+    @Override
+    public void onNavigateToComments2(String dressId) {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(CommentsFragment.newInstance(dressId), R.string.COMMENTS, true);
+    }
 }
