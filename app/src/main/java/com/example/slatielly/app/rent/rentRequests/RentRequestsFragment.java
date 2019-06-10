@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,17 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
-import com.example.slatielly.model.Address;
-import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
-import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
-import com.example.slatielly.view.GridSpacingItemDecoration;
 import com.example.slatielly.view.rentRequest.RentRequestAdapter;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 public class RentRequestsFragment extends Fragment implements RentRequestAdapter.RentRequestListener,
         RentRequestsContract.View {
@@ -61,11 +53,6 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
     }
 
     @Override
-    public void onClickRentRequestListener(Rent rent) {
-
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         this.adapter.startListening();
@@ -75,5 +62,20 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
     public void onStop() {
         super.onStop();
         this.adapter.stopListening();
+    }
+
+    @Override
+    public void onClickRentRequestListener(Rent rent, RentRequestAdapter.Actions action) {
+        switch (action) {
+            case ACCEPT: {
+                this.presenter.acceptRentRequest(rent);
+                break;
+            }
+
+            case DECLINE: {
+                this.presenter.declineRentRequest(rent);
+                break;
+            }
+        }
     }
 }

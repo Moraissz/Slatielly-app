@@ -21,4 +21,16 @@ public class RentRequestsPresenter implements RentRequestsContract.Presenter {
                 .setQuery(this.repository.getQuery("status", "em analise"), Rent.class)
                 .build();
     }
+
+    @Override
+    public void acceptRentRequest(Rent rent) {
+        rent.setStatus("aceito");
+        this.repository.update(rent);
+    }
+
+    @Override
+    public void declineRentRequest(Rent rent) {
+        rent.setStatus("recusado");
+        this.repository.update(rent);
+    }
 }

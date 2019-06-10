@@ -98,7 +98,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if(comment.getAnswers().size()>0)
         {
-            button_see_answers_comment_model.setText("Ver Respostas "+comment.getAnswers().size());
+            button_see_answers_comment_model.setText("Ver Respostas ("+comment.getAnswers().size()+")");
             button_see_answers_comment_model.setVisibility(Button.VISIBLE);
         }
 

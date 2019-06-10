@@ -9,5 +9,9 @@ public class RentRequestsContract {
 
     interface Presenter {
         FirestoreRecyclerOptions<Rent> getRecyclerOptions();
+
+        void acceptRentRequest(Rent rent);
+
+        void declineRentRequest(Rent rent);
     }
 }

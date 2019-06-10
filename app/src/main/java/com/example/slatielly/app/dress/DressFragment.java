@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
@@ -96,7 +97,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         txtDescription.setText(dress.getDescription());
         txtSize.setText(dress.getSize());
         txtColor.setText(dress.getColor());
-        txtPrice.setText(dress.getPrice().toString());
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        this.txtPrice.setText(format.format(dress.getPrice()));
         txtType.setText(dress.getType());
         txtMaterial.setText(dress.getMaterial());
     }

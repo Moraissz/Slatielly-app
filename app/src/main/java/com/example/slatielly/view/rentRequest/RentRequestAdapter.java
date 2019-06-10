@@ -31,7 +31,16 @@ public class RentRequestAdapter extends FirestoreRecyclerAdapter<Rent, RentReque
         holder.bind(model);
     }
 
+    public enum Actions {
+        ACCEPT("accept"), DECLINE("decline");
+
+        private final String action;
+        Actions(String actions) {
+            action = actions;
+        }
+    }
+
     public interface RentRequestListener {
-        void onClickRentRequestListener(Rent rent);
+        void onClickRentRequestListener(Rent rent, Actions action);
     }
 }

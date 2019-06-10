@@ -50,8 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private TextView txtNavHeader;
     private int[] icons = {
-            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_calendar_check_solid,
-            R.string.fa_plus_solid, R.string.fa_tasks_solid
+            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_tasks_solid
+    };
+    private int[] adminIcons = {
+            R.string.fa_plus_solid,
+            R.string.fa_calendar_check_solid,
     };
     private MenuItem menuItemChecked;
     private ArrayList<MenuItem> menuItems;
@@ -147,14 +150,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.txtNavHeader = headerView.findViewById(R.id.txtNavHeader);
         headerView.setOnClickListener(this);
 
-        this.renderMenuIcons(this.navigationView.getMenu());
+        this.renderMenuIcons(this.navigationView.getMenu(), this.icons);
+
+        this.renderMenuIcons(navigationView.getMenu().getItem(3).getSubMenu(), this.adminIcons);
     }
 
-    private void renderMenuIcons(Menu menu) {
+    private void renderMenuIcons(Menu menu, int[] icons) {
         for (int i = 0; i < menu.size(); i++) {
             MenuItem menuItem = menu.getItem(i);
             if (!menuItem.hasSubMenu()) {
-                FontDrawable drawable = new FontDrawable(this, this.icons[i], true, false);
+                FontDrawable drawable = new FontDrawable(this, icons[i], true, false);
                 drawable.setTextColor(ContextCompat.getColor(this, R.color.colorGray600));
                 drawable.setTextSize(25);
                 menu.getItem(i).setIcon(drawable);
@@ -284,10 +289,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.lastTitle = title;
     }
 
+    private void checkIfUserIsAdmin() {
+        if (!this.currentUser.getRole().equals("admin")) {
+            this.navigationView.getMenu().getItem(3).setVisible(false);
+        }
+    }
+
     @Override
     public void onSuccess(DocumentSnapshot documentSnapshot) {
         this.currentUser = documentSnapshot.toObject(User.class);
         this.txtNavHeader.setText(this.currentUser.getName());
+        this.checkIfUserIsAdmin();
     }
 
     @Override
