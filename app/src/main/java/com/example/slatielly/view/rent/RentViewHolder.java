@@ -44,19 +44,17 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
 
-    public void bind(Rent rent){
+    public void bind(Rent rent) {
         this.description.setText(rent.getDress().getDescription());
         this.hirerName.setText(rent.getUser().getName());
-        this.status.setText(rent.getStatus());
-        if(rent.getStatus().equals("Pendente"))
-        {
+        this.status.setText(rent.getStatus().toString());
+
+        if (rent.getStatus().equals(Rent.PENDENT)) {
             this.status.setTextColor(ContextCompat.getColor(context, R.color.colorYellow400));
             this.statusIcon.setTextColor(ContextCompat.getColor(context, R.color.colorYellow400));
             statusIcon.setText(R.string.fa_hourglass_half_solid);
             drawableBorder.setBackgroundResource(R.drawable.border_left_yellow);
-        }
-        else
-        {
+        } else {
             this.status.setTextColor(ContextCompat.getColor(context, R.color.colorGreen500));
             this.statusIcon.setTextColor(ContextCompat.getColor(context, R.color.colorGreen500));
             statusIcon.setText(R.string.fa_flag_checkered_solid);
