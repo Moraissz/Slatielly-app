@@ -1,8 +1,11 @@
 package com.example.slatielly.app.dress.answers;
 
+import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 
 public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessListener<Dress>
 {
@@ -26,6 +29,16 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
     @Override
     public void onSuccess(Dress dress)
     {
+        ArrayList<Comment> comments = dress.getComments();
+
+        for(int i=0;i<comments.size();i=i+1)
+        {
+            if(commentId.equals(comments.get(i).getId()))
+            {
+                view.setAnswers(comments.get(i).getAnswers());
+                break;
+            }
+        }
 
     }
 }

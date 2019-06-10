@@ -22,11 +22,13 @@ import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
+import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
+import com.example.slatielly.view.comment.CommentViewHolder;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,7 +41,8 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, AnswersFragment.OnNavigationListener {
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener,
+        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -323,6 +326,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             AnswersFragment answersFragment = (AnswersFragment) fragment;
             answersFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof NewAnswerFragment) {
+            NewAnswerFragment newAnswerFragment = (NewAnswerFragment) fragment;
+            newAnswerFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -359,8 +366,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public void onNavigateToAnswers(String dressId, String commentId)
+    {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(AnswersFragment.newInstance(dressId,commentId), R.string.ANSWERS, false);
+    }
+
+    @Override
     public void onNavigateToNewAnswer(String dressId, String commentId)
     {
-
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment( NewAnswerFragment.newInstance(dressId,commentId), R.string.NEW_ANSWER, false);
     }
 }

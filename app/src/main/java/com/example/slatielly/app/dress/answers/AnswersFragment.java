@@ -70,6 +70,7 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
         {
             dressId = this.getArguments().getString("dressId");
             commentId = this.getArguments().getString("commentId");
+
             this.presenter.loadAnswers(dressId,commentId);
         }
     }
@@ -98,12 +99,10 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
         {
             if (this.getArguments() != null)
             {
-                return;
+                listener.onNavigateToNewAnswer(dressId,commentId);
             }
-
             return;
         }
-
     }
 
     public interface OnNavigationListener

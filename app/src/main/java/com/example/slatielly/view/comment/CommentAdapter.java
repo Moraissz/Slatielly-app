@@ -12,13 +12,17 @@ import com.example.slatielly.model.Comment;
 
 import java.util.ArrayList;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder>
+{
     private ArrayList<Comment> comments;
     private String dressId;
 
-    public CommentAdapter(ArrayList<Comment> comments, String dressId) {
+    private CommentsFragment view;
+
+    public CommentAdapter(ArrayList<Comment> comments, String dressId, CommentsFragment view) {
         this.comments = comments;
         this.dressId = dressId;
+        this.view = view;
     }
 
 
@@ -33,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i) {
-        commentViewHolder.bind(this.comments.get(i),dressId);
+        commentViewHolder.bind(this.comments.get(i),dressId,view);
     }
 
     @Override

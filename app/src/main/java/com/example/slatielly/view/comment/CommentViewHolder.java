@@ -49,6 +49,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private CommentsPresenter presenter;
 
+    private CommentsFragment view;
+
     public CommentViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -75,10 +77,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         this.presenter = new CommentsPresenter(this);
     }
 
-    public void bind(Comment comment, String dressId)
+    public void bind(Comment comment, String dressId, CommentsFragment view)
     {
         this.comment = comment;
         this.dressId = dressId;
+        this.view = view;
 
         TextView_comment_comment_view.setText(comment.getDescription());
         textView_Likes.setText(String.valueOf(comment.getNumberLikes()));
@@ -92,8 +95,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
         }
 
+
         if(comment.getAnswers().size()>0)
         {
+            button_see_answers_comment_model.setText("Ver Respostas "+comment.getAnswers().size());
             button_see_answers_comment_model.setVisibility(Button.VISIBLE);
         }
 
@@ -120,7 +125,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if (v == button_see_answers_comment_model)
         {
-
+            view.getListener().onNavigateToAnswers(dressId,comment.getId());
         }
     }
 
