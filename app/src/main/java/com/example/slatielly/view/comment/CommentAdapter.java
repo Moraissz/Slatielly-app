@@ -15,16 +15,12 @@ import java.util.ArrayList;
 public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private ArrayList<Comment> comments;
     private String dressId;
-    private CommentsFragment.OnNavigationListener listener;
 
     public CommentAdapter(ArrayList<Comment> comments, String dressId) {
         this.comments = comments;
         this.dressId = dressId;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
-    }
 
     @NonNull
     @Override

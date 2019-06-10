@@ -129,6 +129,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     public interface OnNavigationListener {
         void onNavigateToComments(String dressId);
+
         void enableViews(boolean enable);
     }
 }

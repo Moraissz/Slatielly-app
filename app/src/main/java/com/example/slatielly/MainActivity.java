@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.slatielly.app.dress.DressFragment;
+import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
@@ -38,7 +39,7 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener {
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, AnswersFragment.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -318,6 +319,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NewCommentFragment newCommentFragment = (NewCommentFragment) fragment;
             newCommentFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof AnswersFragment) {
+            AnswersFragment answersFragment = (AnswersFragment) fragment;
+            answersFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -354,10 +359,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToComments2(String dressId) {
-        this.unCheckMenuItem(true);
-        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
-        this.checkMenuItem(menuItem);
-        this.setNavigationFragment(CommentsFragment.newInstance(dressId), R.string.COMMENTS, true);
+    public void onNavigateToNewAnswer(String dressId, String commentId)
+    {
+
     }
 }

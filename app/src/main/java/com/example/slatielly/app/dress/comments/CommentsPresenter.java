@@ -1,15 +1,11 @@
 package com.example.slatielly.app.dress.comments;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.comment.CommentViewHolder;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,9 +19,7 @@ import java.util.Calendar;
 public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessListener<Dress> {
     private CommentsContract.View view;
     private FirestoreRepository<Dress> repository;
-    private CommentViewHolder view2;
-
-    private static final String TAG = "FirestoreRepository";
+    private CommentViewHolder viewHolder;
 
     public CommentsPresenter(CommentsContract.View view,  FirestoreRepository<Dress> repository) {
         this.view = view;
@@ -34,7 +28,7 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
     public CommentsPresenter(CommentViewHolder view2)
     {
-        this.view2 = view2;
+        this.viewHolder = view2;
     }
 
     @Override
@@ -75,11 +69,11 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
                 if(state)
                 {
-                    view2.addLike(currentUser);
+                    viewHolder.addLike(currentUser);
                 }
                 else
                 {
-                    view2.subtractLike(currentUser);
+                    viewHolder.subtractLike(currentUser);
                 }
             }
         });
@@ -110,11 +104,11 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
                 if(!state)
                 {
-                    view2.setLike();
+                    viewHolder.setLike();
                 }
                 else
                 {
-                    view2.setLike2();
+                    viewHolder.setLike2();
                 }
             }
         });

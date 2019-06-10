@@ -42,8 +42,6 @@ public class ScreenSlideFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        //Fresco.initialize(container.getContext());
-
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page_dress, container, false);
         ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);

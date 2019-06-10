@@ -22,7 +22,8 @@ public class DressPresenter implements DressContract.Presenter, OnSuccessListene
     }
 
     @Override
-    public void onSuccess(Dress dress) {
+    public void onSuccess(Dress dress)
+    {
         this.view.setDressViews(dress);
         this.view.setScreenSlideAdapter(dress.getImages());
     }
