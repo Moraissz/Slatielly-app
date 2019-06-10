@@ -32,12 +32,8 @@ public class RentRequestAdapter extends FirestoreRecyclerAdapter<Rent, RentReque
     }
 
     public enum Actions {
-        ACCEPT("accept"), DECLINE("decline");
-
-        private final String action;
-        Actions(String actions) {
-            action = actions;
-        }
+        ACCEPT,
+        DECLINE
     }
 
     public interface RentRequestListener {
