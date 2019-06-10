@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
 
+import java.text.NumberFormat;
+
 public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
     private TextView hirerName;
@@ -40,7 +42,8 @@ public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements V
         this.hirerName.setText(rent.getUser().getName());
         this.startDate.setText(rent.getStartDate().toString());
         this.endDate.setText(rent.getEndDate().toString());
-        this.totalPrice.setText(rent.getDress().getPrice().toString());
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        this.totalPrice.setText(format.format(rent.getDress().getPrice()));
         this.rent = rent;
     }
 
