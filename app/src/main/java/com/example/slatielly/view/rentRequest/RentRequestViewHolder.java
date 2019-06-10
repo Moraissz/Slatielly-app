@@ -18,6 +18,8 @@ public class RentRequestViewHolder extends RecyclerView.ViewHolder implements Vi
     private TextView startDate;
     private TextView endDate;
     private TextView totalPrice;
+    private Button btnAccept;
+    private Button btnDecline;
     private Rent rent;
     private RentRequestAdapter.RentRequestListener listener;
 
@@ -31,11 +33,11 @@ public class RentRequestViewHolder extends RecyclerView.ViewHolder implements Vi
         this.totalPrice = (TextView) itemView.findViewById(R.id.RRTotalPrice);
         this.listener = listener;
 
-        Button btnAccept = itemView.findViewById(R.id.RRbtnAccept);
-        btnAccept.setOnClickListener(this);
+        this.btnAccept = itemView.findViewById(R.id.RRbtnAccept);
+        this.btnAccept.setOnClickListener(this);
 
-        Button btnDecline = itemView.findViewById(R.id.RRbtnDecline);
-        btnDecline.setOnClickListener(this);
+        this.btnDecline = itemView.findViewById(R.id.RRbtnDecline);
+        this.btnDecline.setOnClickListener(this);
     }
 
     public void bind(Rent rent) {
@@ -51,6 +53,14 @@ public class RentRequestViewHolder extends RecyclerView.ViewHolder implements Vi
 
     @Override
     public void onClick(View v) {
-        listener.onClickRentRequestListener(this.rent);
+        if (v == this.btnAccept) {
+            this.listener.onClickRentRequestListener(this.rent, RentRequestAdapter.Actions.ACCEPT);
+            return;
+        }
+
+        if (v == this.btnDecline) {
+            this.listener.onClickRentRequestListener(this.rent, RentRequestAdapter.Actions.DECLINE);
+            return;
+        }
     }
 }
