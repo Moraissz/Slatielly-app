@@ -107,6 +107,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
     {
         void onNavigateToNewComment(String dressId);
         void onNavigateToAnswers(String dressId, String commentId);
+        void onNavigateToNewAnswer(String dressId, String commentId);
     }
 
     public void setOnNavigationListener(CommentsFragment.OnNavigationListener listener)

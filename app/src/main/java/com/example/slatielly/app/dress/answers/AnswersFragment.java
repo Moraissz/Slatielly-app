@@ -88,7 +88,7 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
     @Override
     public void setAnswers(ArrayList<Answer> answers)
     {
-        AnswerAdapter answerAdapter = new AnswerAdapter(answers,dressId,commentId);
+        AnswerAdapter answerAdapter = new AnswerAdapter(answers,dressId,commentId,this);
         rvAnshers.setAdapter(answerAdapter);
     }
 
@@ -113,5 +113,9 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
     public void setOnNavigationListener(AnswersFragment.OnNavigationListener listener)
     {
         this.listener = listener;
+    }
+    public OnNavigationListener getListener()
+    {
+        return listener;
     }
 }

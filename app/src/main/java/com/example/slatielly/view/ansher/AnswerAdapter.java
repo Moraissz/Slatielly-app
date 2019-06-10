@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.model.Answer;
 
 import java.util.ArrayList;
@@ -16,12 +17,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder>
     private String dressId;
     private ArrayList<Answer> answers;
     private String commentId;
+    private AnswersFragment answersFragment;
 
-    public AnswerAdapter(ArrayList<Answer> answers, String dressId, String commentId)
+    public AnswerAdapter(ArrayList<Answer> answers, String dressId, String commentId, AnswersFragment answersFragment)
     {
         this.answers = answers;
         this.dressId = dressId;
         this.commentId = commentId;
+        this.answersFragment = answersFragment;
     }
     @NonNull
     @Override
@@ -36,7 +39,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder>
     @Override
     public void onBindViewHolder(@NonNull AnswerViewHolder answerViewHolder, int i)
     {
-        answerViewHolder.bind(this.answers.get(i),this.dressId,this.commentId);
+        answerViewHolder.bind(this.answers.get(i),this.dressId,this.commentId,this.answersFragment);
     }
 
     @Override

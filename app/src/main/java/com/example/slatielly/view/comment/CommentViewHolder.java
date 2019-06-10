@@ -120,7 +120,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if (v == button_reply_comment_model)
         {
-
+            view.getListener().onNavigateToNewAnswer(dressId,this.comment.getId());
         }
 
         if (v == button_see_answers_comment_model)

@@ -9,9 +9,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.answers.AnswersPresenter;
 import com.example.slatielly.model.Answer;
 import com.example.slatielly.model.Comment;
+import com.example.slatielly.model.Like;
+import com.example.slatielly.model.User;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +37,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
     private Answer answer;
     private String dressId;
     private String commentId;
+    private AnswersFragment answersFragment;
 
     private AnswersPresenter presenter;
 
@@ -58,13 +62,16 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
         image_ansher_ansher_view_holder.setOnClickListener(this);
         buttonImage_like_ansher_view_holder.setOnClickListener(this);
         button_reply_ansher_view_holder .setOnClickListener(this);
+
+        this.presenter = new AnswersPresenter(this);
     }
 
-    public void bind(Answer answer, String dressId, String commentId)
+    public void bind(Answer answer, String dressId, String commentId, AnswersFragment answersFragment)
     {
         this.answer = answer;
         this.dressId = dressId;
         this.commentId = commentId;
+        this.answersFragment =answersFragment;
 
         TextView_ansher_ansher_view_holder.setText(answer.getDescription());
         textView_Likes_ansher_view_holder.setText(String.valueOf(answer.getNumberLikes()));
@@ -77,6 +84,9 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
             image_ansher_ansher_view_holder.setVisibility(ImageView.VISIBLE);
         }
+
+        this.presenter.checkUserBind(this.answer);
+
     }
 
     @Override
@@ -89,14 +99,47 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         if (v == buttonImage_like_ansher_view_holder)
         {
-
+            this.presenter.checkUser(this.answer);
         }
 
         if (v == button_reply_ansher_view_holder)
         {
-
+            this.answersFragment.getListener().onNavigateToNewAnswer(this.dressId,this.commentId);
         }
 
+    }
+
+    public void addLike(User currentUser)
+    {
+        Like like = new Like();
+        like.setUser(currentUser);
+        this.answer.getLikes().add(like);
+        this.answer.setNumberLikes(this.answer.getNumberLikes()+1);
+
+        textView_Likes_ansher_view_holder.setText(String.valueOf(this.answer.getNumberLikes()));
+
+        buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image2);
+
+        this.presenter.updateAnswerAddLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
+    }
+
+    public void subtractLike(User currentUser)
+    {
+        this.answer.setNumberLikes(this.answer.getNumberLikes()-1);
+        for(int i=0;i<this.answer.getLikes().size();i=i+1)
+        {
+            if(currentUser.getId().equals(answer.getLikes().get(i).getUser().getId()))
+            {
+                answer.getLikes().remove(answer.getLikes().get(i));
+                break;
+            }
+        }
+
+        textView_Likes_ansher_view_holder.setText(String.valueOf(this.answer.getNumberLikes()));
+
+        buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image);
+
+        this.presenter.updateCommentSubtractLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
     }
 
     public String formDate(Date date)
