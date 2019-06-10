@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
 
+import java.text.NumberFormat;
+
 public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
     private TextView price;
@@ -38,7 +40,8 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void bind(Dress dress) {
         this.description.setText(dress.getDescription());
         this.type.setText(dress.getType());
-        this.price.setText(dress.getPrice().toString());
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        this.price.setText(format.format(dress.getPrice()));
         this.size.setText(dress.getSize());
         this.material.setText(dress.getMaterial());
         Glide.with(this.context).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);

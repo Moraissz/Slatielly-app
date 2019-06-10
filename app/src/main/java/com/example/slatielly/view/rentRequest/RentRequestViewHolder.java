@@ -9,12 +9,17 @@ import android.widget.TextView;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
 
-public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
+import java.text.DateFormat;
+import java.text.NumberFormat;
+
+public class RentRequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView description;
     private TextView hirerName;
     private TextView startDate;
     private TextView endDate;
     private TextView totalPrice;
+    private Button btnAccept;
+    private Button btnDecline;
     private Rent rent;
     private RentRequestAdapter.RentRequestListener listener;
 
@@ -28,25 +33,34 @@ public class RentRequestViewHolder  extends RecyclerView.ViewHolder implements V
         this.totalPrice = (TextView) itemView.findViewById(R.id.RRTotalPrice);
         this.listener = listener;
 
-        Button btnAccept = itemView.findViewById(R.id.RRbtnAccept);
-        btnAccept.setOnClickListener(this);
+        this.btnAccept = itemView.findViewById(R.id.RRbtnAccept);
+        this.btnAccept.setOnClickListener(this);
 
-        Button btnDecline = itemView.findViewById(R.id.RRbtnDecline);
-        btnDecline.setOnClickListener(this);
+        this.btnDecline = itemView.findViewById(R.id.RRbtnDecline);
+        this.btnDecline.setOnClickListener(this);
     }
 
-    public void bind(Rent rent){
+    public void bind(Rent rent) {
         this.description.setText(rent.getDress().getDescription());
         this.hirerName.setText(rent.getUser().getName());
-        this.startDate.setText(rent.getStartDate().toString());
-        this.endDate.setText(rent.getEndDate().toString());
-        this.totalPrice.setText(rent.getDress().getPrice().toString());
+        this.startDate.setText(DateFormat.getDateInstance().format(rent.getStartDate()));
+        this.endDate.setText(DateFormat.getDateInstance().format(rent.getEndDate()));
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        this.totalPrice.setText(format.format(rent.getDress().getPrice()));
         this.rent = rent;
     }
 
 
     @Override
     public void onClick(View v) {
-        listener.onClickRentRequestListener(this.rent);
+        if (v == this.btnAccept) {
+            this.listener.onClickRentRequestListener(this.rent, RentRequestAdapter.Actions.ACCEPT);
+            return;
+        }
+
+        if (v == this.btnDecline) {
+            this.listener.onClickRentRequestListener(this.rent, RentRequestAdapter.Actions.DECLINE);
+            return;
+        }
     }
 }
