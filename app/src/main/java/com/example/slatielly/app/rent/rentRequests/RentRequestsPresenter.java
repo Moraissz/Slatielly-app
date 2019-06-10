@@ -18,19 +18,19 @@ public class RentRequestsPresenter implements RentRequestsContract.Presenter {
     public FirestoreRecyclerOptions<Rent> getRecyclerOptions() {
         return new FirestoreRecyclerOptions
                 .Builder<Rent>()
-                .setQuery(this.repository.getQuery("status", "em analise"), Rent.class)
+                .setQuery(this.repository.getQuery("status", Rent.PENDENT), Rent.class)
                 .build();
     }
 
     @Override
     public void acceptRentRequest(Rent rent) {
-        rent.setStatus("aceito");
+        rent.setStatus(Rent.ACCEPTED);
         this.repository.update(rent);
     }
 
     @Override
     public void declineRentRequest(Rent rent) {
-        rent.setStatus("recusado");
+        rent.setStatus(Rent.DECLINED);
         this.repository.update(rent);
     }
 }

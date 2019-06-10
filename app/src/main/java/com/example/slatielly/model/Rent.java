@@ -1,14 +1,26 @@
 package com.example.slatielly.model;
 
+import android.support.annotation.StringDef;
+
 import com.example.slatielly.model.repository.Identifiable;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class Rent implements Identifiable<String> {
     public final static String DOCUMENT_NAME = "rents";
+    public static final String PENDENT = "Pendente";
+    public static final String ACCEPTED = "Aprovado";
+    public static final String DECLINED = "Recusado";
+    public static final String FINISHED = "Concluido";
+
+    @StringDef({PENDENT, ACCEPTED, DECLINED, FINISHED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Status {}
 
     private String id;
     private Dress dress;
@@ -28,7 +40,7 @@ public class Rent implements Identifiable<String> {
         this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = "em analise";
+        this.status = PENDENT;
         this.timestamp = new Date();
     }
 
@@ -72,11 +84,12 @@ public class Rent implements Identifiable<String> {
         this.endDate = endDate;
     }
 
+    @Status
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(@Status String status) {
         this.status = status;
     }
 

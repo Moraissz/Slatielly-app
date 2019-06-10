@@ -54,7 +54,7 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
                     new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()));
 
             if (i > 10) {
-                rent.setStatus("Concluido");
+                rent.setStatus(Rent.FINISHED);
             }
 
             this.rentArrayList.add(rent);
