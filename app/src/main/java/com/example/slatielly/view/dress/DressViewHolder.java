@@ -21,7 +21,7 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private TextView material;
     private ImageView dressImage;
     private Dress dress;
-    private View context;
+    private View view;
     private DressAdapter.DressListener listener;
 
     public DressViewHolder(@NonNull View itemView, DressAdapter.DressListener listener) {
@@ -33,7 +33,7 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.size = (TextView) itemView.findViewById(R.id.dressSize);
         this.material = (TextView) itemView.findViewById(R.id.dressMaterial);
         this.listener = listener;
-        this.context = itemView;
+        this.view = itemView;
         itemView.setOnClickListener(this);
     }
 
@@ -44,7 +44,7 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.price.setText(format.format(dress.getPrice()));
         this.size.setText(dress.getSize());
         this.material.setText(dress.getMaterial());
-        Glide.with(this.context).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
+        Glide.with(this.view ).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
         this.dress = dress;
     }
 

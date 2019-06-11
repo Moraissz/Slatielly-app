@@ -1,5 +1,6 @@
 package com.example.slatielly.app.dress.newComment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +30,7 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
     private  Button btnComment_newComment;
     private ImageView imageComment;
 
-    private View context;
+    private View view;
 
 
     private String dressId;
@@ -75,7 +77,7 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
 
         imageComment.setVisibility(ImageView.GONE);
 
-        context = view;
+        this.view = view;
 
         btnComment_newComment.setOnClickListener(this);
         btnImage_newComment.setOnClickListener(this);
@@ -85,6 +87,9 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
     {
         if (v == btnComment_newComment)
         {
+            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService( Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
+
             this.presenter.saveComment(text_view_new_comment.getText().toString(),dressId);
         }
         if (v == btnImage_newComment)
@@ -118,7 +123,7 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
             c.close();
             this.presenter.saveImage(picturePath);
 
-            Glide.with(context).load(this.presenter.getImage()).into(imageComment);
+            Glide.with( view ).load(this.presenter.getImage()).into(imageComment);
 
             imageComment.setVisibility(ImageView.VISIBLE);
 

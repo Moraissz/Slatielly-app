@@ -1,5 +1,6 @@
 package com.example.slatielly.app.dress.newAnswer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
     private  Button btnanswer_newAnswer;
     private ImageView imageAswer;
 
-    private View context;
+    private View view;
 
     private String dressId;
     private String commentId;
@@ -84,7 +86,7 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
 
         imageAswer.setVisibility(ImageView.GONE);
 
-        context = view;
+        this.view = view;
 
         btnanswer_newAnswer.setOnClickListener(this);
         btnImage_newAswer .setOnClickListener(this);
@@ -94,6 +96,9 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
     {
         if (v == btnanswer_newAnswer)
         {
+            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService( Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
+
             this.presenter.saveComment(text_view_new_answer.getText().toString(),dressId,commentId);
         }
         if (v ==  btnImage_newAswer)
@@ -127,7 +132,7 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
             c.close();
             this.presenter.saveImage(picturePath);
 
-            Glide.with(context).load(this.presenter.getImage()).into(imageAswer);
+            Glide.with( view ).load(this.presenter.getImage()).into(imageAswer);
 
             imageAswer.setVisibility(ImageView.VISIBLE);
 
