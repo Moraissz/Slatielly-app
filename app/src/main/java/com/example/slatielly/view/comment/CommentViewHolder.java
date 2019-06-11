@@ -88,11 +88,19 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         TextView_date_comment_model.setText(formDate(comment.getDate()));
         TextView_name_comment_model.setText(comment.getUser().getName());
 
+        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "+comment.getId());
+
         if(!(comment.getImage() == null))
         {
             Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
+            System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO2: "+comment.getImage().getaddressStorage());
+
 
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
+        }
+        else
+        {
+            image_comment_comment_model.setVisibility(ImageView.GONE);
         }
 
 
@@ -100,6 +108,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         {
             button_see_answers_comment_model.setText("Ver Respostas ("+comment.getAnswers().size()+")");
             button_see_answers_comment_model.setVisibility(Button.VISIBLE);
+        }
+        else
+        {
+            button_see_answers_comment_model.setVisibility(Button.GONE);
         }
 
         this.presenter.checkUserBind(this.comment);

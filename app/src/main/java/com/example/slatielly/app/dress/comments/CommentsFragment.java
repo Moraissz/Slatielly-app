@@ -66,6 +66,11 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new CommentsPresenter(this, repository);
 
+        if (this.listener != null)
+        {
+            this.listener.enableViews(true);
+        }
+
        if (this.getArguments() != null) {
            dressId = this.getArguments().getString("id");
            this.presenter.loadComments(dressId);
@@ -108,6 +113,7 @@ public class CommentsFragment extends Fragment implements CommentsContract.View,
         void onNavigateToNewComment(String dressId);
         void onNavigateToAnswers(String dressId, String commentId);
         void onNavigateToNewAnswer(String dressId, String commentId);
+        void enableViews(boolean enable);
     }
 
     public void setOnNavigationListener(CommentsFragment.OnNavigationListener listener)

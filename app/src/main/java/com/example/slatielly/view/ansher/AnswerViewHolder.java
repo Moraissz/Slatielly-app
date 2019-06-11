@@ -84,6 +84,10 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
             image_ansher_ansher_view_holder.setVisibility(ImageView.VISIBLE);
         }
+        else
+        {
+            image_ansher_ansher_view_holder.setVisibility(ImageView.GONE);
+        }
 
         this.presenter.checkUserBind(this.answer);
 
