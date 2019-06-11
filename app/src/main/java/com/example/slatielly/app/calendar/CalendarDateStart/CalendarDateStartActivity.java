@@ -1,4 +1,4 @@
-package com.example.slatielly.app.calendar.CalendarDateStart;
+/*package com.example.slatielly.app.calendar.CalendarDateStart;
 
 import android.content.Intent;
 import android.os.Build;
@@ -112,3 +112,4 @@ public class CalendarDateStartActivity extends AppCompatActivity implements Cale
         return dateStart;
     }
 }
+*/

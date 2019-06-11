@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartFragment;
 import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
@@ -41,7 +42,7 @@ import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener,
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, CalendarDateStartFragment.OnNavigateListener,
         AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener {
 
     private Toolbar toolbar;
@@ -342,6 +343,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NewAnswerFragment newAnswerFragment = (NewAnswerFragment) fragment;
             newAnswerFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof CalendarDateStartFragment) {
+            CalendarDateStartFragment calendarDateStartFragment = (CalendarDateStartFragment) fragment;
+            calendarDateStartFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -394,4 +399,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.checkMenuItem(menuItem);
         this.setNavigationFragment( NewAnswerFragment.newInstance(dressId,commentId), R.string.NEW_ANSWER, false);
     }
+
+    @Override
+    public void onRentDress(String dressId) {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(CalendarDateStartFragment.newInstance(dressId), R.string.COMMENTS /*nome no navbar*/, false);
+    }
+
 }

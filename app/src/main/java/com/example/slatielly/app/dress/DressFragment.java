@@ -123,6 +123,17 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
             return;
         }
+
+        if (v == btnRent)
+        {
+            if (this.getArguments() != null) {
+                String id = this.getArguments().getString("id");
+                this.listener.onRentDress(id);
+                return;
+            }
+
+            return;
+        }
     }
 
     public void setOnNavigationListener(OnNavigationListener listener) {
@@ -133,5 +144,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         void onNavigateToComments(String dressId);
 
         void enableViews(boolean enable);
+
+        void onRentDress(String dressId);
     }
 }
