@@ -3,6 +3,7 @@ package com.example.slatielly.view.comment;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +43,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     private Button button_reply_comment_model;
     private Button button_see_answers_comment_model;
 
+    private ConstraintLayout constraintLayout_Comment_View_Holder;
+
     private View context;
 
     private Comment comment;
@@ -50,6 +53,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     private CommentsPresenter presenter;
 
     private CommentsFragment view;
+
+    private ProgressBar progressBar;
 
     public CommentViewHolder(@NonNull View itemView)
     {
@@ -68,6 +73,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         buttonImage_like_comment_model = (ImageView) itemView.findViewById(R.id.buttonImage_like_comment_model);
         button_reply_comment_model = (Button) itemView.findViewById(R.id.button_reply_comment_model);
         button_see_answers_comment_model = (Button) itemView.findViewById(R.id.button_see_answers_comment_model);
+
+        constraintLayout_Comment_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Comment_View_Holder);
+
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarComment);
 
         image_comment_comment_model.setOnClickListener(this);
         buttonImage_like_comment_model.setOnClickListener(this);
@@ -88,19 +97,21 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         TextView_date_comment_model.setText(formDate(comment.getDate()));
         TextView_name_comment_model.setText(comment.getUser().getName());
 
-        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "+comment.getId());
-
         if(!(comment.getImage() == null))
         {
-            Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
-            System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO2: "+comment.getImage().getaddressStorage());
+            progressBar.setVisibility(View.VISIBLE);
 
+            Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
 
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
+
+            constraintLayout_Comment_View_Holder.setVisibility(ConstraintLayout.VISIBLE);
         }
         else
         {
             image_comment_comment_model.setVisibility(ImageView.GONE);
+            constraintLayout_Comment_View_Holder.setVisibility(ConstraintLayout.GONE);
+            progressBar.setVisibility(View.GONE);
         }
 
 

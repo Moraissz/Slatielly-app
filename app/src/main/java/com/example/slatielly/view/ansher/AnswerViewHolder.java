@@ -1,10 +1,12 @@
 package com.example.slatielly.view.ansher;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +43,10 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
     private AnswersPresenter presenter;
 
+    private ProgressBar progressBar;
+
+    private ConstraintLayout constraintLayout_Answer_View_Holder;
+
 
     public AnswerViewHolder(@NonNull View itemView)
     {
@@ -58,6 +64,10 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder = (ImageView) itemView.findViewById(R.id.buttonImage_like_ansher_view_holder);
         button_reply_ansher_view_holder = (Button) itemView.findViewById(R.id.button_reply_ansher_view_holder);
+
+        constraintLayout_Answer_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Comment_View_Holder);
+
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarComment);
 
         image_ansher_ansher_view_holder.setOnClickListener(this);
         buttonImage_like_ansher_view_holder.setOnClickListener(this);
@@ -80,13 +90,19 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         if(!(answer.getImage() == null))
         {
+            progressBar.setVisibility(View.VISIBLE);
+
             Glide.with(context).load(answer.getImage().getdownloadLink()).into(image_ansher_ansher_view_holder);
 
             image_ansher_ansher_view_holder.setVisibility(ImageView.VISIBLE);
+
+            constraintLayout_Answer_View_Holder.setVisibility(ConstraintLayout.VISIBLE);
         }
         else
         {
             image_ansher_ansher_view_holder.setVisibility(ImageView.GONE);
+            constraintLayout_Answer_View_Holder.setVisibility(ConstraintLayout.GONE);
+            progressBar.setVisibility(View.GONE);
         }
 
         this.presenter.checkUserBind(this.answer);

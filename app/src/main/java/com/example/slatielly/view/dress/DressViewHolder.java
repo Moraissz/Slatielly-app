@@ -1,13 +1,20 @@
 package com.example.slatielly.view.dress;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.R;
 
@@ -23,8 +30,10 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
     private Dress dress;
     private View view;
     private DressAdapter.DressListener listener;
+    private ProgressBar progressBar;
 
-    public DressViewHolder(@NonNull View itemView, DressAdapter.DressListener listener) {
+    public DressViewHolder(@NonNull View itemView, DressAdapter.DressListener listener)
+    {
         super(itemView);
         this.description = (TextView) itemView.findViewById(R.id.dressDescription);
         this.type = (TextView) itemView.findViewById(R.id.dressType);
@@ -34,17 +43,28 @@ public class DressViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.material = (TextView) itemView.findViewById(R.id.dressMaterial);
         this.listener = listener;
         this.view = itemView;
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarDresses);
         itemView.setOnClickListener(this);
     }
 
-    public void bind(Dress dress) {
+    public void bind(Dress dress)
+    {
         this.description.setText(dress.getDescription());
         this.type.setText(dress.getType());
         NumberFormat format = NumberFormat.getCurrencyInstance();
         this.price.setText(format.format(dress.getPrice()));
         this.size.setText(dress.getSize());
         this.material.setText(dress.getMaterial());
-        Glide.with(this.view ).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
+
+        if(!dress.getImages().isEmpty())
+        {
+            Glide.with(this.view ).load(dress.getImages().get(0).getdownloadLink()).into(dressImage);
+        }
+        else
+        {
+            progressBar.setVisibility(View.GONE);
+        }
+
         this.dress = dress;
     }
 

@@ -3,6 +3,7 @@ package com.example.slatielly.app.dress.comments;
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Like;
+import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.comment.CommentViewHolder;
@@ -15,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessListener<Dress> {
     private CommentsContract.View view;

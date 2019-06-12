@@ -23,9 +23,8 @@ import java.util.ArrayList;
 
 public class ScreenSlideFragment extends Fragment
 {
-    public ArrayList<Uri> uris;
-    public int posição = 0;
-    public static ScreenSlideFragment newInstance(Image image) {
+    public static ScreenSlideFragment newInstance(Image image)
+    {
         ScreenSlideFragment fragment = new ScreenSlideFragment();
 
         Bundle bundle = new Bundle();
@@ -44,7 +43,6 @@ public class ScreenSlideFragment extends Fragment
     {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page_dress, container, false);
         ImageView image_dress_fragment_screen_slide_page_dress = rootView.findViewById(R.id.image_dress_fragment_screen_slide_page_dress);
-        final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
         if (this.getArguments() != null)
         {
@@ -52,25 +50,9 @@ public class ScreenSlideFragment extends Fragment
 
             if (image != null)
             {
-                Glide.with(this).load(image.getdownloadLink()).listener(new RequestListener<Drawable>()
-                {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource)
-                    {
-                        progressBar.setVisibility(View.GONE);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource)
-                    {
-                        progressBar.setVisibility(View.GONE);
-                        return false;
-                    }
-                }).into(image_dress_fragment_screen_slide_page_dress);
+                Glide.with(this).load(image.getdownloadLink()).into(image_dress_fragment_screen_slide_page_dress);
             }
         }
-
         return rootView;
     }
 }

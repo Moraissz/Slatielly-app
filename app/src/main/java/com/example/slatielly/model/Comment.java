@@ -79,4 +79,5 @@ public class Comment {
     public void setNumberLikes(int numberLikes) {
         this.numberLikes = numberLikes;
     }
+
 }

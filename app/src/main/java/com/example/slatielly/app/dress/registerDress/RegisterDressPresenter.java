@@ -1,11 +1,6 @@
 package com.example.slatielly.app.dress.registerDress;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -23,7 +18,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -111,19 +105,23 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
             final int finalConstant = this.images.indexOf(image);
 
-            imageRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            imageRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
+            {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                    {
                         @Override
-                        public void onSuccess(Uri uri) {
+                        public void onSuccess(Uri uri)
+                        {
                             Image image = new Image();
                             image.setaddressStorage(address);
                             image.setdownloadLink(uri.toString());
 
                             imagesAux.add(image);
 
-                            if (finalConstant == imagesAux.size() - 1) {
+                            if (finalConstant == imagesAux.size() - 1)
+                            {
                                 dress.setImages(imagesAux);
                                 repository.update(dress).addOnSuccessListener(new OnSuccessListener<Void>()
                                 {
