@@ -133,7 +133,7 @@
             android:visibility="gone">
 
             <ProgressBar
-                android:id="@+id/progressBarDresses"
+                android:id="@+id/progressBarAnswer"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:progressTintMode="add"
@@ -148,7 +148,6 @@
                 android:id="@+id/image_ansher_ansher_view_holder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custom_comment_model"
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 tools:ignore="MissingConstraints" />

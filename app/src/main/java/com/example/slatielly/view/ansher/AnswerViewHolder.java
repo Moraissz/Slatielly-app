@@ -14,7 +14,6 @@ import com.example.slatielly.R;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.answers.AnswersPresenter;
 import com.example.slatielly.model.Answer;
-import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
 
@@ -65,9 +64,9 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
         buttonImage_like_ansher_view_holder = (ImageView) itemView.findViewById(R.id.buttonImage_like_ansher_view_holder);
         button_reply_ansher_view_holder = (Button) itemView.findViewById(R.id.button_reply_ansher_view_holder);
 
-        constraintLayout_Answer_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Comment_View_Holder);
+        constraintLayout_Answer_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Ansher_View_Holder);
 
-        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarComment);
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarAnswer);
 
         image_ansher_ansher_view_holder.setOnClickListener(this);
         buttonImage_like_ansher_view_holder.setOnClickListener(this);
