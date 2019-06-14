@@ -139,7 +139,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image2);
 
-        this.presenter.updateAnswerAddLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
+        this.presenter.updateAnswerAddLike(this.answer,this.commentId,this.dressId,currentUser);
     }
 
     public void subtractLike(User currentUser)
@@ -158,7 +158,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image);
 
-        this.presenter.updateCommentSubtractLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
+        this.presenter.updateCommentSubtractLike(this.answer,this.commentId,this.dressId,currentUser);
     }
 
     public String formDate(Date date)

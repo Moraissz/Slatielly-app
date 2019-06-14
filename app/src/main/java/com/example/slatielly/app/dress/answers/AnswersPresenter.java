@@ -16,6 +16,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessListener<Dress>
 {
@@ -69,26 +71,20 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
-                Boolean state = true;
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
-                for(int i=0;i<answer.getLikes().size();i=i+1)
-                {
-                    if(currentUser.getId().equals(answer.getLikes().get(i).getUser().getId()))
-                    {
-                        state = false;
-                        break;
-                    }
-                }
+                Set<Like> likes = new HashSet<>(answer.getLikes());
+                Like like = new Like();
+                like.setUser(currentUser);
 
-                if(state)
+                if(likes.contains(like))
                 {
-                    viewHolder.addLike(currentUser);
+                    viewHolder.subtractLike(currentUser);
                 }
                 else
                 {
-                    viewHolder.subtractLike(currentUser);
+                    viewHolder.addLike(currentUser);
                 }
             }
         });
@@ -104,20 +100,14 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
-                Boolean state = true;
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
-                for(int i=0;i<answer.getLikes().size();i=i+1)
-                {
-                    if(currentUser.getId().equals(answer.getLikes().get(i).getUser().getId()))
-                    {
-                        state = false;
-                        break;
-                    }
-                }
+                Set<Like> likes = new HashSet<>(answer.getLikes());
+                Like like = new Like();
+                like.setUser(currentUser);
 
-                if(!state)
+                if(likes.contains(like))
                 {
                     viewHolder.setLike();
                 }
@@ -129,7 +119,7 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
         });
     }
 
-    public void updateAnswerAddLike(final String answerId, final String commentId, final String dressId, final User currentUser)
+    public void updateAnswerAddLike(final Answer answer, final String commentId, final String dressId, final User currentUser)
     {
         final Like like = new Like();
         like.setUser(currentUser);
@@ -146,31 +136,22 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
             {
                 final Dress dress = documentSnapshot.toObject(Dress.class);
 
-                ArrayList<Comment> comments = dress.getComments();
+                Comment comment = new Comment();
+                comment.setId(commentId);
 
-                for(int i=0;i<comments.size();i=i+1)
-                {
-                    if(commentId.equals(comments.get(i).getId()))
-                    {
+                int i = dress.getComments().indexOf(comment);
 
-                        for(int j=0;j<comments.get(i).getAnswers().size();j=j+1)
-                        {
-                            if(answerId.equals(comments.get(i).getAnswers().get(j).getId()))
-                            {
-                                comments.get(i).getAnswers().get(j).getLikes().add(like);
-                                comments.get(i).getAnswers().get(j).setNumberLikes(comments.get(i).getAnswers().get(j).getNumberLikes()+1);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-                db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
+                int j = dress.getComments().get(i).getAnswers().indexOf(answer);
+
+                dress.getComments().get(i).getAnswers().get(j).getLikes().add(like);
+                dress.getComments().get(i).getAnswers().get(j).setNumberLikes(dress.getComments().get(i).getAnswers().get(j).getNumberLikes()+1);
+
+                db.collection( "dresses" ).document(dress.getId()).update("comments",dress.getComments());
             }
         });
     }
 
-    public void updateCommentSubtractLike(final String answerId, final String commentId, final String dressId, final User currentUser)
+    public void updateCommentSubtractLike(final Answer answer, final String commentId, final String dressId, final User currentUser)
     {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -181,32 +162,22 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
             {
                 final Dress dress = documentSnapshot.toObject(Dress.class);
 
-                ArrayList<Comment> comments = dress.getComments();
+                Comment comment = new Comment();
+                comment.setId(commentId);
 
-                for(int i=0;i<comments.size();i=i+1)
-                {
-                    if(commentId.equals(comments.get(i).getId()))
-                    {
-                        for(int j=0;j<comments.get(i).getAnswers().size();j=j+1)
-                        {
-                            if(answerId.equals(comments.get(i).getAnswers().get(j).getId()))
-                            {
-                                comments.get(i).getAnswers().get(j).setNumberLikes(comments.get(i).getAnswers().get(j).getNumberLikes()-1);
-                                for(int k=0;j<comments.get(i).getAnswers().get(j).getLikes().size();k=k+1)
-                                {
-                                    if(currentUser.getId().equals(comments.get(i).getAnswers().get(j).getLikes().get(k).getUser().getId()))
-                                    {
-                                        comments.get(i).getAnswers().get(j).getLikes().remove(comments.get(i).getAnswers().get(j).getLikes().get(k));
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-                db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
+                int i = dress.getComments().indexOf(comment);
+
+                int j = dress.getComments().get(i).getAnswers().indexOf(answer);
+
+                Like like = new Like();
+                like.setUser(currentUser);
+
+                int k = dress.getComments().get(i).getAnswers().get(j).getLikes().indexOf(like);
+
+                dress.getComments().get(i).getAnswers().get(j).setNumberLikes(dress.getComments().get(i).getAnswers().get(j).getNumberLikes()-1);
+                dress.getComments().get(i).getAnswers().get(j).getLikes().remove(dress.getComments().get(i).getAnswers().get(j).getLikes().get(k));
+
+                db.collection( "dresses" ).document(dress.getId()).update("comments",dress.getComments());
             }
         });
     }

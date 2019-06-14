@@ -163,7 +163,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
 
-        this.presenter.updateCommentAddLike(this.comment.getId(),this.dressId,currentUser);
+        this.presenter.updateCommentAddLike(this.comment,this.dressId,currentUser);
     }
 
     public void subtractLike(User currentUser)

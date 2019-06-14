@@ -80,4 +80,17 @@ public class Comment {
         this.numberLikes = numberLikes;
     }
 
+    @Override
+    public boolean equals(Object object)
+    {
+        if (object instanceof Comment)
+        {
+            Comment comment = (Comment) object;
+            return this.getId().equals(comment.getId());
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

@@ -57,26 +57,19 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
-                Boolean state = true;
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
-                for(int i=0;i<comment.getLikes().size();i=i+1)
+                Set<Like> likes = new HashSet<>(comment.getLikes());
+                Like like = new Like();
+                like.setUser(currentUser);
+                if(likes.contains(like))
                 {
-                    if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
-                    {
-                        state = false;
-                        break;
-                    }
-                }
-
-                if(state)
-                {
-                    viewHolder.addLike(currentUser);
+                    viewHolder.subtractLike(currentUser);
                 }
                 else
                 {
-                    viewHolder.subtractLike(currentUser);
+                    viewHolder.addLike(currentUser);
                 }
             }
         });
@@ -96,16 +89,11 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
 
                 User currentUser = documentSnapshot.toObject(User.class);
 
-                for(int i=0;i<comment.getLikes().size();i=i+1)
-                {
-                    if(currentUser.getId().equals(comment.getLikes().get(i).getUser().getId()))
-                    {
-                        state = false;
-                        break;
-                    }
-                }
+                Set<Like> likes = new HashSet<>(comment.getLikes());
+                Like like = new Like();
+                like.setUser(currentUser);
 
-                if(!state)
+                if(likes.contains(like))
                 {
                     viewHolder.setLike();
                 }
@@ -117,12 +105,12 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
         });
     }
 
-    public void updateCommentAddLike(final String commentId, final String dressId, final User currentUser)
+    public void updateCommentAddLike(final Comment comment, final String dressId, final User currentUser)
     {
+        Calendar aux = Calendar.getInstance();
+
         final Like like = new Like();
         like.setUser(currentUser);
-
-        Calendar aux = Calendar.getInstance();
         like.setDateLike(new Timestamp(aux.getTimeInMillis()));
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -132,20 +120,14 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
-                final Dress dress = documentSnapshot.toObject(Dress.class);
 
-                ArrayList<Comment> comments = dress.getComments();
+                Dress dress = documentSnapshot.toObject(Dress.class);
 
-                for(int i=0;i<comments.size();i=i+1)
-                {
-                    if(commentId.equals(comments.get(i).getId()))
-                    {
-                        comments.get(i).getLikes().add(like);
-                        comments.get(i).setNumberLikes(comments.get(i).getNumberLikes()+1);
-                        break;
-                    }
-                }
-                db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
+                int i = dress.getComments().indexOf(comment);
+                dress.getComments().get(i).getLikes().add(like);
+                dress.getComments().get(i).setNumberLikes(dress.getComments().get(i).getNumberLikes()+1);
+
+                db.collection( "dresses" ).document(dress.getId()).update("comments",dress.getComments());
             }
         });
     }
@@ -161,26 +143,17 @@ public class CommentsPresenter implements CommentsContract.Presenter, OnSuccessL
             {
                 final Dress dress = documentSnapshot.toObject(Dress.class);
 
-                ArrayList<Comment> comments = dress.getComments();
 
-                for(int i=0;i<comments.size();i=i+1)
-                {
-                    if(comment.getId().equals(comments.get(i).getId()))
-                    {
-                        comments.get(i).setNumberLikes(comments.get(i).getNumberLikes()-1);
+                int i = dress.getComments().indexOf(comment);
+                dress.getComments().get(i).setNumberLikes(dress.getComments().get(i).getNumberLikes()-1);
 
-                        for(int j=0;j<comments.get(i).getLikes().size();j=j+1)
-                        {
-                            if(currentUser.getId().equals(comments.get(i).getLikes().get(j).getUser().getId()))
-                            {
-                                comments.get(i).getLikes().remove(comments.get(i).getLikes().get(j));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-                db.collection( "dresses" ).document(dress.getId()).update("comments",comments);
+                Like like = new Like();
+                like.setUser(currentUser);
+
+                int j = dress.getComments().get(i).getLikes().indexOf(like);
+                dress.getComments().get(i).getLikes().remove(dress.getComments().get(i).getLikes().get(j));
+
+                db.collection( "dresses" ).document(dress.getId()).update("comments",dress.getComments());
             }
         });
     }

@@ -86,6 +86,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
                 android:scaleType="centerInside"
+                android:src="@drawable/like_image"
                 android:textSize="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_Likes"
