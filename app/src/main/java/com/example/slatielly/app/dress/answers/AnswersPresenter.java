@@ -14,7 +14,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,17 +47,11 @@ public class AnswersPresenter implements AnswersContract.Presenter, OnSuccessLis
     @Override
     public void onSuccess(Dress dress)
     {
-        ArrayList<Comment> comments = dress.getComments();
+        Comment comment = new Comment();
+        comment.setId(commentId);
 
-        for(int i=0;i<comments.size();i=i+1)
-        {
-            if(commentId.equals(comments.get(i).getId()))
-            {
-                view.setAnswers(comments.get(i).getAnswers());
-                break;
-            }
-        }
-
+        int i = dress.getComments().indexOf(comment);
+        view.setAnswers(dress.getComments().get(i).getAnswers());
     }
 
     public void checkUser(final Answer answer)

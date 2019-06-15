@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.example.slatielly.view.LargePhoto;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -56,6 +58,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private ProgressBar progressBar;
 
+    private LargePhoto largePhoto;
+
     public CommentViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -84,6 +88,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         button_see_answers_comment_model.setOnClickListener(this);
 
         this.presenter = new CommentsPresenter(this);
+
+        largePhoto = new LargePhoto();
     }
 
     public void bind(Comment comment, String dressId, CommentsFragment view)
@@ -133,6 +139,9 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     {
         if (v == image_comment_comment_model)
         {
+            largePhoto.setImage(comment.getImage().getdownloadLink());
+            FragmentManager fragmentManager = view.getFragmentManager();
+            largePhoto.show( fragmentManager,"ALO" );
 
         }
 
