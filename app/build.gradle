@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.4.0'
     implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
     implementation 'com.google.firebase:firebase-storage:17.0.0'
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

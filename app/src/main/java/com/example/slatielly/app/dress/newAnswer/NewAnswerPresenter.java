@@ -84,7 +84,7 @@ public class NewAnswerPresenter implements NewAswerContract.Presenter, OnSuccess
 
             Random generator = new Random();
 
-            final String address = "images/comments/dresses/"+dressId+"/"+commentId+"answers/"+id+"/"+generator.nextInt(1000000000);
+            final String address = "images/comments/dresses/"+dressId+"/"+commentId+"/answers/"+id+"/"+generator.nextInt(1000000000);
 
             final StorageReference imageRef = storageRef.child(address);
 

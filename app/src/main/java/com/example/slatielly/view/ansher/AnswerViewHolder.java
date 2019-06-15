@@ -1,5 +1,6 @@
 package com.example.slatielly.view.ansher;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.example.slatielly.app.dress.answers.AnswersPresenter;
 import com.example.slatielly.model.Answer;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
+import com.example.slatielly.view.LargePhoto;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -113,7 +115,11 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
     {
         if (v ==  image_ansher_ansher_view_holder)
         {
+            Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyPhoto,answer.getImage().getaddressStorage());
+
+            context.getContext().startActivity(intent);
         }
 
         if (v == buttonImage_like_ansher_view_holder)

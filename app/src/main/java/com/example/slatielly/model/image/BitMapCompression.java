@@ -14,17 +14,8 @@ public class BitMapCompression
 {
     public Bitmap compressedBitmap(String imagePath)
     {
-        Bitmap thumbnail = (BitmapFactory.decodeFile(imagePath));
-        float maxHeight;
-        float maxWidth;
-
-        if (thumbnail.getHeight() > thumbnail.getWidth()) {
-            maxHeight = 1080.0f;
-            maxWidth = 1920.0f;
-        } else {
-            maxHeight = 1920.0f;
-            maxWidth = 1080.0f;
-        }
+        float maxHeight = 1920.0f;
+        float maxWidth = 1080.0f;
 
         Bitmap scaledBitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();

@@ -5,9 +5,17 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <ImageView
+    <ProgressBar
+        android:id="@+id/progressBarLargePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:progressTintMode="add"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints" />
+
+    <com.ortiz.touchview.TouchImageView
         android:id="@+id/Image_View_Large_Photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:srcCompat="@tools:sample/avatars[3]" />
+        android:visibility="visible" />
 </FrameLayout>

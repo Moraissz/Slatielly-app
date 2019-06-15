@@ -1,5 +1,6 @@
 package com.example.slatielly.view.comment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,7 +33,10 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+{
+    public static final String KEY = "ALO";
+
     private ImageView image_profile_image_comment_model;
     private ImageView image_comment_comment_model;
 
@@ -139,10 +143,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     {
         if (v == image_comment_comment_model)
         {
-            largePhoto.setImage(comment.getImage().getdownloadLink());
-            FragmentManager fragmentManager = view.getFragmentManager();
-            largePhoto.show( fragmentManager,"ALO" );
+            Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyPhoto,comment.getImage().getaddressStorage());
+
+            context.getContext().startActivity(intent);
         }
 
         if (v == buttonImage_like_comment_model)
