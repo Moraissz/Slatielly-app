@@ -24,8 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
 
@@ -146,5 +149,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         void enableViews(boolean enable);
 
         void onRentDress(String dressId);
+
+        void onSelectFinishDateRent(String dressId, Timestamp dateStart);
     }
 }

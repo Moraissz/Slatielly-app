@@ -44,11 +44,14 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
     private CalendarDateStartFragment.OnNavigateListener onNavigateListener;
 
+
+
     @Override
     public void onDayClick(EventDay eventDay) {
         Calendar clickedDayCalendar = eventDay.getCalendar();
         System.out.println("Astra\n");
         dateStart = formDate(clickedDayCalendar);
+
 
         if(dateStart.before(dateToday))//verifica se a data escolhida é anterior a data de hoje, se entrar aqui a data escolhida é invalida
         {
@@ -56,11 +59,13 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
         }
         else if(!presenter.dateVerificationDisableDays(disabledays,dateStart)) //verifica se a data escolhida não é uma data desabilitada, se entrar aqui a data escolhida é invalida
         {
-
+            System.out.println("\nDisable Days\n");
         }
         else //pode prosseguir para escolher a data de devolução
         {
             System.out.println("Hello World !");
+            //idDress, dateStart, disableDays
+
         }
     }
 
@@ -75,49 +80,15 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        this.calendarViewStart = (CalendarView) view.findViewById(R.id.MaterialCalendarView_calendar_date_start);
         FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
         this.presenter = new CalendarDateStartPresenter(this, repository);
         if (this.getArguments() != null) {
             String dressId = this.getArguments().getString("id");
             //this.presenter.loadComments(dressId);
             //Buscar as datas
-            rents = new ArrayList<Rent>();
-            disabledays = new ArrayList();
+            rents = this.presenter.loadRents(dressId);
         }
-
-        this.calendarViewStart = (CalendarView) view.findViewById(R.id.MaterialCalendarView_calendar_date_start);
-
-        calendar = Calendar.getInstance();
-        calendarViewStart.setMinimumDate(calendar);
-
-        try //releases dates after a minimum date
-        {
-            calendarViewStart.setDate(calendar);
-        }
-        catch (OutOfDateRangeException e)
-        {
-            e.printStackTrace();
-        }
-
-        calendarViewStart.setOnDayClickListener(this);
-        dateToday = formDate(calendar);
-
-    }
-
-
-
-
-    public void setInvalidDates(){
-
-
-        disabledays = presenter.getDisableDays(rents);
-
-        dateToday = formDate(calendar);
-
-        calendarViewStart.setDisabledDays(disabledays);
-
-
     }
 
 
@@ -165,5 +136,31 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.calendar_date_start, container, false);
+    }
+
+    @Override
+    public void continueProcess(ArrayList<Rent> rents){
+
+        disabledays = this.presenter.getDisableDays(rents);
+        calendar = Calendar.getInstance();
+        calendarViewStart.setMinimumDate(calendar);
+
+        try //releases dates after a minimum date
+        {
+            calendarViewStart.setDate(calendar);
+        }
+        catch (OutOfDateRangeException e)
+        {
+            e.printStackTrace();
+        }
+
+        calendarViewStart.setOnDayClickListener(this);
+        dateToday = formDate(calendar);
+
+        disabledays = presenter.getDisableDays(rents);
+
+        dateToday = formDate(calendar);
+
+        calendarViewStart.setDisabledDays(disabledays);
     }
 }

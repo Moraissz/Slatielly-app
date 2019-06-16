@@ -91,6 +91,7 @@
     <string name="Dress">Dress</string>
     <string name="ANSWERS">ANSWERS</string>
     <string name="NEW_ANSWER">NEW ANSWER</string>
-    <string name="admin" translatable="false">Admin</string>
->>>>>>> b8ceda27633f5795d24e0f0683f3fe4020c762ee
+    <string name="admin" translatable="false">Admin</string><![CDATA[
+    >>>>>>> b8ceda27633f5795d24e0f0683f3fe4020c762ee
+]]>
 </resources>

@@ -15,12 +15,16 @@ public interface CalendarDateStartContract
         Timestamp formDate(Calendar clickedDayCalendar);
         void setRents(ArrayList<Rent> rents);
         void addRent(Rent rent);
+        void continueProcess(ArrayList<Rent> rents);
+
     }
 
     interface Presenter
     {
         List<Calendar> getDisableDays(List<Rent> rents);
         boolean dateVerificationDisableDays (List<Calendar> disableDays,Timestamp dateStart);
+        ArrayList<Rent> loadRents(String dressId);
+
     }
 
 

@@ -1,10 +1,18 @@
 package com.example.slatielly.app.calendar.CalendarDateStart;
 
+import android.support.annotation.NonNull;
+
 import com.example.slatielly.app.dress.comments.CommentsContract;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
+import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,15 +25,40 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
     private CalendarDateStartContract.View view;
     private FirestoreRepository<Rent> repository;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     public CalendarDateStartPresenter (CalendarDateStartContract.View view, FirestoreRepository<Rent> repository) {
         this.view = view;
         this.repository = repository;
     }
 
-    public void loadRents(String dressId){
+    @Override
+    public ArrayList<Rent> loadRents(String dressId){
+        /*
         this.repository
                 .get(dressId)
                 .addOnSuccessListener(this);
+        */
+        final ArrayList<Rent> rents = new ArrayList<>();
+
+        db.collection("rents")
+                .whereEqualTo("dress.id", dressId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            System.out.println(task.getResult().toString());
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Rent rent = document.toObject(Rent.class);
+                                rents.add(rent);
+                            }
+                            view.continueProcess(rents);
+                        } else {
+                        }
+                    }
+                });
+        return rents;
     }
 
     @Override
