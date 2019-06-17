@@ -39,8 +39,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import info.androidhive.fontawesome.FontDrawable;
@@ -352,10 +354,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             CalendarDateStartFragment calendarDateStartFragment = (CalendarDateStartFragment) fragment;
             calendarDateStartFragment.setOnNavigationListener(this);
         }
+        /*
         if (fragment instanceof CalendarDateFinishContract) {
             CalendarDateFinishFragment calendarDateFinishFragment = (CalendarDateFinishFragment) fragment;
             calendarDateFinishFragment.setOnNavigationListener(this);
-        }
+        }*/
     }
 
     @Override
@@ -417,13 +420,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setNavigationFragment(CalendarDateStartFragment.newInstance(dressId), R.string.wStartDate , false);
     }
 
+
     @Override
-    public void onSelectFinishDateRent(String dressId, Timestamp dateStart)   {
+    public void onSelectFinishDateRent(String dressId, long startDate) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment(CalendarDateFinishFragment.newInstance(dressId, dateStart), R.string.wDateEnd, false);
+        System.out.println("Date Start 2: " + startDate);
+        this.setNavigationFragment(CalendarDateFinishFragment.newInstance(dressId, startDate), R.string.wDateEnd, false);
     }
-
-
 }

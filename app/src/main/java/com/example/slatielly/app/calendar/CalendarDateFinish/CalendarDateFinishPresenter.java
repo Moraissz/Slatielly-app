@@ -97,6 +97,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                             }
                             view.continueProcess(rents);
                         } else {
+                            System.out.println("FALHA \n\n\n\n\n");
                         }
                     }
                 });

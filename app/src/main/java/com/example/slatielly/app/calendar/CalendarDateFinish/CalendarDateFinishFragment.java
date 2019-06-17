@@ -32,28 +32,31 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     private Timestamp dateStart;
     private CalendarDateFinishFragment.OnNavigateListener onNavigateListener;
     private View view;
+    private CalendarView calendarViewFinish;
+    private Timestamp dateToday;
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
+        System.out.println("\n\n\n MANO, SEI LÁ \n\n\n");
         this.view = view;
+        this.calendarViewFinish = (CalendarView) view.findViewById(R.id.MaterialCalendarView_calendar_date_finish);
         FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
         this.presenter = new CalendarDateFinishPresenter(this, repository);
         if (this.getArguments() != null) {
             String dressId = this.getArguments().getString("id");
+            this.dateStart = new Timestamp(this.getArguments().getLong("dateStart"));
+            System.out.println("DATE START: " + dateStart.toString() );
             rents = this.presenter.loadRents(dressId);
         }
-
-
-
-
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.calendar_date_finish, container, false);
+
     }
 
     public interface OnNavigateListener{
@@ -94,12 +97,13 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         }
     }
 
-    public static CalendarDateFinishFragment newInstance(String id, Timestamp dateStart) {
+    public static CalendarDateFinishFragment newInstance(String id, long dateStart) {
         CalendarDateFinishFragment calendarDateFinishFragment = new CalendarDateFinishFragment();
-
         Bundle bundle = new Bundle();
         bundle.putString("id", id);
-        bundle.putString("dateStart", dateStart.toString());
+        bundle.putLong("dateStart", dateStart);
+        System.out.println("Date Start: 3 " + dateStart);
+
         calendarDateFinishFragment.setArguments(bundle);
 
         return calendarDateFinishFragment;
@@ -123,15 +127,17 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
 
     @Override
     public void continueProcess(ArrayList<Rent> rents) {
-        CalendarView calendarViewFinish = (CalendarView) this.view.findViewById(R.id.MaterialCalendarView_calendar_date_finish);
+        this.disabledays = this.presenter.getDisableDays(rents);
+        this.calendar = Calendar.getInstance();
+        defineDisabledDays();
 
-
-        calendar = Calendar.getInstance();
-        calendarViewFinish.setMinimumDate(calendar);
 
         try //releases dates after a minimum date
         {
-            calendarViewFinish.setDate(calendar);
+            this.calendar.setTime(dateStart);
+            calendarViewFinish.setDate(this.calendar);
+            this.calendarViewFinish.setMinimumDate(this.calendar);
+
         }
         catch (OutOfDateRangeException e)
         {
@@ -142,7 +148,22 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         calendarViewFinish.setDisabledDays(disabledays);
 
 
-        dateStart = CalendarDateStartFragment.dateStart;
+        //dateStart = CalendarDateStartFragment.dateStart;
         this.rents = CalendarDateStartFragment.rents;
     }
+
+    public void defineDisabledDays(){
+
+
+        calendarViewFinish.setOnDayClickListener(this);
+        dateToday = formDate(calendar);
+
+        disabledays = presenter.getDisableDays(rents);
+
+        dateToday = formDate(calendar);
+
+        calendarViewFinish.setDisabledDays(disabledays);
+    }
+
+
 }

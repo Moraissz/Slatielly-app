@@ -150,6 +150,5 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
         void onRentDress(String dressId);
 
-        void onSelectFinishDateRent(String dressId, Timestamp dateStart);
     }
 }

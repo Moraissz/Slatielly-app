@@ -46,12 +46,11 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
 
 
+
     @Override
     public void onDayClick(EventDay eventDay) {
         Calendar clickedDayCalendar = eventDay.getCalendar();
-        System.out.println("Astra\n");
         dateStart = formDate(clickedDayCalendar);
-
 
         if(dateStart.before(dateToday))//verifica se a data escolhida é anterior a data de hoje, se entrar aqui a data escolhida é invalida
         {
@@ -59,23 +58,21 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
         }
         else if(!presenter.dateVerificationDisableDays(disabledays,dateStart)) //verifica se a data escolhida não é uma data desabilitada, se entrar aqui a data escolhida é invalida
         {
-            System.out.println("\nDisable Days\n");
+
         }
         else //pode prosseguir para escolher a data de devolução
         {
-            System.out.println("Hello World !");
-            //idDress, dateStart, disableDays
+            if (this.getArguments() != null)
+            {
+                long startDateMiliseconds = this.dateStart.getTime();
+                System.out.println("Date Start 1: " + startDateMiliseconds);
+                this.onNavigateListener.onSelectFinishDateRent(this.dressId, startDateMiliseconds);
+                return;
+            }
 
         }
     }
 
-    public interface OnNavigateListener{
-
-    }
-
-    public void setOnNavigationListener(CalendarDateStartFragment.OnNavigateListener onNavigationListener){
-        this.onNavigateListener = onNavigationListener;
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -101,6 +98,7 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
         return calendarDateStartFragment;
     }
+
 
 
     @Override
@@ -163,4 +161,19 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
         calendarViewStart.setDisabledDays(disabledays);
     }
+
+    public interface OnNavigateListener{
+        void onSelectFinishDateRent(String dressId, long startDate);
+    }
+
+    public void setOnNavigationListener(CalendarDateStartFragment.OnNavigateListener onNavigationListener){
+        this.onNavigateListener = onNavigationListener;
+    }
+
+    public CalendarDateStartFragment.OnNavigateListener getListener()
+    {
+        return onNavigateListener;
+    }
+
+
 }
