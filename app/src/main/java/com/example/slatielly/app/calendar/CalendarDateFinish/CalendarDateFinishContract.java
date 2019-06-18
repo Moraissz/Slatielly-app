@@ -1,7 +1,9 @@
 package com.example.slatielly.app.calendar.CalendarDateFinish;
 
 import com.example.slatielly.app.FormContract;
+import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
+import com.example.slatielly.model.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,7 +16,9 @@ public interface CalendarDateFinishContract
     {
         Timestamp formDate(Calendar clickedDayCalendar);
         void continueProcess(ArrayList<Rent> rents);
-
+        void getUserDb(User user);
+        void getDressDb(Dress dress);
+        CalendarDateFinishFragment.OnNavigateListener getOnNavigateListener();
     }
 
     interface Presenter
@@ -23,5 +27,8 @@ public interface CalendarDateFinishContract
         boolean dateVerificationDisableDays (List<Calendar> disableDays,Timestamp dateFinish);
         ArrayList<Rent> loadRents(String dressId);
         List<Calendar> getDisableDays(List<Rent> rents);
+        void loadUser();
+        void getDress(String dressId);
+        void saveRent(Rent rent);
     }
 }

@@ -59,6 +59,7 @@ public class ProfilePresenter implements ProfileContract.Presenter, OnCompleteLi
                     }
                 });
     }
+    //TODO MÉTODO PRA USAR NO PRESENTER :)
 
     @Override
     public void logout() {

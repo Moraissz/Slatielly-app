@@ -354,11 +354,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             CalendarDateStartFragment calendarDateStartFragment = (CalendarDateStartFragment) fragment;
             calendarDateStartFragment.setOnNavigationListener(this);
         }
-        /*
+
         if (fragment instanceof CalendarDateFinishContract) {
             CalendarDateFinishFragment calendarDateFinishFragment = (CalendarDateFinishFragment) fragment;
             calendarDateFinishFragment.setOnNavigationListener(this);
-        }*/
+        }
     }
 
     @Override
@@ -426,6 +426,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
+        System.out.println("BUG 5: " + dressId);
         System.out.println("Date Start 2: " + startDate);
         this.setNavigationFragment(CalendarDateFinishFragment.newInstance(dressId, startDate), R.string.wDateEnd, false);
     }

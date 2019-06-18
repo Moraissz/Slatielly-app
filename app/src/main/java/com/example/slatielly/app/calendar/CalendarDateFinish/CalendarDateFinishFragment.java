@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -15,12 +16,18 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.bumptech.glide.load.engine.cache.DiskCacheAdapter;
 import com.example.slatielly.R;
 import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartFragment;
+import com.example.slatielly.app.dress.DressContract;
+import com.example.slatielly.app.dress.DressFragment;
+import com.example.slatielly.app.dress.DressPresenter;
+import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
+import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CalendarDateFinishFragment  extends Fragment implements CalendarDateFinishContract.View, View.OnClickListener, OnDayClickListener {
@@ -34,7 +41,14 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     private View view;
     private CalendarView calendarViewFinish;
     private Timestamp dateToday;
+    private Timestamp dateFinish;
+    private Dress dress;
+    private User user;
+    private String dressId;
 
+    public OnNavigateListener getOnNavigateListener() {
+        return onNavigateListener;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -43,12 +57,12 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         this.view = view;
         this.calendarViewFinish = (CalendarView) view.findViewById(R.id.MaterialCalendarView_calendar_date_finish);
         FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
-        this.presenter = new CalendarDateFinishPresenter(this, repository);
+        FirestoreRepository<User> repositoryUser = new FirestoreRepository<>(User.class, User.DOCUMENT_NAME);
+        this.presenter = new CalendarDateFinishPresenter(this, repository, repositoryUser);
         if (this.getArguments() != null) {
-            String dressId = this.getArguments().getString("id");
+            this.dressId = this.getArguments().getString("id");
             this.dateStart = new Timestamp(this.getArguments().getLong("dateStart"));
-            System.out.println("DATE START: " + dateStart.toString() );
-            rents = this.presenter.loadRents(dressId);
+            rents = this.presenter.loadRents(this.dressId);
         }
     }
 
@@ -60,7 +74,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     }
 
     public interface OnNavigateListener{
-
+        void onBackPressed();
     }
 
     @Override
@@ -76,7 +90,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     public void onDayClick(EventDay eventDay) {
         Calendar clickedDayCalendar = eventDay.getCalendar();
 
-        Timestamp dateFinish = formDate(clickedDayCalendar);
+        this.dateFinish = formDate(clickedDayCalendar);
 
 
         if(dateFinish.before(dateStart))//verifica se a data de devolução é anterior a data de de inicio, se entrar aqui a data escolhida é invalida
@@ -93,7 +107,12 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         }
         else //pode fazer o aluguel
         {
-
+            FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
+            if (this.getArguments() != null) {
+                //Inserir
+                System.out.println("BUG 2: " + this.dressId);
+                this.presenter.getDress(this.dressId);
+            }
         }
     }
 
@@ -152,6 +171,34 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         this.rents = CalendarDateStartFragment.rents;
     }
 
+    @Override
+    public void getUserDb(User user) {
+        //TODO Pegar o usuário do objeto
+        this.user = user;
+        this.insertRent();
+    }
+
+    @Override
+    public void getDressDb(Dress dress) {
+        //TODO pegar o dress do objeto
+        this.dress = dress;
+        this.presenter.loadUser();
+    }
+
+
+    public void insertRent(){
+        Rent rent = new Rent();
+        rent.setDress(this.dress);
+        rent.setUser(this.user);
+        rent.setStartDate(this.dateStart);
+        rent.setEndDate(this.dateFinish);
+        rent.setStatus(Rent.PENDENT);
+        rent.setTimestamp(new Date());
+        insertRentOnDatabase(rent);
+    }
+
+
+
     public void defineDisabledDays(){
 
 
@@ -165,5 +212,8 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         calendarViewFinish.setDisabledDays(disabledays);
     }
 
+    public void insertRentOnDatabase(Rent rent){
+        presenter.saveRent(rent);
 
+    }
 }
