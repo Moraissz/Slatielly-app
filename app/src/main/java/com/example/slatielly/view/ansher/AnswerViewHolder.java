@@ -1,10 +1,13 @@
 package com.example.slatielly.view.ansher;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,9 +15,9 @@ import com.example.slatielly.R;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.answers.AnswersPresenter;
 import com.example.slatielly.model.Answer;
-import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
+import com.example.slatielly.view.LargePhoto;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +44,10 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
     private AnswersPresenter presenter;
 
+    private ProgressBar progressBar;
+
+    private ConstraintLayout constraintLayout_Answer_View_Holder;
+
 
     public AnswerViewHolder(@NonNull View itemView)
     {
@@ -58,6 +65,10 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder = (ImageView) itemView.findViewById(R.id.buttonImage_like_ansher_view_holder);
         button_reply_ansher_view_holder = (Button) itemView.findViewById(R.id.button_reply_ansher_view_holder);
+
+        constraintLayout_Answer_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Ansher_View_Holder);
+
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarAnswer);
 
         image_ansher_ansher_view_holder.setOnClickListener(this);
         buttonImage_like_ansher_view_holder.setOnClickListener(this);
@@ -80,9 +91,19 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         if(!(answer.getImage() == null))
         {
+            progressBar.setVisibility(View.VISIBLE);
+
             Glide.with(context).load(answer.getImage().getdownloadLink()).into(image_ansher_ansher_view_holder);
 
             image_ansher_ansher_view_holder.setVisibility(ImageView.VISIBLE);
+
+            constraintLayout_Answer_View_Holder.setVisibility(ConstraintLayout.VISIBLE);
+        }
+        else
+        {
+            image_ansher_ansher_view_holder.setVisibility(ImageView.GONE);
+            constraintLayout_Answer_View_Holder.setVisibility(ConstraintLayout.GONE);
+            progressBar.setVisibility(View.GONE);
         }
 
         this.presenter.checkUserBind(this.answer);
@@ -94,7 +115,11 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
     {
         if (v ==  image_ansher_ansher_view_holder)
         {
+            Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyPhoto,answer.getImage().getaddressStorage());
+
+            context.getContext().startActivity(intent);
         }
 
         if (v == buttonImage_like_ansher_view_holder)
@@ -120,7 +145,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image2);
 
-        this.presenter.updateAnswerAddLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
+        this.presenter.updateAnswerAddLike(this.answer,this.commentId,this.dressId,currentUser);
     }
 
     public void subtractLike(User currentUser)
@@ -139,7 +164,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
 
         buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image);
 
-        this.presenter.updateCommentSubtractLike(this.answer.getId(),this.commentId,this.dressId,currentUser);
+        this.presenter.updateCommentSubtractLike(this.answer,this.commentId,this.dressId,currentUser);
     }
 
     public String formDate(Date date)

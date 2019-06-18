@@ -70,5 +70,19 @@ public class Answer {
         this.image = image;
     }
 
+    @Override
+    public boolean equals(Object object)
+    {
+        if (object instanceof Answer)
+        {
+            Answer answer = (Answer) object;
+            return this.getId().equals(answer.getId());
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }

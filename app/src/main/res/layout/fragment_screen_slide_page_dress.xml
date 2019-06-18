@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:progressTintMode="add"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/image_dress_fragment_screen_slide_page_dress"
-        app:layout_constraintTop_toTopOf="@+id/image_dress_fragment_screen_slide_page_dress"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-20dp" />
-
     <ImageView
         android:id="@+id/image_dress_fragment_screen_slide_page_dress"
         android:layout_width="0dp"

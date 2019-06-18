@@ -66,6 +66,11 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new AnswersPresenter(this, repository);
 
+        if (this.listener != null)
+        {
+            this.listener.enableViews(true);
+        }
+
         if (this.getArguments() != null)
         {
             dressId = this.getArguments().getString("dressId");
@@ -108,6 +113,7 @@ public class AnswersFragment extends Fragment implements AnswersContract.View, V
     public interface OnNavigationListener
     {
         void onNavigateToNewAnswer(String dressId, String commentId);
+        void enableViews(boolean enable);
     }
 
     public void setOnNavigationListener(AnswersFragment.OnNavigationListener listener)

@@ -1,8 +1,11 @@
 package com.example.slatielly.view.comment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +27,16 @@ import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Like;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
+import com.example.slatielly.view.LargePhoto;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+{
+    public static final String KEY = "ALO";
+
     private ImageView image_profile_image_comment_model;
     private ImageView image_comment_comment_model;
 
@@ -42,6 +49,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     private Button button_reply_comment_model;
     private Button button_see_answers_comment_model;
 
+    private ConstraintLayout constraintLayout_Comment_View_Holder;
+
     private View context;
 
     private Comment comment;
@@ -50,6 +59,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     private CommentsPresenter presenter;
 
     private CommentsFragment view;
+
+    private ProgressBar progressBar;
+
+    private LargePhoto largePhoto;
 
     public CommentViewHolder(@NonNull View itemView)
     {
@@ -69,12 +82,18 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         button_reply_comment_model = (Button) itemView.findViewById(R.id.button_reply_comment_model);
         button_see_answers_comment_model = (Button) itemView.findViewById(R.id.button_see_answers_comment_model);
 
+        constraintLayout_Comment_View_Holder = (ConstraintLayout) itemView.findViewById(R.id.ConstraintLayout_Comment_View_Holder);
+
+        progressBar = (ProgressBar) itemView.findViewById(R.id.progressBarComment);
+
         image_comment_comment_model.setOnClickListener(this);
         buttonImage_like_comment_model.setOnClickListener(this);
         button_reply_comment_model.setOnClickListener(this);
         button_see_answers_comment_model.setOnClickListener(this);
 
         this.presenter = new CommentsPresenter(this);
+
+        largePhoto = new LargePhoto();
     }
 
     public void bind(Comment comment, String dressId, CommentsFragment view)
@@ -90,9 +109,19 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         if(!(comment.getImage() == null))
         {
+            progressBar.setVisibility(View.VISIBLE);
+
             Glide.with(context).load(comment.getImage().getdownloadLink()).into(image_comment_comment_model);
 
             image_comment_comment_model.setVisibility(ImageView.VISIBLE);
+
+            constraintLayout_Comment_View_Holder.setVisibility(ConstraintLayout.VISIBLE);
+        }
+        else
+        {
+            image_comment_comment_model.setVisibility(ImageView.GONE);
+            constraintLayout_Comment_View_Holder.setVisibility(ConstraintLayout.GONE);
+            progressBar.setVisibility(View.GONE);
         }
 
 
@@ -100,6 +129,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         {
             button_see_answers_comment_model.setText("Ver Respostas ("+comment.getAnswers().size()+")");
             button_see_answers_comment_model.setVisibility(Button.VISIBLE);
+        }
+        else
+        {
+            button_see_answers_comment_model.setVisibility(Button.GONE);
         }
 
         this.presenter.checkUserBind(this.comment);
@@ -110,7 +143,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
     {
         if (v == image_comment_comment_model)
         {
+            Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyPhoto,comment.getImage().getaddressStorage());
+
+            context.getContext().startActivity(intent);
         }
 
         if (v == buttonImage_like_comment_model)
@@ -140,7 +177,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         buttonImage_like_comment_model.setImageResource(R.drawable.like_image2);
 
-        this.presenter.updateCommentAddLike(this.comment.getId(),this.dressId,currentUser);
+        this.presenter.updateCommentAddLike(this.comment,this.dressId,currentUser);
     }
 
     public void subtractLike(User currentUser)

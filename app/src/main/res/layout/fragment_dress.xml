@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,11 +11,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager_dress_fragment_screen_slide"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ConstraintLayout_Fragment_Dress"
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            tools:ignore="MissingConstraints" />
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progressBarFragmentDress"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:progressTintMode="add"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/pager_dress_fragment_screen_slide"
+                app:layout_constraintTop_toTopOf="@+id/pager_dress_fragment_screen_slide"
+                tools:ignore="MissingConstraints" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager_dress_fragment_screen_slide"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:id="@+id/txtDescription"

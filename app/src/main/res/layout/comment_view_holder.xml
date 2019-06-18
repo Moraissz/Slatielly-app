@@ -86,6 +86,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/background_light"
                 android:scaleType="centerInside"
+                android:src="@drawable/like_image"
                 android:textSize="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_Likes"
@@ -125,15 +126,33 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/image_comment_comment_model"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ConstraintLayout_Comment_View_Holder"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/custom_comment_model"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:ignore="MissingConstraints" />
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressBarComment"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:progressTintMode="add"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/image_comment_comment_model"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                tools:ignore="MissingConstraints" />
+        </android.support.constraint.ConstraintLayout>
 
         <Button
             android:id="@+id/button_see_answers_comment_model"
