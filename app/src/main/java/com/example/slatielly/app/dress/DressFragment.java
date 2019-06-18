@@ -24,8 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
 
@@ -123,6 +126,17 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
             return;
         }
+
+        if (v == btnRent)
+        {
+            if (this.getArguments() != null) {
+                String id = this.getArguments().getString("id");
+                this.listener.onRentDress(id);
+                return;
+            }
+
+            return;
+        }
     }
 
     public void setOnNavigationListener(OnNavigationListener listener) {
@@ -133,5 +147,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         void onNavigateToComments(String dressId);
 
         void enableViews(boolean enable);
+
+        void onRentDress(String dressId);
+
     }
 }

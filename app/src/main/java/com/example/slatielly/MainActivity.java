@@ -18,6 +18,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.calendar.CalendarDateFinish.CalendarDateFinishContract;
+import com.example.slatielly.app.calendar.CalendarDateFinish.CalendarDateFinishFragment;
+import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartFragment;
 import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
@@ -35,13 +38,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import info.androidhive.fontawesome.FontDrawable;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
-        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener,
+        DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, CalendarDateStartFragment.OnNavigateListener, CalendarDateFinishFragment.OnNavigateListener,
         AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener {
 
     private Toolbar toolbar;
@@ -342,10 +350,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NewAnswerFragment newAnswerFragment = (NewAnswerFragment) fragment;
             newAnswerFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof CalendarDateStartFragment) {
+            CalendarDateStartFragment calendarDateStartFragment = (CalendarDateStartFragment) fragment;
+            calendarDateStartFragment.setOnNavigationListener(this);
+        }
+
+        if (fragment instanceof CalendarDateFinishFragment) {
+            CalendarDateFinishFragment calendarDateFinishFragment = (CalendarDateFinishFragment) fragment;
+            calendarDateFinishFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
-    public void onNavigateToAllDresses() {
+    public void onNavigateToAllDresses()
+    {
         this.unCheckMenuItem(false);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
@@ -394,4 +412,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.checkMenuItem(menuItem);
         this.setNavigationFragment( NewAnswerFragment.newInstance(dressId,commentId), R.string.NEW_ANSWER, false);
     }
+
+    @Override
+    public void onRentDress(String dressId) {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(CalendarDateStartFragment.newInstance(dressId), R.string.wStartDate , false);
+    }
+
+
+    @Override
+    public void onSelectFinishDateRent(String dressId, long startDate) {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        System.out.println("BUG 5: " + dressId);
+        System.out.println("Date Start 2: " + startDate);
+        this.setNavigationFragment(CalendarDateFinishFragment.newInstance(dressId, startDate), R.string.wDateEnd, false);
+    }
+
 }
