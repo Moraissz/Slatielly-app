@@ -18,7 +18,7 @@ public interface CalendarDateFinishContract
         void continueProcess(ArrayList<Rent> rents);
         void getUserDb(User user);
         void getDressDb(Dress dress);
-        CalendarDateFinishFragment.OnNavigateListener getOnNavigateListener();
+        void navigateToDresses();
     }
 
     interface Presenter

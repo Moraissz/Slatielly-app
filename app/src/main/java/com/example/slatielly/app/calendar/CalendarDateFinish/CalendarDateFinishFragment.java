@@ -46,10 +46,6 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     private User user;
     private String dressId;
 
-    public OnNavigateListener getOnNavigateListener() {
-        return onNavigateListener;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,7 +70,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     }
 
     public interface OnNavigateListener{
-        void onBackPressed();
+        void onNavigateToAllDresses();
     }
 
     @Override
@@ -84,6 +80,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
 
     public void setOnNavigationListener(CalendarDateFinishFragment.OnNavigateListener onNavigationListener){
         this.onNavigateListener = onNavigationListener;
+
     }
 
     @Override
@@ -185,6 +182,11 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         this.presenter.loadUser();
     }
 
+    @Override
+    public void navigateToDresses() {
+        this.onNavigateListener.onNavigateToAllDresses();
+    }
+
 
     public void insertRent(){
         Rent rent = new Rent();
@@ -216,4 +218,5 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         presenter.saveRent(rent);
 
     }
+
 }

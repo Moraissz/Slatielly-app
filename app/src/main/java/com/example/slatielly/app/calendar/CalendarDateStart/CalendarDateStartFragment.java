@@ -68,7 +68,6 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
                 System.out.println("Date Start 1: " + startDateMiliseconds);
                 System.out.println("BUG 6: " + this.dressId);
                 this.onNavigateListener.onSelectFinishDateRent(this.dressId, startDateMiliseconds);
-                this.onNavigateListener.onBackPressed();
             }
 
         }
@@ -177,6 +176,4 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
     {
         return onNavigateListener;
     }
-
-
 }

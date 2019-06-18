@@ -212,7 +212,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
     @Override
     public void onSuccess(DocumentReference documentReference) {
-        view.getOnNavigateListener().onBackPressed();
+        view.navigateToDresses();
     }
 }
 
