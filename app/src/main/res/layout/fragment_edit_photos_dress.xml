@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/R_edit_photos_dress"
+        android:layout_width="match_parent"
+        android:clipToPadding="false"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light"
+        tools:context=".Lista_comentarios" />
+</android.support.constraint.ConstraintLayout>

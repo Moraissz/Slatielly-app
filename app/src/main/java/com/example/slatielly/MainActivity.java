@@ -18,12 +18,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.slatielly.app.dress.DressContract;
 import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
+import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
+import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
 import com.example.slatielly.model.User;
@@ -393,5 +396,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
         this.setNavigationFragment( NewAnswerFragment.newInstance(dressId,commentId), R.string.NEW_ANSWER, false);
+    }
+
+    @Override
+    public void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, DressContract.Presenter presenterDress)
+    {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment( new EditPhotosDress(presenterRegister,presenterDress), R.string.Edit_Photos, false);
     }
 }

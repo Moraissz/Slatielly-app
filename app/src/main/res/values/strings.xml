@@ -92,5 +92,6 @@
     <string name="ANSWERS">ANSWERS</string>
     <string name="NEW_ANSWER">NEW ANSWER</string>
     <string name="admin" translatable="false">Admin</string>
->>>>>>> b8ceda27633f5795d24e0f0683f3fe4020c762ee
+    <string name="Edit_Photos">Edit Photos Dress</string>
+    >>>>>>> b8ceda27633f5795d24e0f0683f3fe4020c762ee
 </resources>

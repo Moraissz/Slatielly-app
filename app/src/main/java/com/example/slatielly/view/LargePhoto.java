@@ -1,26 +1,15 @@
 package com.example.slatielly.view;
 
-import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
-import com.example.slatielly.view.comment.CommentViewHolder;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,6 +38,8 @@ public class LargePhoto extends AppCompatActivity
         Image_View_Large_Photo = (TouchImageView) findViewById(R.id.Image_View_Large_Photo);
 
         progressBarLargePhoto = (ProgressBar) findViewById(R.id.progressBarLargePhoto);
+
+        Image_View_Large_Photo.setMaxZoom(10);
 
         setImage(address);
     }
