@@ -72,8 +72,6 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
         Bitmap image = bitMapCompression.compressedBitmap(imagePath);
         this.images.add(image);
-
-        System.out.println("ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "+ images.size());
     }
 
     @Override

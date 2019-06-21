@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.slatielly.R;
 import com.example.slatielly.app.dress.DressContract;
@@ -40,6 +42,8 @@ public class EditPhotosDress extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        this.getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         return inflater.inflate( R.layout.fragment_edit_photos_dress, container, false);
     }
 
@@ -47,7 +51,6 @@ public class EditPhotosDress extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
 
         R_edit_photos_dress = (RecyclerView) view.findViewById(R.id.R_edit_photos_dress);
 
@@ -67,7 +70,7 @@ public class EditPhotosDress extends Fragment
         editPhotosAdapter = new EditPhotosAdapter(this.images);
         R_edit_photos_dress.setAdapter(editPhotosAdapter);
 
-        GridLayoutManager manager = new GridLayoutManager(this.getContext(),2,GridLayoutManager.VERTICAL,false);
+        GridLayoutManager manager = new GridLayoutManager(this.getContext(),3,GridLayoutManager.VERTICAL,false);
 
         R_edit_photos_dress.setLayoutManager(manager);
     }
@@ -83,7 +86,7 @@ public class EditPhotosDress extends Fragment
             outRect.right = 10;
             outRect.left = 10;
 
-            if(parent.getChildAdapterPosition(view)%2 != 0)
+            if(parent.getChildAdapterPosition(view)%3 != 0)
             {
                 outRect.left = 0;
             }

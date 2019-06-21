@@ -12,5 +12,6 @@
         android:clipToPadding="false"
         android:layout_height="match_parent"
         android:background="@android:color/background_light"
-        tools:context=".Lista_comentarios" />
+        tools:context=".Lista_comentarios"
+        android:splitMotionEvents="false"/>
 </android.support.constraint.ConstraintLayout>

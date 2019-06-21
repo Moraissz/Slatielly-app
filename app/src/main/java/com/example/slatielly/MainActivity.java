@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -271,6 +272,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             this.unCheckMenuItem(false);
             this.isProfileActive = true;
         }
+
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onBackPressed();
     }

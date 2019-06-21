@@ -15,9 +15,15 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
 {
     private ArrayList<Bitmap> images;
 
+    private ArrayList<Bitmap> imagesDelete;
+
     public EditPhotosAdapter(ArrayList<Bitmap> images)
     {
         this.images = images;
+
+        imagesDelete = new ArrayList<>();
+
+        EditPhotosHolder.onLongclick = false;
     }
 
     @NonNull
@@ -27,7 +33,7 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate( R.layout.edit_photo_view_holder,viewGroup,false);
 
-        EditPhotosHolder editPhotosHolder = new EditPhotosHolder(view);
+        EditPhotosHolder editPhotosHolder = new EditPhotosHolder(view, this);
 
         return editPhotosHolder;
     }
@@ -42,5 +48,20 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
     public int getItemCount()
     {
         return this.images.size();
+    }
+
+    public ArrayList<Bitmap> getImagesDelete()
+    {
+        return imagesDelete;
+    }
+
+    public void addImageDelete(Bitmap bitmap)
+    {
+        imagesDelete.add(bitmap);
+    }
+
+    public void removeImageDelete(Bitmap bitmap)
+    {
+        imagesDelete.remove(bitmap);
     }
 }

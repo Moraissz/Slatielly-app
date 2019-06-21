@@ -31,6 +31,7 @@ public class LargePhoto extends AppCompatActivity
         setContentView(R.layout.large_photo);
 
         getSupportActionBar().hide();
+
         getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String address = getIntent().getStringExtra(KeyPhoto);

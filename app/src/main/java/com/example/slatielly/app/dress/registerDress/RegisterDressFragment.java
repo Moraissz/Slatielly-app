@@ -75,6 +75,10 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     {
         super.onViewCreated(view, savedInstanceState);
 
+        if (this.onNavigationListener != null) {
+            this.onNavigationListener.enableViews(true);
+        }
+
         this.setupViews(view);
         this.presenter.createValidationSchema();
     }
@@ -188,5 +192,6 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     {
         void onNavigateToAllDresses();
         void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, DressContract.Presenter presenterDress);
+        void enableViews(boolean enable);
     }
 }
