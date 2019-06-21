@@ -75,7 +75,8 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     {
         super.onViewCreated(view, savedInstanceState);
 
-        if (this.onNavigationListener != null) {
+        if (this.onNavigationListener != null)
+        {
             this.onNavigationListener.enableViews(true);
         }
 
@@ -83,7 +84,8 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         this.presenter.createValidationSchema();
     }
 
-    private void setupViews(View view) {
+    private void setupViews(View view)
+    {
         this.ptxtMaterial = view.findViewById(R.id.ptxtMaterial);
         this.ptxtColor = view.findViewById(R.id.ptxtColor);
         this.ptxtSize = view.findViewById(R.id.ptxtSize);
@@ -129,7 +131,8 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
     @Override
     public void onClick(View v) {
-        if (v == this.btnSaveChanges) {
+        if (v == this.btnSaveChanges)
+        {
             String material = this.ptxtMaterial.getText().toString();
             String color = this.ptxtColor.getText().toString();
             String size = this.ptxtSize.getText().toString();

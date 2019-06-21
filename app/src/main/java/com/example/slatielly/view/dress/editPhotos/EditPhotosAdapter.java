@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
 
 import java.util.ArrayList;
 
@@ -15,13 +16,16 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
 {
     private ArrayList<Bitmap> images;
 
-    private ArrayList<Bitmap> imagesDelete;
+    private ArrayList<Bitmap> imagesDeleteRegister;
 
-    public EditPhotosAdapter(ArrayList<Bitmap> images)
+    private EditPhotosDress editPhotosDress;
+
+    public EditPhotosAdapter(ArrayList<Bitmap> images, EditPhotosDress editPhotosDress)
     {
         this.images = images;
+        this.editPhotosDress = editPhotosDress;
 
-        imagesDelete = new ArrayList<>();
+        imagesDeleteRegister = new ArrayList<>();
 
         EditPhotosHolder.onLongclick = false;
     }
@@ -50,18 +54,33 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
         return this.images.size();
     }
 
-    public ArrayList<Bitmap> getImagesDelete()
+    public ArrayList<Bitmap> getImagesDeleteRegister()
     {
-        return imagesDelete;
+        return imagesDeleteRegister;
     }
 
     public void addImageDelete(Bitmap bitmap)
     {
-        imagesDelete.add(bitmap);
+        imagesDeleteRegister.add(bitmap);
     }
 
     public void removeImageDelete(Bitmap bitmap)
     {
-        imagesDelete.remove(bitmap);
+        imagesDeleteRegister.remove(bitmap);
     }
+
+    public EditPhotosDress getEditPhotosDress()
+    {
+        return editPhotosDress;
+    }
+
+
+    public void setImages(ArrayList<Bitmap> images) {
+        this.images = images;
+    }
+
+    public void setImagesDeleteRegister(ArrayList<Bitmap> imagesDeleteRegister) {
+        this.imagesDeleteRegister = imagesDeleteRegister;
+    }
+
 }

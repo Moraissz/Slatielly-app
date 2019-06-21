@@ -18,5 +18,7 @@ public interface RegisterDressContract {
         void saveImage(String imagePath);
 
         ArrayList<Bitmap> getImages();
+
+        void updateImages(ArrayList<Bitmap> imagesDelete);
     }
 }

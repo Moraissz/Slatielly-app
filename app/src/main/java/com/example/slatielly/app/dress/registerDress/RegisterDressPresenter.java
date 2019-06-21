@@ -143,4 +143,12 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     {
         return this.images;
     }
+
+    public void updateImages(ArrayList<Bitmap> imagesDelete)
+    {
+        for(Bitmap bitmap : imagesDelete)
+        {
+            images.remove(bitmap);
+        }
+    }
 }

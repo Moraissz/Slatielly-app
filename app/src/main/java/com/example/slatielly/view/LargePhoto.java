@@ -18,7 +18,8 @@ import com.ortiz.touchview.TouchImageView;
 
 public class LargePhoto extends AppCompatActivity
 {
-    public static final String KeyPhoto = "com.example.slatielly.LargePhoto";
+    public static final String KeyPhoto = "com.example.slatielly.LargePhoto.KeyPhoto";
+    public static final String KeyOption = "com.example.slatielly.LargePhoto.KeyOption";
 
     private TouchImageView Image_View_Large_Photo;
 
@@ -34,15 +35,22 @@ public class LargePhoto extends AppCompatActivity
 
         getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        String address = getIntent().getStringExtra(KeyPhoto);
-
         Image_View_Large_Photo = (TouchImageView) findViewById(R.id.Image_View_Large_Photo);
 
         progressBarLargePhoto = (ProgressBar) findViewById(R.id.progressBarLargePhoto);
 
         Image_View_Large_Photo.setMaxZoom(10);
 
-        setImage(address);
+        if(getIntent().getStringExtra(KeyOption).equals("bitmap"))
+        {
+            byte[] bytes = getIntent().getByteArrayExtra(KeyPhoto);
+            setImage2(bytes);
+        }
+        else
+        {
+            String address = getIntent().getStringExtra(KeyPhoto);
+            setImage(address);
+        }
     }
 
     private void setImage(String address)
@@ -69,5 +77,13 @@ public class LargePhoto extends AppCompatActivity
 
             }
         });
+    }
+
+    private void setImage2(byte[] bytes)
+    {
+        Bitmap photoBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        progressBarLargePhoto.setVisibility(View.GONE);
+        Image_View_Large_Photo.setImageBitmap(photoBitmap);
+
     }
 }
