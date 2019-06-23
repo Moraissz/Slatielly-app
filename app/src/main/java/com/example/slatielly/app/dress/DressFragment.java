@@ -85,7 +85,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
@@ -139,10 +140,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     @Override
     public void setScreenSlideAdapter(ArrayList<Image> images) {
-        PagerAdapter pagerAdapter = new ScreenSlideAdapter(this.getFragmentManager(), images);
-        PagerAdapter pagerAdapter2 = new ScreenSlideAdapter(this.getFragmentManager(), images);
+        PagerAdapter pagerAdapter = new ScreenSlideAdapter(this.getChildFragmentManager(), images);
         mPager.setAdapter(pagerAdapter);
-        mPager.setAdapter(pagerAdapter2);
     }
 
     @Override

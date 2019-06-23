@@ -8,21 +8,26 @@ import com.example.slatielly.model.Image;
 
 import java.util.ArrayList;
 
-public class ScreenSlideAdapter extends FragmentStatePagerAdapter {
+
+public class ScreenSlideAdapter extends FragmentStatePagerAdapter
+{
     private ArrayList<Image> images;
 
-    public ScreenSlideAdapter(FragmentManager fm, ArrayList<Image> images) {
+    public ScreenSlideAdapter(FragmentManager fm, ArrayList<Image> images)
+    {
         super(fm);
         this.images = images;
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(int position)
+    {
         return ScreenSlideFragment.newInstance(images.get(position));
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return images.size();
     }
 }
