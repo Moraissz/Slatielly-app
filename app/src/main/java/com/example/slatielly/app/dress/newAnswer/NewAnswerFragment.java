@@ -15,10 +15,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
+import com.example.slatielly.view.LargePhoto;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -32,6 +35,8 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
     private Button btnImage_newAswer;
     private  Button btnanswer_newAnswer;
     private ImageView imageAswer;
+    private ScrollView scrollViewAnswer;
+    private ProgressBar loadingBarAnswer;
 
     private View view;
 
@@ -84,12 +89,16 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
         btnanswer_newAnswer = view.findViewById(R.id.btnanswer_newAnswer);
         imageAswer = view.findViewById(R.id.imageAswer);
 
+        scrollViewAnswer = view.findViewById(R.id.scrollViewAnswer);
+        loadingBarAnswer = view.findViewById(R.id.loadingBarAnswer);
+
         imageAswer.setVisibility(ImageView.GONE);
 
         this.view = view;
 
         btnanswer_newAnswer.setOnClickListener(this);
         btnImage_newAswer .setOnClickListener(this);
+        imageAswer.setOnClickListener(this);
     }
 
     public void onClick(View v)
@@ -98,6 +107,13 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
         {
             InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService( Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
+
+            this.scrollViewAnswer.fullScroll(ScrollView.FOCUS_UP);
+            this.loadingBarAnswer.setVisibility(ProgressBar.VISIBLE);
+
+            btnImage_newAswer.setEnabled(false);
+            btnImage_newAswer.setEnabled(false);
+            imageAswer.setEnabled(false);
 
             this.presenter.saveComment(text_view_new_answer.getText().toString(),dressId,commentId);
         }
@@ -114,6 +130,16 @@ public class NewAnswerFragment extends Fragment implements NewAswerContract.View
                 imageAswer.setVisibility(ImageView.GONE);
                 btnImage_newAswer.setText(R.string.mais_image);
             }
+        }
+        if(v == imageAswer)
+        {
+            Intent intent = new Intent(getActivity(), LargePhoto.class);
+
+            intent.putExtra(LargePhoto.KeyOption,"bitmap");
+            byte[] bytes = this.presenter.getData();
+            intent.putExtra(LargePhoto.KeyPhoto,bytes);
+
+            startActivity(intent);
         }
     }
 

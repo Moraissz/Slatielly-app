@@ -93,5 +93,6 @@
     <string name="NEW_ANSWER">NEW ANSWER</string>
     <string name="admin" translatable="false">Admin</string>
     <string name="Edit_Photos">"Edit Photos "</string>
+    <string name="Edit_dress">Edit Dress</string>
     >>>>>>> b8ceda27633f5795d24e0f0683f3fe4020c762ee
 </resources>

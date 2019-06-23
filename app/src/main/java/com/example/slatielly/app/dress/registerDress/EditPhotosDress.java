@@ -1,13 +1,16 @@
 package com.example.slatielly.app.dress.registerDress;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,10 +22,16 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.example.slatielly.R;
-import com.example.slatielly.app.dress.DressContract;
+import com.example.slatielly.app.dress.edit.EditDressContract;
+import com.example.slatielly.app.dress.edit.EditDressPresenter;
+import com.example.slatielly.model.Image;
+import com.example.slatielly.model.image.BitMapCompression;
 import com.example.slatielly.view.dress.editPhotos.EditPhotosAdapter;
+import com.example.slatielly.view.dress.editPhotos.EditPhotosHolder;
 
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 @SuppressLint("ValidFragment")
 public class EditPhotosDress extends Fragment
@@ -30,17 +39,23 @@ public class EditPhotosDress extends Fragment
     private RecyclerView R_edit_photos_dress;
     private EditPhotosAdapter editPhotosAdapter;
 
+
     private RegisterDressContract.Presenter presenterRegister;
-    private DressContract.Presenter presenterDress;
 
-    private ArrayList<Bitmap> images;
+    private EditDressContract.Presenter presenterEdit;
 
-    private MenuItem menuItem;
+    private ArrayList<Bitmap> imagesRegister;
+
+    private MenuItem menuItemTrash;
+
+    private MenuItem menuItemAdd;
+
+    private OnNavigationListener onNavigationListener;
 
     @SuppressLint("ValidFragment")
-    public EditPhotosDress(RegisterDressContract.Presenter presenterRegister, DressContract.Presenter presenterDress)
+    public EditPhotosDress(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit)
     {
-        this.presenterDress = presenterDress;
+        this.presenterEdit = presenterEdit;
         this.presenterRegister = presenterRegister;
     }
 
@@ -64,8 +79,18 @@ public class EditPhotosDress extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         inflater.inflate(R.menu.menu_edit_photo, menu);
-        menuItem = menu.findItem(R.id.trash_image);
-        menuItem.setVisible(false);
+
+        menuItemTrash = menu.findItem(R.id.trash_image);
+        menuItemAdd = menu.findItem(R.id.add_image);
+
+        menuItemTrash.setVisible(false);
+        menuItemAdd.setVisible(false);
+
+        if(presenterRegister == null)
+        {
+            menuItemAdd.setVisible(true);
+        }
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -80,17 +105,21 @@ public class EditPhotosDress extends Fragment
 
         R_edit_photos_dress.addItemDecoration(verticalSpaceItemDecoration);
 
-        if(this.presenterDress == null)
+        this.onNavigationListener.enableViews(true);
+
+        if(this.presenterEdit == null)
         {
-            this.images = this.presenterRegister.getImages();
+            this.imagesRegister = this.presenterRegister.getImages();
+            editPhotosAdapter = new EditPhotosAdapter(this.imagesRegister,null,this);
         }
         else
         {
-
+            editPhotosAdapter = new EditPhotosAdapter( null, presenterEdit.getImagesDress(), this );
         }
 
-        editPhotosAdapter = new EditPhotosAdapter(this.images,this);
         R_edit_photos_dress.setAdapter(editPhotosAdapter);
+
+        R_edit_photos_dress.setHasFixedSize(true);
 
         GridLayoutManager manager = new GridLayoutManager(this.getContext(),3,GridLayoutManager.VERTICAL,false);
 
@@ -103,11 +132,21 @@ public class EditPhotosDress extends Fragment
         int id = item.getItemId();
         if(id == R.id.trash_image)
         {
-            if(this.presenterDress == null)
+            EditPhotosHolder.onLongclick = false;
+
+            if(this.presenterEdit == null)
             {
                 presenterRegister.updateImages(editPhotosAdapter.getImagesDeleteRegister());
                 editPhotosAdapter.setImagesDeleteRegister(new ArrayList<Bitmap>());
-                editPhotosAdapter.setImages(presenterRegister.getImages());
+                editPhotosAdapter.setImagesRegister(presenterRegister.getImages());
+                menuItemInvisible();
+                editPhotosAdapter.notifyDataSetChanged();
+            }
+            else
+            {
+                presenterEdit.updateImages(editPhotosAdapter.getImageDressDelete());
+                editPhotosAdapter.setImageDressDelete(new ArrayList<Object>());
+                editPhotosAdapter.setImagesDress(presenterEdit.getImagesDress());
                 menuItemInvisible();
                 editPhotosAdapter.notifyDataSetChanged();
             }
@@ -115,17 +154,47 @@ public class EditPhotosDress extends Fragment
             return true;
         }
 
+        if(id == R.id.add_image)
+        {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            startActivityForResult(intent, 1);
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1)
+        {
+            Uri selectedImage = data.getData();
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
+            c.close();
+
+            BitMapCompression bitMapCompression = new BitMapCompression();
+            presenterEdit.getImagesDress().add(bitMapCompression.compressedBitmap(picturePath));
+
+            editPhotosAdapter.notifyDataSetChanged();
+        }
     }
 
     public void menuItemVisible()
     {
-        menuItem.setVisible(true);
+        menuItemTrash.setVisible(true);
     }
 
     public void menuItemInvisible()
     {
-        menuItem.setVisible(false);
+        menuItemTrash.setVisible(false);
     }
 
     public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration
@@ -144,5 +213,20 @@ public class EditPhotosDress extends Fragment
                 outRect.left = 0;
             }
         }
+    }
+
+    public interface OnNavigationListener
+    {
+        void enableViews(boolean enable);
+    }
+
+    public void setOnNavigationListener(EditPhotosDress.OnNavigationListener listener)
+    {
+        this.onNavigationListener = listener;
+    }
+
+    public EditDressContract.Presenter getPresenterEdit()
+    {
+        return presenterEdit;
     }
 }

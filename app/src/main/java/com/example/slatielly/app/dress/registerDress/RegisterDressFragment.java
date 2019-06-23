@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.slatielly.R;
 import com.example.slatielly.app.dress.DressContract;
+import com.example.slatielly.app.dress.edit.EditDressContract;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.service.ValidationService;
@@ -98,6 +99,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         this.btnSaveChanges = view.findViewById(R.id.btnSaveChanges);
         this.btnEditPhotos = view.findViewById(R.id.btnEditPhotos);
         this.btnTakePhotos = view.findViewById(R.id.btnTakePhotos);
+
         this.btnEditPhotos.setOnClickListener(this);
         this.btnSaveChanges.setOnClickListener(this);
         this.btnTakePhotos.setOnClickListener(this);
@@ -114,6 +116,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
             this.loadingBar.setVisibility(ProgressBar.VISIBLE);
             this.btnSaveChanges.setEnabled(false);
             this.btnEditPhotos.setEnabled(false);
+            this.btnTakePhotos.setEnabled(false);
 
             return;
         }
@@ -194,7 +197,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     public interface OnNavigationListener
     {
         void onNavigateToAllDresses();
-        void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, DressContract.Presenter presenterDress);
+        void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit);
         void enableViews(boolean enable);
     }
 }

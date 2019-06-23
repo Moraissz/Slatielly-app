@@ -15,5 +15,6 @@ public class NewAswerContract
         void setImage(Bitmap image);
         Bitmap getImage();
         void saveComment(String description,String id, String commentId);
+        byte[] getData();
     }
 }

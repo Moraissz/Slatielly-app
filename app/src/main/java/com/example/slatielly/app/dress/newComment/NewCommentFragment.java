@@ -3,6 +3,8 @@ package com.example.slatielly.app.dress.newComment;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,9 +17,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.slatielly.R;
+import com.example.slatielly.view.LargePhoto;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -29,6 +34,8 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
     private Button btnImage_newComment;
     private  Button btnComment_newComment;
     private ImageView imageComment;
+    private ScrollView scrollViewComment;
+    private ProgressBar loadingBarComment;
 
     private View view;
 
@@ -75,12 +82,16 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
         btnComment_newComment = view.findViewById(R.id.btnComment_newComment);
         imageComment = view.findViewById(R.id.imageComment);
 
+        scrollViewComment = view.findViewById(R.id.scrollViewComment);
+        loadingBarComment = view.findViewById(R.id.loadingBarComment);
+
         imageComment.setVisibility(ImageView.GONE);
 
         this.view = view;
 
         btnComment_newComment.setOnClickListener(this);
         btnImage_newComment.setOnClickListener(this);
+        imageComment.setOnClickListener(this);
     }
 
     public void onClick(View v)
@@ -89,6 +100,13 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
         {
             InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService( Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
+
+            this.scrollViewComment.fullScroll(ScrollView.FOCUS_UP);
+            this.loadingBarComment.setVisibility(ProgressBar.VISIBLE);
+
+            btnImage_newComment.setEnabled(false);
+            btnComment_newComment.setEnabled(false);
+            imageComment.setEnabled(false);
 
             this.presenter.saveComment(text_view_new_comment.getText().toString(),dressId);
         }
@@ -105,6 +123,16 @@ public class NewCommentFragment extends Fragment implements NewCommentContract.V
                 imageComment.setVisibility(ImageView.GONE);
                 btnImage_newComment.setText(R.string.mais_image);
             }
+        }
+        if(v == imageComment)
+        {
+            Intent intent = new Intent(getActivity(), LargePhoto.class);
+
+            intent.putExtra(LargePhoto.KeyOption,"bitmap");
+            byte[] bytes = this.presenter.getData();
+            intent.putExtra(LargePhoto.KeyPhoto,bytes);
+
+            startActivity(intent);
         }
     }
 

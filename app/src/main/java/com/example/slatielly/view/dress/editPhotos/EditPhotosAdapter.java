@@ -9,23 +9,30 @@ import android.view.ViewGroup;
 
 import com.example.slatielly.R;
 import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
+import com.example.slatielly.model.Image;
 
 import java.util.ArrayList;
 
 public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
 {
-    private ArrayList<Bitmap> images;
+    private ArrayList<Bitmap> imagesRegister;
 
     private ArrayList<Bitmap> imagesDeleteRegister;
 
+    private ArrayList<Object> imagesDress;
+
+    private ArrayList<Object> imageDressDelete;
+
     private EditPhotosDress editPhotosDress;
 
-    public EditPhotosAdapter(ArrayList<Bitmap> images, EditPhotosDress editPhotosDress)
+    public EditPhotosAdapter(ArrayList<Bitmap> imagesRegister, ArrayList<Object> imagesDress, EditPhotosDress editPhotosDress)
     {
-        this.images = images;
+        this.imagesRegister = imagesRegister;
+        this.imagesDress = imagesDress;
         this.editPhotosDress = editPhotosDress;
 
         imagesDeleteRegister = new ArrayList<>();
+        imageDressDelete = new ArrayList<>();
 
         EditPhotosHolder.onLongclick = false;
     }
@@ -45,13 +52,27 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
     @Override
     public void onBindViewHolder(@NonNull EditPhotosHolder editPhotosHolder, int i)
     {
-        editPhotosHolder.bind(this.images.get(i));
+        if(imagesDress == null)
+        {
+            editPhotosHolder.bind(this.imagesRegister.get(i),0);
+        }
+        else
+        {
+            editPhotosHolder.bind(this.imagesDress.get(i),1);
+        }
     }
 
     @Override
     public int getItemCount()
     {
-        return this.images.size();
+        if(imagesDress == null)
+        {
+            return this.imagesRegister.size();
+        }
+        else
+        {
+            return this.imagesDress.size();
+        }
     }
 
     public ArrayList<Bitmap> getImagesDeleteRegister()
@@ -59,12 +80,12 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
         return imagesDeleteRegister;
     }
 
-    public void addImageDelete(Bitmap bitmap)
+    public void addImageDeleteRegister(Bitmap bitmap)
     {
         imagesDeleteRegister.add(bitmap);
     }
 
-    public void removeImageDelete(Bitmap bitmap)
+    public void removeImageDeleteRegister(Bitmap bitmap)
     {
         imagesDeleteRegister.remove(bitmap);
     }
@@ -74,13 +95,28 @@ public class EditPhotosAdapter extends RecyclerView.Adapter<EditPhotosHolder>
         return editPhotosDress;
     }
 
-
-    public void setImages(ArrayList<Bitmap> images) {
-        this.images = images;
+    public void setImagesRegister(ArrayList<Bitmap> imagesRegister) {
+        this.imagesRegister = imagesRegister;
     }
 
     public void setImagesDeleteRegister(ArrayList<Bitmap> imagesDeleteRegister) {
         this.imagesDeleteRegister = imagesDeleteRegister;
     }
+
+    public ArrayList<Object> getImageDressDelete()
+    {
+        return imageDressDelete;
+    }
+
+    public void setImageDressDelete(ArrayList<Object> imageDressDelete)
+    {
+        this.imageDressDelete = imageDressDelete;
+    }
+
+    public void setImagesDress(ArrayList<Object> imagesDress)
+    {
+        this.imagesDress = imagesDress;
+    }
+
 
 }

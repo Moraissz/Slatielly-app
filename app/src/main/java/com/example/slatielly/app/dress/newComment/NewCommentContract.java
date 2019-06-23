@@ -21,5 +21,6 @@ public interface NewCommentContract
         void setImage(Bitmap image);
         Bitmap getImage();
         void saveComment(String description,String id);
+        byte[] getData();
     }
 }

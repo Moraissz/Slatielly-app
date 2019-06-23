@@ -24,12 +24,16 @@ import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
+import com.example.slatielly.app.dress.edit.EditDressContract;
+import com.example.slatielly.app.dress.edit.EditDressFragment;
 import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
+import com.example.slatielly.app.dress.newAnswer.NewAswerContract;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
 import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
 import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
+import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
 import com.example.slatielly.view.comment.CommentViewHolder;
@@ -46,7 +50,7 @@ import info.androidhive.fontawesome.FontDrawable;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
         DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener,
-        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener {
+        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener, EditDressFragment.OnNavigationListener, EditPhotosDress.OnNavigationListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -348,6 +352,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             NewAnswerFragment newAnswerFragment = (NewAnswerFragment) fragment;
             newAnswerFragment.setOnNavigationListener(this);
         }
+        if (fragment instanceof EditDressFragment) {
+            EditDressFragment editDressFragment = (EditDressFragment) fragment;
+            editDressFragment.setOnNavigationListener(this);
+        }
+        if (fragment instanceof EditPhotosDress) {
+            EditPhotosDress editPhotosDress = (EditPhotosDress) fragment;
+            editPhotosDress.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -355,6 +367,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(false);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
+        enableViews(false);
+        getSupportFragmentManager().
         this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
     }
 
@@ -402,11 +416,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, DressContract.Presenter presenterDress)
+    public void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit)
     {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment( new EditPhotosDress(presenterRegister,presenterDress), R.string.Edit_Photos, false);
+        this.setNavigationFragment( new EditPhotosDress(presenterRegister,presenterEdit), R.string.Edit_Photos, false);
+    }
+
+    @Override
+    public void onNavigateToEditDress(String id)
+    {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(EditDressFragment.newInstance(id), R.string.Edit_dress, false);
     }
 }

@@ -121,7 +121,7 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
                             imagesAux.add(image);
 
-                            if (finalConstant == imagesAux.size() - 1)
+                            if (finalConstant == images.size() - 1)
                             {
                                 dress.setImages(imagesAux);
                                 repository.update(dress).addOnSuccessListener(new OnSuccessListener<Void>()
