@@ -42,6 +42,8 @@ public class EditDressFragment extends Fragment implements EditDressContract.Vie
     private String dressId;
     private Dress dress;
 
+    private boolean first;
+
     public static EditDressFragment newInstance(String id)
     {
         EditDressFragment editDressFragment = new EditDressFragment();
@@ -63,6 +65,7 @@ public class EditDressFragment extends Fragment implements EditDressContract.Vie
 
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new EditDressPresenter(this,repository);
+        this.first = true;
 
     }
 
@@ -116,14 +119,19 @@ public class EditDressFragment extends Fragment implements EditDressContract.Vie
 
         presenter.setDress(dress);
 
-        ptxtDescriptionEdit.setText(dress.getDescription());
-        ptxtSizeEdit.setText(dress.getSize());
-        ptxtColorEdit.setText(dress.getColor());
-        ptxtPriceDressEdit.setText(String.valueOf(dress.getPrice()));
-        ptxtTypeDressEdit.setText(dress.getType());
-        ptxtMaterialEdit.setText(dress.getMaterial());
-        ptxtDaysOfWashingEdit.setText(String.valueOf(dress.getWashingDays()));
-        ptxtDaysOfPrepareEdit.setText(String.valueOf(dress.getPrepareDays()));
+        if(first)
+        {
+            ptxtDescriptionEdit.setText(dress.getDescription());
+            ptxtSizeEdit.setText(dress.getSize());
+            ptxtColorEdit.setText(dress.getColor());
+            ptxtPriceDressEdit.setText(String.valueOf(dress.getPrice()));
+            ptxtTypeDressEdit.setText(dress.getType());
+            ptxtMaterialEdit.setText(dress.getMaterial());
+            ptxtDaysOfWashingEdit.setText(String.valueOf(dress.getWashingDays()));
+            ptxtDaysOfPrepareEdit.setText(String.valueOf(dress.getPrepareDays()));
+
+            first = false;
+        }
     }
 
     @Override
