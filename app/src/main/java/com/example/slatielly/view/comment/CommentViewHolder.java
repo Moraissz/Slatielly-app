@@ -145,6 +145,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         {
             Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyOption,"firebaseStorage");
             intent.putExtra(LargePhoto.KeyPhoto,comment.getImage().getaddressStorage());
 
             context.getContext().startActivity(intent);

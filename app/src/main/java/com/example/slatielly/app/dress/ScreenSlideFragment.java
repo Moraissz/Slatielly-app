@@ -65,6 +65,7 @@ public class ScreenSlideFragment extends Fragment implements View.OnClickListene
         {
             Intent intent = new Intent(this.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyOption,"firebaseStorage");
             intent.putExtra(LargePhoto.KeyPhoto,image.getaddressStorage());
 
             startActivity(intent);

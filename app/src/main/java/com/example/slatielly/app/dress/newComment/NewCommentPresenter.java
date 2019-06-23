@@ -2,26 +2,16 @@ package com.example.slatielly.app.dress.newComment;
 
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
 import com.example.slatielly.model.Comment;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Image;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.image.BitMapCompression;
-import com.example.slatielly.model.repository.FirestoreRepository;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -29,9 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -159,9 +147,15 @@ public class NewCommentPresenter implements NewCommentContract.Presenter, OnSucc
     {
         return image;
     }
+
     public void setImage(Bitmap image)
     {
         this.image = image;
         this.data = null;
+    }
+
+    public byte[] getData()
+    {
+        return data;
     }
 }

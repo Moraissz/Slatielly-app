@@ -19,6 +19,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.slatielly.R;
+import com.example.slatielly.app.dress.DressContract;
+import com.example.slatielly.app.dress.edit.EditDressContract;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.service.ValidationService;
@@ -48,28 +50,43 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     private RegisterDressContract.Presenter presenter;
     private OnNavigationListener onNavigationListener;
 
-    public RegisterDressFragment() {
-        // Required empty public constructor
+    public RegisterDressFragment()
+    {
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_register_dress, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
 
         ValidationService validationService = new ValidationService(this.getActivity());
         FirestoreRepository<Dress> firestoreRepository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
         this.presenter = new RegisterDressPresenter(this, validationService, firestoreRepository);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        return inflater.inflate(R.layout.fragment_register_dress, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (this.onNavigationListener != null)
+        {
+            this.onNavigationListener.enableViews(true);
+        }
 
         this.setupViews(view);
         this.presenter.createValidationSchema();
     }
 
-    private void setupViews(View view) {
+    private void setupViews(View view)
+    {
         this.ptxtMaterial = view.findViewById(R.id.ptxtMaterial);
         this.ptxtColor = view.findViewById(R.id.ptxtColor);
         this.ptxtSize = view.findViewById(R.id.ptxtSize);
@@ -82,6 +99,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
         this.btnSaveChanges = view.findViewById(R.id.btnSaveChanges);
         this.btnEditPhotos = view.findViewById(R.id.btnEditPhotos);
         this.btnTakePhotos = view.findViewById(R.id.btnTakePhotos);
+
         this.btnEditPhotos.setOnClickListener(this);
         this.btnSaveChanges.setOnClickListener(this);
         this.btnTakePhotos.setOnClickListener(this);
@@ -98,6 +116,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
             this.loadingBar.setVisibility(ProgressBar.VISIBLE);
             this.btnSaveChanges.setEnabled(false);
             this.btnEditPhotos.setEnabled(false);
+            this.btnTakePhotos.setEnabled(false);
 
             return;
         }
@@ -115,7 +134,8 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
     @Override
     public void onClick(View v) {
-        if (v == this.btnSaveChanges) {
+        if (v == this.btnSaveChanges)
+        {
             String material = this.ptxtMaterial.getText().toString();
             String color = this.ptxtColor.getText().toString();
             String size = this.ptxtSize.getText().toString();
@@ -136,6 +156,16 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
 
             startActivityForResult(intent, 1);
         }
+
+        if (v == btnEditPhotos)
+        {
+            this.navigateToEditPhotos();
+        }
+    }
+
+    public void navigateToEditPhotos()
+    {
+        this.onNavigationListener.onNavigateToEditPhotos(presenter,null);
     }
 
     @Override
@@ -167,5 +197,7 @@ public class RegisterDressFragment extends Fragment implements RegisterDressCont
     public interface OnNavigationListener
     {
         void onNavigateToAllDresses();
+        void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit);
+        void enableViews(boolean enable);
     }
 }

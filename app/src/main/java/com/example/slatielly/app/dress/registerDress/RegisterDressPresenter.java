@@ -29,8 +29,8 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
     private ArrayList<Bitmap> images;
     private Dress dress;
 
-    public RegisterDressPresenter(RegisterDressContract.View view, ValidationService validationService,
-                                  FirestoreRepository<Dress> repository) {
+
+    public RegisterDressPresenter(RegisterDressContract.View view, ValidationService validationService, FirestoreRepository<Dress> repository) {
         this.view = view;
         this.validationService = validationService;
         this.repository = repository;
@@ -85,7 +85,8 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
         this.saveImages(documentReference);
     }
 
-    private void saveImages(DocumentReference documentReference) {
+    private void saveImages(DocumentReference documentReference)
+    {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
@@ -120,7 +121,7 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
 
                             imagesAux.add(image);
 
-                            if (finalConstant == imagesAux.size() - 1)
+                            if (finalConstant == images.size() - 1)
                             {
                                 dress.setImages(imagesAux);
                                 repository.update(dress).addOnSuccessListener(new OnSuccessListener<Void>()
@@ -135,6 +136,19 @@ public class RegisterDressPresenter implements RegisterDressContract.Presenter, 
                     });
                 }
             });
+        }
+    }
+
+    public ArrayList<Bitmap> getImages()
+    {
+        return this.images;
+    }
+
+    public void updateImages(ArrayList<Bitmap> imagesDelete)
+    {
+        for(Bitmap bitmap : imagesDelete)
+        {
+            images.remove(bitmap);
         }
     }
 }

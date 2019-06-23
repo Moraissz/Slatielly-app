@@ -185,4 +185,9 @@ public class NewAnswerPresenter implements NewAswerContract.Presenter, OnSuccess
     {
         return image;
     }
+
+    public byte[] getData()
+    {
+        return data;
+    }
 }

@@ -117,6 +117,7 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
         {
             Intent intent = new Intent(context.getContext(), LargePhoto.class);
 
+            intent.putExtra(LargePhoto.KeyOption,"firebaseStorage");
             intent.putExtra(LargePhoto.KeyPhoto,answer.getImage().getaddressStorage());
 
             context.getContext().startActivity(intent);

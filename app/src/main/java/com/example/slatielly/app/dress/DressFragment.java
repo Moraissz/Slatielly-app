@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,8 +46,11 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     private Button btnRent;
     private DressContract.Presenter presenter;
     private OnNavigationListener listener;
+    private MenuItem menuItem;
+    private Dress dress;
 
-    public static DressFragment newInstance(String id) {
+    public static DressFragment newInstance(String id)
+    {
         DressFragment dressFragment = new DressFragment();
         Bundle bundle = new Bundle();
         bundle.putString("id", id);
@@ -54,6 +60,23 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     public DressFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.menu_edit_dress, menu);
+        menuItem = menu.findItem(R.id.edit_dress_image);
+        menuItem.setVisible(false);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -96,7 +119,15 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     @Override
-    public void setDressViews(Dress dress) {
+    public void setDressViews(Dress dress, User currentUser)
+    {
+        this.dress = dress;
+
+        if(currentUser.getRole().equals("admin"))
+        {
+            menuItem.setVisible(true);
+        }
+
         txtDescription.setText(dress.getDescription());
         txtSize.setText(dress.getSize());
         txtColor.setText(dress.getColor());
@@ -150,5 +181,21 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
         void onRentDress(String dressId);
 
+
+        void onNavigateToEditDress(String dressId);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if(id == R.id.edit_dress_image)
+        {
+            this.listener.onNavigateToEditDress(dress.getId());
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
