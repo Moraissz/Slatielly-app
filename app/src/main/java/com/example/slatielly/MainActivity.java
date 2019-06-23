@@ -368,7 +368,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
         enableViews(false);
-        getSupportFragmentManager().
         this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
     }
 
