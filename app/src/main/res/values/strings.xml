@@ -89,6 +89,7 @@
     <string name="comment2">Comment</string>
     <string name="New_comment">NEW COMMENT</string>
     <string name="Dress">Dress</string>
+    <string name="ConfirmRent" translatable="false">Confirm Rent</string>
     <string name="ANSWERS">ANSWERS</string>
     <string name="NEW_ANSWER">NEW ANSWER</string>
     <string name="Edit_Photos">"Edit Photos "</string>
