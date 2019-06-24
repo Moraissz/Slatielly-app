@@ -3,6 +3,7 @@ package com.example.slatielly.app.rent.rentRequests;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class RentRequestsPresenter implements RentRequestsContract.Presenter {
 
@@ -23,14 +24,24 @@ public class RentRequestsPresenter implements RentRequestsContract.Presenter {
     }
 
     @Override
-    public void acceptRentRequest(Rent rent) {
+    public void acceptRentRequest(final Rent rent) {
         rent.setStatus(Rent.ACCEPTED);
-        this.repository.update(rent);
+        this.repository.update(rent).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                view.removeRent();
+            }
+        });
     }
 
     @Override
-    public void declineRentRequest(Rent rent) {
+    public void declineRentRequest(final Rent rent) {
         rent.setStatus(Rent.DECLINED);
-        this.repository.update(rent);
+        this.repository.update(rent).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                view.removeRent();
+            }
+        });
     }
 }

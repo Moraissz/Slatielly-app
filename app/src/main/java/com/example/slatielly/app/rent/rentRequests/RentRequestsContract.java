@@ -5,6 +5,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class RentRequestsContract {
     interface View {
+        void removeRent();
     }
 
     interface Presenter {
