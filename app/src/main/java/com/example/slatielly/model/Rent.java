@@ -16,9 +16,10 @@ public class Rent implements Identifiable<String> {
     public static final String PENDENT = "Pendente";
     public static final String ACCEPTED = "Aprovado";
     public static final String DECLINED = "Recusado";
+    public static final String SOUGHT = "Vestido retirado";
     public static final String FINISHED = "Concluido";
 
-    @StringDef({PENDENT, ACCEPTED, DECLINED, FINISHED})
+    @StringDef({PENDENT, ACCEPTED, DECLINED, SOUGHT, FINISHED})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Status {}
 

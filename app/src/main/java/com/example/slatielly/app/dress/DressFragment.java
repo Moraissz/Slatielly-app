@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     private OnNavigationListener listener;
     private MenuItem menuItem;
     private Dress dress;
+    private FragmentManager fragmentManager;
 
     public static DressFragment newInstance(String id)
     {
@@ -66,6 +68,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        fragmentManager = this.getChildFragmentManager();
 
         setHasOptionsMenu(true);
     }
@@ -140,7 +144,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     @Override
     public void setScreenSlideAdapter(ArrayList<Image> images) {
-        PagerAdapter pagerAdapter = new ScreenSlideAdapter(this.getChildFragmentManager(), images);
+        PagerAdapter pagerAdapter = new ScreenSlideAdapter(fragmentManager, images);
         mPager.setAdapter(pagerAdapter);
     }
 
