@@ -25,7 +25,7 @@ public class RentRequestAdapter extends FirestoreRecyclerAdapter<Rent, RentReque
         View view = layoutInflater.inflate(R.layout.request_rent_card_viewholder, viewGroup, false);
         return new RentRequestViewHolder(view, this.listener);
     }
-
+    
     @Override
     protected void onBindViewHolder(@NonNull RentRequestViewHolder holder, int position, @NonNull Rent model) {
         holder.bind(model);

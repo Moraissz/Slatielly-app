@@ -16,8 +16,10 @@ import com.example.slatielly.model.Address;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
+import com.example.slatielly.model.repository.FirestoreRepository;
 import com.example.slatielly.view.GridSpacingItemDecoration;
 import com.example.slatielly.view.rent.RentAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,8 +29,6 @@ import java.util.Calendar;
 public class RentsFragment extends Fragment implements RentAdapter.RentListener {
     private RecyclerView recyclerView;
     private RentAdapter adapter;
-    private ArrayList<Rent> rentArrayList;
-
 
     public Calendar calendar = Calendar.getInstance();
 
@@ -43,29 +43,33 @@ public class RentsFragment extends Fragment implements RentAdapter.RentListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         this.recyclerView = view.findViewById(R.id.allRentsRecyclerView);
-        this.rentArrayList = new ArrayList<>();
 
-        Rent rent;
-        //Preencher ArrayList
-        for (int i = 0; i < 20; i++) {
-            rent = new Rent("i", new Dress("i", "Vestido Doidao", "Para doidos", 70.00, "38 a 40", "Preto", "Pano"),
-                    new User("" + i, "Lucas", "Avenida dos doido", "333333", new Address()), new Timestamp(calendar.getTimeInMillis()), new Timestamp(calendar.getTimeInMillis()));
-
-            if (i > 10) {
-                rent.setStatus(Rent.FINISHED);
-            }
-
-            this.rentArrayList.add(rent);
-        }
-        System.out.println(rentArrayList.get(0));
-        this.adapter = new RentAdapter(rentArrayList, this);
-
+        FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
+        this.adapter = new RentAdapter(this.getRecyclerOptions(repository), this);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
         this.recyclerView.setAdapter(this.adapter);
+    }
+
+    public FirestoreRecyclerOptions<Rent> getRecyclerOptions(FirestoreRepository<Rent> repository ) {
+        return new FirestoreRecyclerOptions
+                .Builder<Rent>()
+                .setQuery(repository.getQuery(), Rent.class)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.adapter.stopListening();
     }
 
     @Override

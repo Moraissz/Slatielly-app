@@ -78,4 +78,10 @@ public class RentRequestsFragment extends Fragment implements RentRequestAdapter
             }
         }
     }
+
+    @Override
+    public void removeRent() {
+        this.adapter.stopListening();
+        this.adapter.startListening();
+    }
 }

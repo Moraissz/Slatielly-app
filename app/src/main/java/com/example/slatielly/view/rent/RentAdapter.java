@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
+import com.example.slatielly.view.rentRequest.RentRequestViewHolder;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.ArrayList;
 
-public class RentAdapter extends RecyclerView.Adapter<RentViewHolder> {
-
-    private ArrayList<Rent> rentArrayList;
+public class RentAdapter extends FirestoreRecyclerAdapter<Rent, RentViewHolder> {
     private RentListener listener;
 
-    public RentAdapter(ArrayList<Rent> rentArrayList, RentListener listener) {
-        this.rentArrayList = rentArrayList;
+    public RentAdapter(FirestoreRecyclerOptions<Rent> options, RentListener listener) {
+        super(options);
         this.listener = listener;
     }
 
@@ -35,12 +36,7 @@ public class RentAdapter extends RecyclerView.Adapter<RentViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RentViewHolder bookViewHolder, int i) {
-        bookViewHolder.bind(rentArrayList.get(i));
-    }
-
-    @Override
-    public int getItemCount() {
-        return rentArrayList.size();
+    protected void onBindViewHolder(@NonNull RentViewHolder holder, int position, @NonNull Rent model) {
+        holder.bind(model);
     }
 }
