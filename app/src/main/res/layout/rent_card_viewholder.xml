@@ -171,7 +171,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/thumbnail"
+                        android:id="@+id/dressImage"
                         android:layout_width="match_parent"
                         android:layout_height="254dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
