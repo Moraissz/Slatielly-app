@@ -24,7 +24,6 @@ import java.util.Date;
 
 public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    private ImageView image_profile_image_ansher_view_holder;
     private ImageView image_ansher_ansher_view_holder;
 
     private TextView TextView_name_ansher_view_holder;
@@ -60,7 +59,6 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
         TextView_date_ansher_view_holder = (TextView) itemView.findViewById(R.id.TextView_date_ansher_view_holder);
         textView_Likes_ansher_view_holder = (TextView) itemView.findViewById(R.id.textView_Likes_ansher_view_holder);
 
-        image_profile_image_ansher_view_holder = (ImageView) itemView.findViewById(R.id.image_profile_image_ansher_view_holder);
         image_ansher_ansher_view_holder = (ImageView) itemView.findViewById(R.id.image_ansher_ansher_view_holder);
 
         buttonImage_like_ansher_view_holder = (ImageView) itemView.findViewById(R.id.buttonImage_like_ansher_view_holder);
@@ -191,5 +189,4 @@ public class AnswerViewHolder extends RecyclerView.ViewHolder implements View.On
     {
         buttonImage_like_ansher_view_holder.setImageResource(R.drawable.like_image);
     }
-
 }

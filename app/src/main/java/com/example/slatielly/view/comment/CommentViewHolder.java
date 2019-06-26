@@ -35,9 +35,6 @@ import java.util.Date;
 
 public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
-    public static final String KEY = "ALO";
-
-    private ImageView image_profile_image_comment_model;
     private ImageView image_comment_comment_model;
 
     private TextView TextView_name_comment_model;
@@ -62,8 +59,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
     private ProgressBar progressBar;
 
-    private LargePhoto largePhoto;
-
     public CommentViewHolder(@NonNull View itemView)
     {
         super(itemView);
@@ -75,7 +70,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
         TextView_date_comment_model = (TextView) itemView.findViewById(R.id.TextView_date_comment_model);
         textView_Likes = (TextView) itemView.findViewById(R.id.textView_Likes);
 
-        image_profile_image_comment_model = (ImageView) itemView.findViewById(R.id.image_profile_image_comment_model);
         image_comment_comment_model = (ImageView) itemView.findViewById(R.id.image_comment_comment_model);
 
         buttonImage_like_comment_model = (ImageView) itemView.findViewById(R.id.buttonImage_like_comment_model);
@@ -93,7 +87,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements View.O
 
         this.presenter = new CommentsPresenter(this);
 
-        largePhoto = new LargePhoto();
     }
 
     public void bind(Comment comment, String dressId, CommentsFragment view)
