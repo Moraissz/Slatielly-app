@@ -83,7 +83,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
     @Override
     public void getDress(final String dressId) {
-        System.out.println("\n\nID: " + dressId);
         db.collection("dresses").document(dressId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -91,9 +90,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Dress dress = document.toObject(Dress.class);
-                        System.out.println("BUG 1: " + dressId);
                         view.getDressDb(dress);
-
                     } else {
 
                     }
@@ -102,22 +99,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 }
             }
         });
-
-                /*
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Dress dress = new Dress();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                dress = document.toObject(Dress.class);
-                                System.out.println(dress);
-                            }
-                            view.getDressDb(dress);
-                        }
-                    }
-                });*/
     }
 
 
@@ -140,7 +121,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
     @Override
     public ArrayList<Rent> loadRents(String dressId) {
         final ArrayList<Rent> rents = new ArrayList<>();
-        System.out.println("BUG 4: " + dressId);
         db.collection("rents")
                 .whereEqualTo("dress.id", dressId)
                 .get()
@@ -148,14 +128,13 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            System.out.println(task.getResult().toString());
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Rent rent = document.toObject(Rent.class);
                                 rents.add(rent);
                             }
                             view.continueProcess(rents);
                         } else {
-                            System.out.println("FALHA \n\n\n\n\n");
+                            //Failure
                         }
                     }
                 });
@@ -187,7 +166,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 aux.set(year, month, day + 1, 0, 0, 0);
 
                 dataaux = new Timestamp(aux.getTimeInMillis());
-                //dataaux.setNanos(0);
 
                 aux = Calendar.getInstance();
                 aux.setTime(dataaux);
