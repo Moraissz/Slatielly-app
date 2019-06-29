@@ -34,7 +34,11 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
 
     @Override
     public ArrayList<Rent> loadRents(String dressId){
-
+        /*
+        this.repository
+                .get(dressId)
+                .addOnSuccessListener(this);
+        */
         final ArrayList<Rent> rents = new ArrayList<>();
 
         db.collection("rents")
@@ -44,6 +48,7 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            System.out.println(task.getResult().toString());
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Rent rent = document.toObject(Rent.class);
                                 rents.add(rent);

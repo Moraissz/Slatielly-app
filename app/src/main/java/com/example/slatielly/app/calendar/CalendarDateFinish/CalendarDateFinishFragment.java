@@ -49,6 +49,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        System.out.println("\n\n\n MANO, SEI LÁ \n\n\n");
         this.view = view;
         this.calendarViewFinish = (CalendarView) view.findViewById(R.id.MaterialCalendarView_calendar_date_finish);
         FirestoreRepository<Rent> repository = new FirestoreRepository<>(Rent.class, Rent.DOCUMENT_NAME);
@@ -106,6 +107,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
             FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
             if (this.getArguments() != null) {
                 //Inserir
+                System.out.println("BUG 2: " + this.dressId);
                 this.presenter.getDress(this.dressId);
             }
         }
@@ -116,6 +118,7 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         Bundle bundle = new Bundle();
         bundle.putString("id", id);
         bundle.putLong("dateStart", dateStart);
+        System.out.println("Date Start: 3 " + dateStart);
 
         calendarDateFinishFragment.setArguments(bundle);
 
@@ -161,17 +164,20 @@ public class CalendarDateFinishFragment  extends Fragment implements CalendarDat
         calendarViewFinish.setDisabledDays(disabledays);
 
 
+        //dateStart = CalendarDateStartFragment.dateStart;
         this.rents = CalendarDateStartFragment.rents;
     }
 
     @Override
     public void getUserDb(User user) {
+        //TODO Pegar o usuário do objeto
         this.user = user;
         this.insertRent();
     }
 
     @Override
     public void getDressDb(Dress dress) {
+        //TODO pegar o dress do objeto
         this.dress = dress;
         this.presenter.loadUser();
     }

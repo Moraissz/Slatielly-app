@@ -65,6 +65,8 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
             if (this.getArguments() != null)
             {
                 long startDateMiliseconds = this.dateStart.getTime();
+                System.out.println("Date Start 1: " + startDateMiliseconds);
+                System.out.println("BUG 6: " + this.dressId);
                 this.onNavigateListener.onSelectFinishDateRent(this.dressId, startDateMiliseconds);
             }
 
@@ -80,6 +82,7 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
         this.presenter = new CalendarDateStartPresenter(this, repository);
         if (this.getArguments() != null) {
             String dressId = this.getArguments().getString("id");
+            //this.presenter.loadComments(dressId);
             //Buscar as datas
             this.dressId = this.getArguments().getString("id");
             rents = this.presenter.loadRents(this.dressId);
