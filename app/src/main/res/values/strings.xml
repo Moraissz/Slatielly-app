@@ -60,7 +60,6 @@
     <string name="profile" translatable="false">Profile</string>
     <string name="edit_profile" translatable="false">Edit Profile</string>
     <string name="edit_address" translatable="false">Edit Address</string>
-    <string name="address" translatable="false">Address</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="success_edit_profile" translatable="false">Profile was edited successfully!</string>
     <string name="success_edit_address" translatable="false">Address was edited successfully!</string>
@@ -80,7 +79,6 @@
     <string name="Rent">RENT</string>
     <string name="COMMENTS">COMMENTS</string>
     <string name="Like">Like</string>
-    <string name="changeStatus" translatable="false">Change Status</string>
     <string name="Answer">Answer</string>
     <string name="select_start">SELECT THE INITIAL DATE:</string>
     <string name="select_finish">SELECT THE RETURN DATE:</string>
