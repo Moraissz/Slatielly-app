@@ -13,6 +13,9 @@ import com.bumptech.glide.Glide;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.R;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
+
 import info.androidhive.fontawesome.FontTextView;
 
 public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -52,6 +55,10 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void bind(Rent rent) {
         this.description.setText(rent.getDress().getDescription());
         this.hirerName.setText(rent.getUser().getName());
+        this.startDate.setText(DateFormat.getDateInstance().format(rent.getStartDate()));
+        this.endDate.setText(DateFormat.getDateInstance().format(rent.getEndDate()));
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        this.totalPrice.setText(format.format(rent.getDress().getPrice()));
         this.status.setText(rent.getStatus());
 
         if (!rent.getDress().getImages().isEmpty()) {
