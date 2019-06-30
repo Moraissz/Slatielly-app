@@ -28,28 +28,20 @@ import com.example.slatielly.app.dress.dresses.DressesFragment;
 import com.example.slatielly.app.dress.edit.EditDressContract;
 import com.example.slatielly.app.dress.edit.EditDressFragment;
 import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
-import com.example.slatielly.app.dress.newAnswer.NewAswerContract;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
 import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
 import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
-import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
-import com.example.slatielly.view.comment.CommentViewHolder;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import info.androidhive.fontawesome.FontDrawable;
 
@@ -65,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private TextView txtNavHeader;
     private int[] icons = {
-            R.string.fa_female_solid, R.string.fa_calendar_alt_solid, R.string.fa_tasks_solid
+            R.string.fa_female_solid, R.string.fa_calendar_alt_solid
     };
     private int[] adminIcons = {
             R.string.fa_plus_solid,
@@ -167,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.renderMenuIcons(this.navigationView.getMenu(), this.icons);
 
-        this.renderMenuIcons(navigationView.getMenu().getItem(3).getSubMenu(), this.adminIcons);
+        this.renderMenuIcons(navigationView.getMenu().getItem(2).getSubMenu(), this.adminIcons);
     }
 
     private void renderMenuIcons(Menu menu, int[] icons) {
@@ -210,11 +202,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_item_register_dress: {
                 this.setNavigationFragment(new RegisterDressFragment(), R.string.wRegisterDress, false);
-                break;
-            }
-
-            case R.id.nav_item_list_orders: {
-                this.setNavigationFragment(new ListOrdersFragment(), R.string.wOrders, false);
                 break;
             }
 
