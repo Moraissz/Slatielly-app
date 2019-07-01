@@ -1,4 +1,4 @@
-package com.example.slatielly.app.dress.registerDress;
+package com.example.slatielly.app.dress;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,8 +23,7 @@ import android.view.WindowManager;
 
 import com.example.slatielly.R;
 import com.example.slatielly.app.dress.edit.EditDressContract;
-import com.example.slatielly.app.dress.edit.EditDressPresenter;
-import com.example.slatielly.model.Image;
+import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.model.image.BitMapCompression;
 import com.example.slatielly.view.dress.editPhotos.EditPhotosAdapter;
 import com.example.slatielly.view.dress.editPhotos.EditPhotosHolder;

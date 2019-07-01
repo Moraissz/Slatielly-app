@@ -18,7 +18,8 @@ import java.text.NumberFormat;
 
 import info.androidhive.fontawesome.FontTextView;
 
-public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+{
     private TextView description;
     private TextView hirerName;
     private TextView totalPrice;
@@ -61,7 +62,8 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.totalPrice.setText(format.format(rent.getDress().getPrice()));
         this.status.setText(rent.getStatus());
 
-        if (!rent.getDress().getImages().isEmpty()) {
+        if (!rent.getDress().getImages().isEmpty())
+        {
             Glide.with(this.view).load(rent.getDress().getImages().get(0).getdownloadLink()).into(dressImage);
         }
 
@@ -82,6 +84,5 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     @Override
     public void onClick(View v) {
         listener.onClickRentListener(this.rent);
-
     }
 }

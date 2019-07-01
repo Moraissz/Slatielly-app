@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.slatielly.app.calendar.CalendarDateFinish.CalendarDateFinishFragment;
 import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartFragment;
+import com.example.slatielly.app.calendar.ConfirmRent.ConfirmRentFragment;
 import com.example.slatielly.app.dress.DressFragment;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
@@ -29,10 +30,12 @@ import com.example.slatielly.app.dress.edit.EditDressContract;
 import com.example.slatielly.app.dress.edit.EditDressFragment;
 import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
-import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
+import com.example.slatielly.app.dress.EditPhotosDress;
 import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
+import com.example.slatielly.model.Dress;
+import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
 import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +51,7 @@ import info.androidhive.fontawesome.FontDrawable;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
         DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, CalendarDateStartFragment.OnNavigateListener, CalendarDateFinishFragment.OnNavigateListener,
-        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener, EditDressFragment.OnNavigationListener, EditPhotosDress.OnNavigationListener{
+        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener, EditDressFragment.OnNavigationListener, EditPhotosDress.OnNavigationListener, ConfirmRentFragment.OnNavigateListener{
 
 
     private Toolbar toolbar;
@@ -363,6 +366,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             EditPhotosDress editPhotosDress = (EditPhotosDress) fragment;
             editPhotosDress.setOnNavigationListener(this);
         }
+        if (fragment instanceof ConfirmRentFragment) {
+            ConfirmRentFragment confirmRentFragment = (ConfirmRentFragment) fragment;
+            confirmRentFragment.setOnNavigationListener(this);
+        }
     }
 
     @Override
@@ -453,5 +460,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
         this.setNavigationFragment(EditDressFragment.newInstance(id), R.string.Edit_dress, false);
+    }
+
+    @Override
+    public void onNavigateToConfirmRent(Rent rent, Dress dress)
+    {
+        this.unCheckMenuItem(true);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        this.setNavigationFragment(new ConfirmRentFragment(rent, dress), R.string.Edit_dress, false);
+    }
+
+    @Override
+    public void onNavigateToAllDresses2()
+    {
+        this.unCheckMenuItem(false);
+        MenuItem menuItem = this.navigationView.getMenu().getItem(0);
+        this.checkMenuItem(menuItem);
+        enableViews(false);
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        this.setNavigationFragment(new DressesFragment(), R.string.all_dresses, true);
     }
 }

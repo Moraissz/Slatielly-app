@@ -32,6 +32,8 @@ public class Rent implements Identifiable<String> {
     private String description;
     private Date timestamp;
 
+    private Double price;
+
     public Rent() {
     }
 
@@ -121,5 +123,13 @@ public class Rent implements Identifiable<String> {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
