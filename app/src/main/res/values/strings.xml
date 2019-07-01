@@ -1,30 +1,30 @@
 <resources>
-    <string name="app_name">Slatielly</string>
+    <string name="app_name" translatable="false">Slatielly</string>
     <string name="type" translatable="false">Type:</string>
     <string name="price" translatable="false">Price:</string>
     <string name="welcomeMessage" translatable="false">Welcome To Slatielly app</string>
     <string name="subWelcomeMessage" translatable="false">The best dress for you!</string>
     <string name="hirerName" translatable="false">Hirer Name:</string>
     <string name="allBooks" translatable="false">All Books</string>
-    <string name="wRegisterDress">Register Dress</string>
+    <string name="wRegisterDress" translatable="false">Register Dress</string>
     <string name="wTitleD" translatable="false">Title</string>
     <string name="wMaterial" translatable="false">Material</string>
     <string name="wColor" translatable="false">Color</string>
-    <string name="wSizeDress">Size</string>
-    <string name="wDaysOfPrepare">Days of Prepare</string>
-    <string name="wDaysOfWashing">Days of Washing</string>
-    <string name="wPriceDress">Price Per Day</string>
-    <string name="wDescriptionDress">Description</string>
-    <string name="wAddPhotoDress">Add Photos</string>
-    <string name="wSaveDress">Save Dress</string>
-    <string name="wTypeDress">Type of Dress</string>
-    <string name="wEditDress">Edit Dress</string>
-    <string name="wSetPhotos">Edit Photos</string>
-    <string name="wSaveChanges">Save Changes</string>
-    <string name="wStartDate">Start</string>
-    <string name="wDateEnd">End</string>
-    <string name="wTotalPrice">Total Amount</string>
-    <string name="wOrders">Orders</string>
+    <string name="wSizeDress" translatable="false">Size</string>
+    <string name="wDaysOfPrepare" translatable="false">Days of Prepare</string>
+    <string name="wDaysOfWashing" translatable="false">Days of Washing</string>
+    <string name="wPriceDress" translatable="false">Price Per Day</string>
+    <string name="wDescriptionDress" translatable="false">Description</string>
+    <string name="wAddPhotoDress" translatable="false">Add Photos</string>
+    <string name="wSaveDress" translatable="false">Save Dress</string>
+    <string name="wTypeDress" translatable="false">Type of Dress</string>
+    <string name="wEditDress" translatable="false">Edit Dress</string>
+    <string name="wSetPhotos" translatable="false">Edit Photos</string>
+    <string name="wSaveChanges" translatable="false">Save Changes</string>
+    <string name="wStartDate" translatable="false">Start</string>
+    <string name="wDateEnd" translatable="false">End</string>
+    <string name="wTotalPrice" translatable="false">Total Amount</string>
+    <string name="wOrders" translatable="false">Orders</string>
     <string name="allRents" translatable="false">All Rents</string>
     <string name="email" translatable="false">E-mail</string>
     <string name="join" translatable="false">JOIN</string>
@@ -72,28 +72,28 @@
     <string name="err_type" translatable="false">Type should not be empty</string>
     <string name="err_color" translatable="false">Color should not be empty</string>
     <string name="Size2">Size:</string>
-    <string name="Cor">Color:</string>
-    <string name="Preço">Price:</string>
-    <string name="Type">Type:</string>
-    <string name="Material">Material:</string>
-    <string name="Rent">RENT</string>
-    <string name="COMMENTS">COMMENTS</string>
-    <string name="Like">Like</string>
-    <string name="Answer">Answer</string>
-    <string name="select_start">SELECT THE INITIAL DATE:</string>
-    <string name="select_finish">SELECT THE RETURN DATE:</string>
-    <string name="TAKE_PHOTO">TAKE A PHOTO</string>
-    <string name="Comment">Comment</string>
-    <string name="mais_image">+ Image</string>
-    <string name="menos_Imagem">- Image</string>
-    <string name="comment2">Comment</string>
-    <string name="New_comment">NEW COMMENT</string>
-    <string name="Dress">Dress</string>
+    <string name="Cor" translatable="false">Color:</string>
+    <string name="Preço" translatable="false">Price:</string>
+    <string name="Type" translatable="false">Type:</string>
+    <string name="Material" translatable="false">Material:</string>
+    <string name="Rent" translatable="false">RENT</string>
+    <string name="COMMENTS" translatable="false">COMMENTS</string>
+    <string name="Like" translatable="false">Like</string>
+    <string name="Answer" translatable="false">Answer</string>
+    <string name="select_start" translatable="false">SELECT THE INITIAL DATE:</string>
+    <string name="select_finish" translatable="false">SELECT THE RETURN DATE:</string>
+    <string name="TAKE_PHOTO" translatable="false">TAKE A PHOTO</string>
+    <string name="Comment" translatable="false">Comment</string>
+    <string name="mais_image" translatable="false">+ Image</string>
+    <string name="menos_Imagem" translatable="false">- Image</string>
+    <string name="comment2" translatable="false">Comment</string>
+    <string name="New_comment" translatable="false">NEW COMMENT</string>
+    <string name="Dress" translatable="false">Dress</string>
     <string name="ConfirmRent" translatable="false">Confirm Rent</string>
-    <string name="ANSWERS">ANSWERS</string>
-    <string name="NEW_ANSWER">NEW ANSWER</string>
-    <string name="Edit_Photos">"Edit Photos "</string>
-    <string name="Edit_dress">Edit Dress</string>
-    <string name="Admin">Admin</string>
-    <string name="Confirm_rent">Confirm Rent</string>
+    <string name="ANSWERS" translatable="false">ANSWERS</string>
+    <string name="NEW_ANSWER" translatable="false">NEW ANSWER</string>
+    <string name="Edit_Photos" translatable="false">"Edit Photos "</string>
+    <string name="Edit_dress" translatable="false">Edit Dress</string>
+    <string name="Admin" translatable="false">Admin</string>
+    <string name="Confirm_rent" translatable="false">Confirm Rent</string>
 </resources>
