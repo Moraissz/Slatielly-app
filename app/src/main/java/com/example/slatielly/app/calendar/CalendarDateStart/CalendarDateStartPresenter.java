@@ -65,7 +65,8 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
     public List<Calendar> getDisableDays(List<Rent> rents) {
         List<Calendar> disabledays = new ArrayList<>();
 
-        for (int i = 0; i < rents.size(); i = i + 1) {
+        for (int i = 0; i < rents.size(); i = i + 1)
+        {
             Calendar aux = Calendar.getInstance();
             aux.setTime(rents.get(i).getStartDate());
             disabledays.add(aux);
@@ -74,11 +75,33 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
             aux.setTime(rents.get(i).getEndDate());
             disabledays.add(aux);
 
-            Date dataaux = rents.get(i).getStartDate();
+            Date dataaux;
+
+            dataaux = rents.get(i).getStartDate();
+
+            for(int j=0;j<rents.get(i).getDress().getPrepareDays();j=j+1)
+            {
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+
+                int day = aux.get( Calendar.DAY_OF_MONTH );
+                int month = aux.get( Calendar.MONTH );
+                int year = aux.get( Calendar.YEAR );
+
+                aux.set( year, month, day - 1, 0, 0, 0 );
+
+                dataaux = new Timestamp(aux.getTimeInMillis());
+
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+                disabledays.add(aux);
+            }
+
+            dataaux = rents.get(i).getStartDate();
             while (dataaux.before(rents.get(i).getEndDate()))
             {
                 aux = Calendar.getInstance();
-                aux.setTime( dataaux );
+                aux.setTime(dataaux);
 
                 int day = aux.get( Calendar.DAY_OF_MONTH );
                 int month = aux.get( Calendar.MONTH );
@@ -87,7 +110,25 @@ public class CalendarDateStartPresenter implements CalendarDateStartContract.Pre
                 aux.set( year, month, day + 1, 0, 0, 0 );
 
                 dataaux = new Timestamp(aux.getTimeInMillis());
-                //dataaux.setNanos(0);
+
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+                disabledays.add(aux);
+            }
+
+            dataaux = rents.get(i).getEndDate();
+            for(int j=0;j<rents.get(i).getDress().getWashingDays();j=j+1)
+            {
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+
+                int day = aux.get( Calendar.DAY_OF_MONTH );
+                int month = aux.get( Calendar.MONTH );
+                int year = aux.get( Calendar.YEAR );
+
+                aux.set( year, month, day + 1, 0, 0, 0 );
+
+                dataaux = new Timestamp(aux.getTimeInMillis());
 
                 aux = Calendar.getInstance();
                 aux.setTime(dataaux);

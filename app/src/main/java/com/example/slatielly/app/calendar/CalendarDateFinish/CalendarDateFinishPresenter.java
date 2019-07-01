@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CalendarDateFinishPresenter implements CalendarDateFinishContract.Presenter, OnSuccessListener<DocumentReference>, OnFailureListener {
+public class CalendarDateFinishPresenter implements CalendarDateFinishContract.Presenter{
 
     private CalendarDateFinishContract.View view;
     private FirestoreRepository<Rent> repository;
@@ -138,9 +138,8 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
     }
 
     @Override
-    public ArrayList<Rent> loadRents(String dressId) {
+    public void loadRents(String dressId) {
         final ArrayList<Rent> rents = new ArrayList<>();
-        System.out.println("BUG 4: " + dressId);
         db.collection("rents")
                 .whereEqualTo("dress.id", dressId)
                 .get()
@@ -155,15 +154,14 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                             }
                             view.continueProcess(rents);
                         } else {
-                            System.out.println("FALHA \n\n\n\n\n");
                         }
                     }
                 });
-        return rents;
     }
 
     @Override
-    public List<Calendar> getDisableDays(List<Rent> rents) {
+    public List<Calendar> getDisableDays(List<Rent> rents)
+    {
         List<Calendar> disabledays = new ArrayList<>();
 
         for (int i = 0; i < rents.size(); i = i + 1) {
@@ -175,8 +173,31 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
             aux.setTime(rents.get(i).getEndDate());
             disabledays.add(aux);
 
-            Date dataaux = rents.get(i).getStartDate();
-            while (dataaux.before(rents.get(i).getEndDate())) {
+            Date dataaux;
+
+            dataaux = rents.get(i).getStartDate();
+
+            for(int j=0;j<rents.get(i).getDress().getPrepareDays();j=j+1)
+            {
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+
+                int day = aux.get( Calendar.DAY_OF_MONTH );
+                int month = aux.get( Calendar.MONTH );
+                int year = aux.get( Calendar.YEAR );
+
+                aux.set( year, month, day - 1, 0, 0, 0 );
+
+                dataaux = new Timestamp(aux.getTimeInMillis());
+
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+                disabledays.add(aux);
+            }
+
+            dataaux = rents.get(i).getStartDate();
+            while (dataaux.before(rents.get(i).getEndDate()))
+            {
                 aux = Calendar.getInstance();
                 aux.setTime(dataaux);
 
@@ -187,7 +208,25 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 aux.set(year, month, day + 1, 0, 0, 0);
 
                 dataaux = new Timestamp(aux.getTimeInMillis());
-                //dataaux.setNanos(0);
+
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+                disabledays.add(aux);
+            }
+
+            dataaux = rents.get(i).getEndDate();
+            for(int j=0;j<rents.get(i).getDress().getWashingDays();j=j+1)
+            {
+                aux = Calendar.getInstance();
+                aux.setTime(dataaux);
+
+                int day = aux.get( Calendar.DAY_OF_MONTH );
+                int month = aux.get( Calendar.MONTH );
+                int year = aux.get( Calendar.YEAR );
+
+                aux.set( year, month, day + 1, 0, 0, 0 );
+
+                dataaux = new Timestamp(aux.getTimeInMillis());
 
                 aux = Calendar.getInstance();
                 aux.setTime(dataaux);
@@ -195,24 +234,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
             }
         }
         return disabledays;
-    }
-
-
-    public void saveRent(Rent rent) {
-        this.repository
-                .add(rent)
-                .addOnSuccessListener(this)
-                .addOnFailureListener(this);
-    }
-
-    @Override
-    public void onFailure(@NonNull Exception e) {
-
-    }
-
-    @Override
-    public void onSuccess(DocumentReference documentReference) {
-        view.navigateToDresses();
     }
 }
 

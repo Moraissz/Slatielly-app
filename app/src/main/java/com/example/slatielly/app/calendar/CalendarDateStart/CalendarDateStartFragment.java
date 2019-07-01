@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.repository.FirestoreRepository;
@@ -28,24 +29,21 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
     public Calendar calendar;
 
-    public static List<Calendar> disabledays ;
+    public List<Calendar> disabledays ;
 
-    public static List<com.example.slatielly.model.Rent> rents; //Load all dresses
+    public List<com.example.slatielly.model.Rent> rents; //Load all dresses
 
     private CalendarDateStartContract.Presenter presenter;
 
     private Timestamp dateToday;
 
-    public static Timestamp dateStart;
+    public Timestamp dateStart;
 
     private String dressId;
 
     private CalendarView calendarViewStart;
 
     private CalendarDateStartFragment.OnNavigateListener onNavigateListener;
-
-
-
 
     @Override
     public void onDayClick(EventDay eventDay) {
@@ -54,11 +52,11 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
 
         if(dateStart.before(dateToday))//verifica se a data escolhida é anterior a data de hoje, se entrar aqui a data escolhida é invalida
         {
-
+            Toast.makeText(this.getContext().getApplicationContext(), "A DATA DE INÍCIO NÃO PODE SER ANTERIOR A DATA DE HOJE!", Toast.LENGTH_SHORT).show();
         }
         else if(!presenter.dateVerificationDisableDays(disabledays,dateStart)) //verifica se a data escolhida não é uma data desabilitada, se entrar aqui a data escolhida é invalida
         {
-
+            Toast.makeText(this.getContext().getApplicationContext(), "ESSA DATA NÃO PODE SER ESCOLHIDA!", Toast.LENGTH_SHORT).show();
         }
         else //pode prosseguir para escolher a data de devolução
         {
@@ -85,6 +83,17 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
             //this.presenter.loadComments(dressId);
             //Buscar as datas
             this.dressId = this.getArguments().getString("id");
+
+            calendar = Calendar.getInstance();
+            calendarViewStart.setMinimumDate(calendar);
+            try //releases dates after a minimum date
+            {
+                calendarViewStart.setDate(calendar);
+            }
+            catch (OutOfDateRangeException e)
+            {
+                e.printStackTrace();
+            }
             rents = this.presenter.loadRents(this.dressId);
         }
     }
@@ -141,6 +150,7 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
     public void continueProcess(ArrayList<Rent> rents){
 
         disabledays = this.presenter.getDisableDays(rents);
+
         calendar = Calendar.getInstance();
         calendarViewStart.setMinimumDate(calendar);
 
@@ -154,7 +164,6 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
         }
 
         calendarViewStart.setOnDayClickListener(this);
-        dateToday = formDate(calendar);
 
         disabledays = presenter.getDisableDays(rents);
 
@@ -163,9 +172,11 @@ public class CalendarDateStartFragment extends Fragment implements CalendarDateS
         calendarViewStart.setDisabledDays(disabledays);
     }
 
-    public interface OnNavigateListener{
+    public interface OnNavigateListener
+    {
         void onSelectFinishDateRent(String dressId, long startDate);
         void onBackPressed();
+        void enableViews(boolean enable);
     }
 
     public void setOnNavigationListener(CalendarDateStartFragment.OnNavigateListener onNavigationListener){

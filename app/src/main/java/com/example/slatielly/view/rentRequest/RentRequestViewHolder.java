@@ -51,7 +51,7 @@ public class RentRequestViewHolder extends RecyclerView.ViewHolder implements Vi
         this.startDate.setText(DateFormat.getDateInstance().format(rent.getStartDate()));
         this.endDate.setText(DateFormat.getDateInstance().format(rent.getEndDate()));
         NumberFormat format = NumberFormat.getCurrencyInstance();
-        this.totalPrice.setText(format.format(rent.getDress().getPrice()));
+        this.totalPrice.setText(format.format(rent.getPrice()));
 
         if (!rent.getDress().getImages().isEmpty()) {
             Glide.with(this.view).load(rent.getDress().getImages().get(0).getdownloadLink()).into(dressImage);

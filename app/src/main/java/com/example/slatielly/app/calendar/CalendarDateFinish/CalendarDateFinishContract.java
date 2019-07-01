@@ -18,17 +18,15 @@ public interface CalendarDateFinishContract
         void continueProcess(ArrayList<Rent> rents);
         void getUserDb(User user);
         void getDressDb(Dress dress);
-        void navigateToDresses();
     }
 
     interface Presenter
     {
         boolean dateVerificationRents (List<Rent> rents,Timestamp dateStart,Timestamp dateFinish);
         boolean dateVerificationDisableDays (List<Calendar> disableDays,Timestamp dateFinish);
-        ArrayList<Rent> loadRents(String dressId);
+        void loadRents(String dressId);
         List<Calendar> getDisableDays(List<Rent> rents);
         void loadUser();
         void getDress(String dressId);
-        void saveRent(Rent rent);
     }
 }

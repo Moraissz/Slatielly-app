@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.slatielly.R;
-import com.example.slatielly.app.dress.registerDress.EditPhotosDress;
-import com.example.slatielly.model.Image;
+import com.example.slatielly.app.dress.EditPhotosDress;
 
 import java.util.ArrayList;
 

@@ -45,8 +45,8 @@ public class BitMapCompression
         options.inSampleSize = (int) calculateInSampleSize(options, actualWidth, actualHeight);
         options.inJustDecodeBounds = false;
         options.inDither = false;
-        options.inPurgeable = true;
-        options.inInputShareable = true;
+        //options.inPurgeable = true;
+        //options.inInputShareable = true;
         options.inTempStorage = new byte[16 * 1024];
 
         try {

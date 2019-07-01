@@ -19,7 +19,7 @@
             android:visibility="visible">
 
             <ProgressBar
-                android:id="@+id/progressBarFragmentDress"
+                android:id="@+id/progressConfirmRent"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:progressTintMode="add"
@@ -29,7 +29,7 @@
                 tools:ignore="MissingConstraints" />
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/pager_dress_fragment_screen_slide"
+                android:id="@+id/pager__ConfirmRent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -118,49 +118,20 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:fontFamily="arial"
-            android:text="@string/wTotalPrice"
+            android:text="Valor total aluguel"
             android:textAlignment="viewStart"
             android:textColor="?attr/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtPrice"
+            android:id="@+id/txtRentPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:fontFamily="arial"
-            android:text="50 reais"
-            android:textAlignment="viewStart"
-            android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/a4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="arial"
-            android:text="@string/Type"
-            android:textAlignment="viewStart"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="arial"
-            android:text="Alças Finas"
             android:textAlignment="viewStart"
             android:textColor="@color/color_text_fragment_screen_slide_dress"
             android:textSize="20sp"
@@ -209,7 +180,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/RRStartDate"
+                android:id="@+id/RenStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -235,7 +206,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/RREndDate"
+                android:id="@+id/RentEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -247,13 +218,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnRent"
+            android:id="@+id/btnRentConfirm"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/colorPrimary"
             android:fontFamily="@font/ubuntu"
             android:text="@string/ConfirmRent"
@@ -261,6 +233,20 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-
+        <Button
+            android:id="@+id/btnRentCancel"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/ubuntu"
+            android:text="Cancel Rent"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
