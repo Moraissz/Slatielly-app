@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void checkIfUserIsAdmin() {
         if (!this.currentUser.getRole().equals("admin")) {
-            this.navigationView.getMenu().getItem(3).setVisible(false);
+            this.navigationView.getMenu().getItem(2).setVisible(false);
         }
     }
 
