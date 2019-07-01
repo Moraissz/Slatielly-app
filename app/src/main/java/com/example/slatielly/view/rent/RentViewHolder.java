@@ -59,7 +59,7 @@ public class RentViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.startDate.setText(DateFormat.getDateInstance().format(rent.getStartDate()));
         this.endDate.setText(DateFormat.getDateInstance().format(rent.getEndDate()));
         NumberFormat format = NumberFormat.getCurrencyInstance();
-        this.totalPrice.setText(format.format(rent.getDress().getPrice()));
+        this.totalPrice.setText(format.format(rent.getPrice()));
         this.status.setText(rent.getStatus());
 
         if (!rent.getDress().getImages().isEmpty())
