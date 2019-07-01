@@ -46,19 +46,24 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
     public boolean dateVerificationRents(List<Rent> rents, Timestamp dateStart, Timestamp datefinish) {
         boolean state = true;
-        for (int i = 0; i < rents.size(); i = i + 1) {
-            Timestamp comparation1 = new Timestamp(rents.get(i).getStartDate().getTime());
-            Timestamp comparation2 = new Timestamp(rents.get(i).getEndDate().getTime());
-            if (dateStart.before(comparation1) && datefinish.before(comparation1)) {
-                state = true;
-            } else if (dateStart.after(comparation2) && datefinish.after(comparation2)) {
-                state = true;
-            } else {
-                state = false;
-            }
+        for (int i = 0; i < rents.size(); i = i + 1)
+        {
+            if(!rents.get(i).getStatus().equals(Rent.DECLINED))
+            {
+                Timestamp comparation1 = new Timestamp(rents.get(i).getStartDate().getTime());
+                Timestamp comparation2 = new Timestamp(rents.get(i).getEndDate().getTime());
+                if (dateStart.before(comparation1) && datefinish.before(comparation1)) {
+                    state = true;
+                } else if (dateStart.after(comparation2) && datefinish.after(comparation2)) {
+                    state = true;
+                } else {
+                    state = false;
+                }
 
-            if (!state) {
-                break;
+                if (!state)
+                {
+                    break;
+                }
             }
         }
 
@@ -102,22 +107,6 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 }
             }
         });
-
-                /*
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Dress dress = new Dress();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                dress = document.toObject(Dress.class);
-                                System.out.println(dress);
-                            }
-                            view.getDressDb(dress);
-                        }
-                    }
-                });*/
     }
 
 
@@ -164,73 +153,77 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
     {
         List<Calendar> disabledays = new ArrayList<>();
 
-        for (int i = 0; i < rents.size(); i = i + 1) {
-            Calendar aux = Calendar.getInstance();
-            aux.setTime(rents.get(i).getStartDate());
-            disabledays.add(aux);
-
-            aux = Calendar.getInstance();
-            aux.setTime(rents.get(i).getEndDate());
-            disabledays.add(aux);
-
-            Date dataaux;
-
-            dataaux = rents.get(i).getStartDate();
-
-            for(int j=0;j<rents.get(i).getDress().getPrepareDays();j=j+1)
+        for (int i = 0; i < rents.size(); i = i + 1)
+        {
+            if(!rents.get(i).getStatus().equals(Rent.DECLINED))
             {
-                aux = Calendar.getInstance();
-                aux.setTime(dataaux);
-
-                int day = aux.get( Calendar.DAY_OF_MONTH );
-                int month = aux.get( Calendar.MONTH );
-                int year = aux.get( Calendar.YEAR );
-
-                aux.set( year, month, day - 1, 0, 0, 0 );
-
-                dataaux = new Timestamp(aux.getTimeInMillis());
-
-                aux = Calendar.getInstance();
-                aux.setTime(dataaux);
+                Calendar aux = Calendar.getInstance();
+                aux.setTime(rents.get(i).getStartDate());
                 disabledays.add(aux);
-            }
-
-            dataaux = rents.get(i).getStartDate();
-            while (dataaux.before(rents.get(i).getEndDate()))
-            {
-                aux = Calendar.getInstance();
-                aux.setTime(dataaux);
-
-                int day = aux.get(Calendar.DAY_OF_MONTH);
-                int month = aux.get(Calendar.MONTH);
-                int year = aux.get(Calendar.YEAR);
-
-                aux.set(year, month, day + 1, 0, 0, 0);
-
-                dataaux = new Timestamp(aux.getTimeInMillis());
 
                 aux = Calendar.getInstance();
-                aux.setTime(dataaux);
+                aux.setTime(rents.get(i).getEndDate());
                 disabledays.add(aux);
-            }
 
-            dataaux = rents.get(i).getEndDate();
-            for(int j=0;j<rents.get(i).getDress().getWashingDays();j=j+1)
-            {
-                aux = Calendar.getInstance();
-                aux.setTime(dataaux);
+                Date dataaux;
 
-                int day = aux.get( Calendar.DAY_OF_MONTH );
-                int month = aux.get( Calendar.MONTH );
-                int year = aux.get( Calendar.YEAR );
+                dataaux = rents.get(i).getStartDate();
 
-                aux.set( year, month, day + 1, 0, 0, 0 );
+                for(int j=0;j<rents.get(i).getDress().getPrepareDays();j=j+1)
+                {
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
 
-                dataaux = new Timestamp(aux.getTimeInMillis());
+                    int day = aux.get( Calendar.DAY_OF_MONTH );
+                    int month = aux.get( Calendar.MONTH );
+                    int year = aux.get( Calendar.YEAR );
 
-                aux = Calendar.getInstance();
-                aux.setTime(dataaux);
-                disabledays.add(aux);
+                    aux.set( year, month, day - 1, 0, 0, 0 );
+
+                    dataaux = new Timestamp(aux.getTimeInMillis());
+
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
+                    disabledays.add(aux);
+                }
+
+                dataaux = rents.get(i).getStartDate();
+                while (dataaux.before(rents.get(i).getEndDate()))
+                {
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
+
+                    int day = aux.get(Calendar.DAY_OF_MONTH);
+                    int month = aux.get(Calendar.MONTH);
+                    int year = aux.get(Calendar.YEAR);
+
+                    aux.set(year, month, day + 1, 0, 0, 0);
+
+                    dataaux = new Timestamp(aux.getTimeInMillis());
+
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
+                    disabledays.add(aux);
+                }
+
+                dataaux = rents.get(i).getEndDate();
+                for(int j=0;j<rents.get(i).getDress().getWashingDays();j=j+1)
+                {
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
+
+                    int day = aux.get( Calendar.DAY_OF_MONTH );
+                    int month = aux.get( Calendar.MONTH );
+                    int year = aux.get( Calendar.YEAR );
+
+                    aux.set( year, month, day + 1, 0, 0, 0 );
+
+                    dataaux = new Timestamp(aux.getTimeInMillis());
+
+                    aux = Calendar.getInstance();
+                    aux.setTime(dataaux);
+                    disabledays.add(aux);
+                }
             }
         }
         return disabledays;

@@ -468,7 +468,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment(new ConfirmRentFragment(rent, dress), R.string.Edit_dress, false);
+        this.setNavigationFragment(new ConfirmRentFragment(rent, dress), R.string.Confirm_rent, false);
     }
 
     @Override

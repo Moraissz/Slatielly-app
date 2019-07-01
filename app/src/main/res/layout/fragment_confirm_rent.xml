@@ -22,16 +22,18 @@
                 android:id="@+id/progressConfirmRent"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="8dp"
                 android:progressTintMode="add"
                 android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/pager_dress_fragment_screen_slide"
-                app:layout_constraintTop_toTopOf="@+id/pager_dress_fragment_screen_slide"
+                app:layout_constraintBottom_toBottomOf="@+id/imageDress_ConfirmRent"
+                app:layout_constraintTop_toTopOf="@+id/imageDress_ConfirmRent"
                 tools:ignore="MissingConstraints" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager__ConfirmRent"
+            <ImageView
+                android:id="@+id/imageDress_ConfirmRent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,17 +43,16 @@
         </android.support.constraint.ConstraintLayout>
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/txtDescriptionConfirRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:fontFamily="arial"
-            android:text='Vestido Feminino Babados Alças Finas Marisa'
             android:textAlignment="center"
             android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -69,17 +70,16 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtSize"
+            android:id="@+id/txtSizeConfirmRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:fontFamily="arial"
-            android:text="36 ao 44"
             android:textAlignment="viewStart"
             android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="20sp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
@@ -93,21 +93,20 @@
             android:text="@string/Cor"
             android:textAlignment="viewStart"
             android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtColor"
+            android:id="@+id/txtColorConfirmRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:fontFamily="arial"
-            android:text="Preto"
             android:textAlignment="viewStart"
             android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="20sp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
@@ -118,10 +117,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:fontFamily="arial"
-            android:text="Valor total aluguel"
+            android:text="Total rent value"
             android:textAlignment="viewStart"
             android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <TextView
@@ -134,35 +133,7 @@
             android:fontFamily="arial"
             android:textAlignment="viewStart"
             android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/a5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="arial"
-            android:text="@string/Material"
-            android:textAlignment="viewStart"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtMaterial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:fontFamily="arial"
-            android:text="viscose"
-            android:textAlignment="viewStart"
-            android:textColor="@color/color_text_fragment_screen_slide_dress"
-            android:textSize="20sp"
+            android:textSize="16dp"
             android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -225,7 +196,6 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="12dp"
-            android:layout_marginBottom="10dp"
             android:background="@color/colorPrimary"
             android:fontFamily="@font/ubuntu"
             android:text="@string/ConfirmRent"
