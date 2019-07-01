@@ -1,5 +1,6 @@
 package com.example.slatielly.app.dress;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -29,5 +30,11 @@ public class ScreenSlideAdapter extends FragmentStatePagerAdapter
     public int getCount()
     {
         return images.size();
+    }
+
+    @Override
+    public Parcelable saveState()
+    {
+        return null;
     }
 }
