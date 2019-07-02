@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:focusable="auto"
         android:scaleType="fitXY"
-        android:translationZ="@android:dimen/dialog_min_width_minor"
+        android:translationZ="@android:dimen/app_icon_size"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
