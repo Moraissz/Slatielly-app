@@ -27,9 +27,9 @@
     <string name="wOrders" translatable="false">Orders</string>
     <string name="allRents" translatable="false">All Rents</string>
     <string name="email" translatable="false">E-mail</string>
-    <string name="join" translatable="false">JOIN</string>
-    <string name="register" translatable="false">REGISTER</string>
-    <string name="login" translatable="false">LOGIN</string>
+    <string name="join">JOIN</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
     <string name="name" translatable="false">Name</string>
     <string name="password" translatable="false">Password</string>
     <string name="phone" translatable="false">Phone</string>
