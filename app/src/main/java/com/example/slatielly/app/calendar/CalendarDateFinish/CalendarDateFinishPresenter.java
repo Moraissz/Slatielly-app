@@ -1,20 +1,15 @@
 package com.example.slatielly.app.calendar.CalendarDateFinish;
 
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
-import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartContract;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,16 +21,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class CalendarDateFinishPresenter implements CalendarDateFinishContract.Presenter{
+public class CalendarDateFinishPresenter implements CalendarDateFinishContract.Presenter {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CalendarDateFinishContract.View view;
     private FirestoreRepository<Rent> repository;
     private FirestoreRepository<Dress> repositoryDress;
     private FirestoreRepository<User> userRepository;
     private User user;
-
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public CalendarDateFinishPresenter(CalendarDateFinishContract.View view, FirestoreRepository<Rent> rentFirestoreRepository, FirestoreRepository<User> userFirestoreRepository) {
         this.view = view;
@@ -46,10 +39,8 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
     public boolean dateVerificationRents(List<Rent> rents, Timestamp dateStart, Timestamp datefinish) {
         boolean state = true;
-        for (int i = 0; i < rents.size(); i = i + 1)
-        {
-            if(!rents.get(i).getStatus().equals(Rent.DECLINED))
-            {
+        for (int i = 0; i < rents.size(); i = i + 1) {
+            if (!rents.get(i).getStatus().equals(Rent.DECLINED)) {
                 Timestamp comparation1 = new Timestamp(rents.get(i).getStartDate().getTime());
                 Timestamp comparation2 = new Timestamp(rents.get(i).getEndDate().getTime());
                 if (dateStart.before(comparation1) && datefinish.before(comparation1)) {
@@ -60,8 +51,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                     state = false;
                 }
 
-                if (!state)
-                {
+                if (!state) {
                     break;
                 }
             }
@@ -74,16 +64,16 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
     public void loadUser() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         this.userRepository
-            .get(firebaseUser.getUid())
-            .addOnCompleteListener(new OnCompleteListener<User>() {
-                @Override
-                public void onComplete(@NonNull Task<User> task) {
-                    if (task.isSuccessful()) {
-                        user = task.getResult();
-                        view.getUserDb(user);
+                .get(firebaseUser.getUid())
+                .addOnCompleteListener(new OnCompleteListener<User>() {
+                    @Override
+                    public void onComplete(@NonNull Task<User> task) {
+                        if (task.isSuccessful()) {
+                            user = task.getResult();
+                            view.getUserDb(user);
+                        }
                     }
-                }
-            });
+                });
     }
 
     @Override
@@ -149,14 +139,11 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
     }
 
     @Override
-    public List<Calendar> getDisableDays(List<Rent> rents)
-    {
+    public List<Calendar> getDisableDays(List<Rent> rents) {
         List<Calendar> disabledays = new ArrayList<>();
 
-        for (int i = 0; i < rents.size(); i = i + 1)
-        {
-            if(!rents.get(i).getStatus().equals(Rent.DECLINED))
-            {
+        for (int i = 0; i < rents.size(); i = i + 1) {
+            if (!rents.get(i).getStatus().equals(Rent.DECLINED)) {
                 Calendar aux = Calendar.getInstance();
                 aux.setTime(rents.get(i).getStartDate());
                 disabledays.add(aux);
@@ -169,16 +156,15 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
 
                 dataaux = rents.get(i).getStartDate();
 
-                for(int j=0;j<rents.get(i).getDress().getPrepareDays();j=j+1)
-                {
+                for (int j = 0; j < rents.get(i).getDress().getPrepareDays(); j = j + 1) {
                     aux = Calendar.getInstance();
                     aux.setTime(dataaux);
 
-                    int day = aux.get( Calendar.DAY_OF_MONTH );
-                    int month = aux.get( Calendar.MONTH );
-                    int year = aux.get( Calendar.YEAR );
+                    int day = aux.get(Calendar.DAY_OF_MONTH);
+                    int month = aux.get(Calendar.MONTH);
+                    int year = aux.get(Calendar.YEAR);
 
-                    aux.set( year, month, day - 1, 0, 0, 0 );
+                    aux.set(year, month, day - 1, 0, 0, 0);
 
                     dataaux = new Timestamp(aux.getTimeInMillis());
 
@@ -188,8 +174,7 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 }
 
                 dataaux = rents.get(i).getStartDate();
-                while (dataaux.before(rents.get(i).getEndDate()))
-                {
+                while (dataaux.before(rents.get(i).getEndDate())) {
                     aux = Calendar.getInstance();
                     aux.setTime(dataaux);
 
@@ -207,16 +192,15 @@ public class CalendarDateFinishPresenter implements CalendarDateFinishContract.P
                 }
 
                 dataaux = rents.get(i).getEndDate();
-                for(int j=0;j<rents.get(i).getDress().getWashingDays();j=j+1)
-                {
+                for (int j = 0; j < rents.get(i).getDress().getWashingDays(); j = j + 1) {
                     aux = Calendar.getInstance();
                     aux.setTime(dataaux);
 
-                    int day = aux.get( Calendar.DAY_OF_MONTH );
-                    int month = aux.get( Calendar.MONTH );
-                    int year = aux.get( Calendar.YEAR );
+                    int day = aux.get(Calendar.DAY_OF_MONTH);
+                    int month = aux.get(Calendar.MONTH);
+                    int year = aux.get(Calendar.YEAR);
 
-                    aux.set( year, month, day + 1, 0, 0, 0 );
+                    aux.set(year, month, day + 1, 0, 0, 0);
 
                     dataaux = new Timestamp(aux.getTimeInMillis());
 
