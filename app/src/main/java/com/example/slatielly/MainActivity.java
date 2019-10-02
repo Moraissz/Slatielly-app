@@ -23,6 +23,7 @@ import com.example.slatielly.app.calendar.CalendarDateFinish.CalendarDateFinishF
 import com.example.slatielly.app.calendar.CalendarDateStart.CalendarDateStartFragment;
 import com.example.slatielly.app.calendar.ConfirmRent.ConfirmRentFragment;
 import com.example.slatielly.app.dress.DressFragment;
+import com.example.slatielly.app.dress.EditPhotosDress;
 import com.example.slatielly.app.dress.answers.AnswersFragment;
 import com.example.slatielly.app.dress.comments.CommentsFragment;
 import com.example.slatielly.app.dress.dresses.DressesFragment;
@@ -30,14 +31,13 @@ import com.example.slatielly.app.dress.edit.EditDressContract;
 import com.example.slatielly.app.dress.edit.EditDressFragment;
 import com.example.slatielly.app.dress.newAnswer.NewAnswerFragment;
 import com.example.slatielly.app.dress.newComment.NewCommentFragment;
-import com.example.slatielly.app.dress.EditPhotosDress;
 import com.example.slatielly.app.dress.registerDress.RegisterDressContract;
 import com.example.slatielly.app.dress.registerDress.RegisterDressFragment;
+import com.example.slatielly.app.profile.ProfileFragment;
 import com.example.slatielly.app.rent.rentRequests.RentRequestsFragment;
 import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Rent;
 import com.example.slatielly.model.User;
-import com.example.slatielly.app.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,7 +51,7 @@ import info.androidhive.fontawesome.FontDrawable;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         OnSuccessListener<DocumentSnapshot>, View.OnClickListener, RegisterDressFragment.OnNavigationListener,
         DressesFragment.OnNavigationListener, DressFragment.OnNavigationListener, CommentsFragment.OnNavigationListener, NewCommentFragment.OnNavigationListener, CalendarDateStartFragment.OnNavigateListener, CalendarDateFinishFragment.OnNavigateListener,
-        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener, EditDressFragment.OnNavigationListener, EditPhotosDress.OnNavigationListener, ConfirmRentFragment.OnNavigateListener{
+        AnswersFragment.OnNavigationListener, NewAnswerFragment.OnNavigationListener, EditDressFragment.OnNavigationListener, EditPhotosDress.OnNavigationListener, ConfirmRentFragment.OnNavigateListener {
 
 
     private Toolbar toolbar;
@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (fragment instanceof CalendarDateFinishFragment) {
             CalendarDateFinishFragment calendarDateFinishFragment = (CalendarDateFinishFragment) fragment;
-            calendarDateFinishFragment.setOnNavigationListener( this );
+            calendarDateFinishFragment.setOnNavigationListener(this);
         }
         if (fragment instanceof EditDressFragment) {
             EditDressFragment editDressFragment = (EditDressFragment) fragment;
@@ -373,8 +373,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToAllDresses()
-    {
+    public void onNavigateToAllDresses() {
         this.unCheckMenuItem(false);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
@@ -400,30 +399,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToNewComment(String dressId)
-    {
+    public void onNavigateToNewComment(String dressId) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment( NewCommentFragment.newInstance(dressId), R.string.New_comment, false);
+        this.setNavigationFragment(NewCommentFragment.newInstance(dressId), R.string.New_comment, false);
     }
 
     @Override
-    public void onNavigateToAnswers(String dressId, String commentId)
-    {
+    public void onNavigateToAnswers(String dressId, String commentId) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment(AnswersFragment.newInstance(dressId,commentId), R.string.ANSWERS, false);
+        this.setNavigationFragment(AnswersFragment.newInstance(dressId, commentId), R.string.ANSWERS, false);
     }
 
     @Override
-    public void onNavigateToNewAnswer(String dressId, String commentId)
-    {
+    public void onNavigateToNewAnswer(String dressId, String commentId) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment( NewAnswerFragment.newInstance(dressId,commentId), R.string.NEW_ANSWER, false);
+        this.setNavigationFragment(NewAnswerFragment.newInstance(dressId, commentId), R.string.NEW_ANSWER, false);
     }
 
     @Override
@@ -431,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment(CalendarDateStartFragment.newInstance(dressId), R.string.wStartDate , false);
+        this.setNavigationFragment(CalendarDateStartFragment.newInstance(dressId), R.string.wStartDate, false);
     }
 
 
@@ -445,17 +441,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.setNavigationFragment(CalendarDateFinishFragment.newInstance(dressId, startDate), R.string.wDateEnd, false);
     }
 
-    public void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit)
-    {
+    public void onNavigateToEditPhotos(RegisterDressContract.Presenter presenterRegister, EditDressContract.Presenter presenterEdit) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
-        this.setNavigationFragment( new EditPhotosDress(presenterRegister,presenterEdit), R.string.Edit_Photos, false);
+        this.setNavigationFragment(new EditPhotosDress(presenterRegister, presenterEdit), R.string.Edit_Photos, false);
     }
 
     @Override
-    public void onNavigateToEditDress(String id)
-    {
+    public void onNavigateToEditDress(String id) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
@@ -463,8 +457,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToConfirmRent(Rent rent, Dress dress)
-    {
+    public void onNavigateToConfirmRent(Rent rent, Dress dress) {
         this.unCheckMenuItem(true);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);
@@ -472,8 +465,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onNavigateToAllDresses2()
-    {
+    public void onNavigateToAllDresses2() {
         this.unCheckMenuItem(false);
         MenuItem menuItem = this.navigationView.getMenu().getItem(0);
         this.checkMenuItem(menuItem);

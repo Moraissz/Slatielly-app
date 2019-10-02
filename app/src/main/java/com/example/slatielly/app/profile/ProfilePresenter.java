@@ -3,10 +3,10 @@ package com.example.slatielly.app.profile;
 import android.support.annotation.NonNull;
 import android.util.Patterns;
 
+import com.example.slatielly.R;
 import com.example.slatielly.model.Address;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
-import com.example.slatielly.R;
 import com.example.slatielly.service.ValidationService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -59,7 +59,6 @@ public class ProfilePresenter implements ProfileContract.Presenter, OnCompleteLi
                     }
                 });
     }
-    //TODO MÉTODO PRA USAR NO PRESENTER :)
 
     @Override
     public void logout() {
