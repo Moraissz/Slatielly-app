@@ -18,11 +18,6 @@ public class Rent implements Identifiable<String> {
     public static final String DECLINED = "Recusado";
     public static final String SOUGHT = "Vestido retirado";
     public static final String FINISHED = "Concluido";
-
-    @StringDef({PENDENT, ACCEPTED, DECLINED, SOUGHT, FINISHED})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {}
-
     private String id;
     private Dress dress;
     private User user;
@@ -31,7 +26,6 @@ public class Rent implements Identifiable<String> {
     private String status;
     private String description;
     private Date timestamp;
-
     private Double price;
 
     public Rent() {
@@ -131,5 +125,10 @@ public class Rent implements Identifiable<String> {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @StringDef({PENDENT, ACCEPTED, DECLINED, SOUGHT, FINISHED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Status {
     }
 }

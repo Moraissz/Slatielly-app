@@ -22,17 +22,9 @@ import com.example.slatielly.model.Dress;
 import com.example.slatielly.model.Image;
 import com.example.slatielly.model.User;
 import com.example.slatielly.model.repository.FirestoreRepository;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 public class DressFragment extends Fragment implements DressContract.View, View.OnClickListener {
 
@@ -51,8 +43,11 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     private Dress dress;
     private FragmentManager fragmentManager;
 
-    public static DressFragment newInstance(String id)
-    {
+    public DressFragment() {
+        // Required empty public constructor
+    }
+
+    public static DressFragment newInstance(String id) {
         DressFragment dressFragment = new DressFragment();
         Bundle bundle = new Bundle();
         bundle.putString("id", id);
@@ -60,13 +55,8 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         return dressFragment;
     }
 
-    public DressFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         fragmentManager = this.getChildFragmentManager();
@@ -75,8 +65,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_edit_dress, menu);
         menuItem = menu.findItem(R.id.edit_dress_image);
         menuItem.setVisible(false);
@@ -89,8 +78,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         FirestoreRepository<Dress> repository = new FirestoreRepository<>(Dress.class, Dress.DOCUMENT_NAME);
@@ -124,12 +112,10 @@ public class DressFragment extends Fragment implements DressContract.View, View.
     }
 
     @Override
-    public void setDressViews(Dress dress, User currentUser)
-    {
+    public void setDressViews(Dress dress, User currentUser) {
         this.dress = dress;
 
-        if(currentUser.getRole().equals("admin"))
-        {
+        if (currentUser.getRole().equals("admin")) {
             menuItem.setVisible(true);
         }
 
@@ -150,8 +136,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
     @Override
     public void onClick(View v) {
-        if (v == btnComments)
-        {
+        if (v == btnComments) {
             if (this.getArguments() != null) {
                 String id = this.getArguments().getString("id");
                 this.listener.onNavigateToComments(id);
@@ -161,8 +146,7 @@ public class DressFragment extends Fragment implements DressContract.View, View.
             return;
         }
 
-        if (v == btnRent)
-        {
+        if (v == btnRent) {
             if (this.getArguments() != null) {
                 String id = this.getArguments().getString("id");
                 this.listener.onRentDress(id);
@@ -177,6 +161,18 @@ public class DressFragment extends Fragment implements DressContract.View, View.
         this.listener = listener;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.edit_dress_image) {
+            this.listener.onNavigateToEditDress(dress.getId());
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public interface OnNavigationListener {
         void onNavigateToComments(String dressId);
 
@@ -186,19 +182,5 @@ public class DressFragment extends Fragment implements DressContract.View, View.
 
 
         void onNavigateToEditDress(String dressId);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-        if(id == R.id.edit_dress_image)
-        {
-            this.listener.onNavigateToEditDress(dress.getId());
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
